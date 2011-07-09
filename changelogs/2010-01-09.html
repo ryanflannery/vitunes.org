@@ -1,0 +1,28 @@
+<html>
+<head>
+   <title>Changelog: 2010 January 9</title>
+</head>
+<body>
+<pre>
+
+<big>Changelog: 2010-01-09: 1.0.2 Release</big>
+
+<b>Bug-Fixes:</b>
+   *  If the child instance of mplayer is killed, it is now automatically
+      re-launched and playback continues where it left off
+   *  If mplayer fork()'s an instance of itself (it does this when playing
+      internet streams), this grandchild instance of mplayer is now killed
+      on exit also.
+   *  *much* better signal handling... :)
+
+<b>New Features:</b>
+   *  Added keybinding 's' to stop playback
+   *  The '^y' keybinding now works
+   *  Can now be prompted on exit to save any playlist that have been sorted
+      with the following option:
+            :set save-sorts=true
+      (click <a href="/#cmd_set">here</a> for details)
+
+</pre>
+</body>
+</html>

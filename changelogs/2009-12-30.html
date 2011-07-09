@@ -1,0 +1,64 @@
+<html>
+<head>
+   <title>Changelog: 2009 December 30</title>
+</head>
+<body>
+<pre>
+
+<big>Changelog: 2009-12-30: 1.0 Release</big>
+
+<b>Big Changes:</b>
+   * Almost a complete re-write of vitunes.
+   * Many ugly bugs with the display (like resizing) have been fixed.
+   * Many more vi(1) keybindings supported.
+   * <i>Much</i> more customizable with various commands below, all of which
+     can be stored in a configuration file to be applied automatically when vitunes loads.
+   * Fixed a particularly nasty bug caused when displaying files whose meta information
+     contained curses control sequences.
+
+<b>Notable New Features:</b>
+   * Non-files (things like URL's) can now be added to the database using the
+     "addurl" e-command.
+     See <b>vitunes -e help addurl</b> for more information.
+
+   * The color of each window and even columns in the playlist window can now be customized:
+            :color errors=yellow,blue
+            :color artist=cyan,black
+      (click <a href="/#cmd_color">here</a> for details)
+
+   * The format of the playlist window can now be customized, including which fields are
+     shown, in what order, and how wide each should be:
+            :display artist.10,album.10,title.20
+      (click <a href="/#cmd_display">here</a> for details)
+
+   * Searching using '/' and '?' are now actual vi(1)-like searches.  Filtering is done
+      using the ":filter" command.
+            :filter nine !nails
+      (click <a href="/#cmd_filter">here</a> for details)
+
+   * Playlists can now be sorted using the ":sort" command.
+            :sort artist,-year,album,track
+      (click <a href="/#cmd_sort">here</a> for details)
+
+   * The library window can be hidden when it does not have focus using
+            :set lhide=true
+      (click <a href="/#cmd_set">here</a> for details)
+
+   * The library window can be dynamically resized using
+            :set lwidth=10
+      (click <a href="/#cmd_set">here</a> for details)
+
+   * Can reload the database and configuration file dynamically.
+      (click <a href="/#cmd_reload">here</a> for details)
+
+   * And a few more smaller features...read through the list of keybindings and commands
+      <a href="/#keybindings">here</a> for a complete list.
+
+   * Also, there's now a configuration file that can contain any of the above commands
+     to be automatically applied when vitunes loads.
+     Click <a href="/vitunes.html#configfile">here</a> for details.
+
+   * The man page is now the primary source of documentation.
+</pre>
+</body>
+</html>

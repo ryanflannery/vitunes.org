@@ -1,0 +1,107 @@
+/* structure */
+body { margin: 0; }
+
+#header, #main, #footer { width: 800px; margin-left: auto; margin-right: auto; }
+#header, #footer, #navigation { text-align: center; }
+
+#header { padding-top: 1em; }
+#header b { font: bold 1em Georgia, Times New Roman, Times, serif; }
+#navigation {
+   padding: 0.1em;
+   background-color: #000;
+   font: small-caps 0.9em Verdana, sans-serif;
+   color: #ccc;
+}
+#navigation a, #navigation a:visited {
+   padding: 0;
+   padding-left: 0.4em;
+   padding-right: 0.4em;
+   text-decoration: none;
+   color: #eee;
+}
+#navigation a:hover {
+   color: #f44;
+   text-shadow: 0px 0px 9px #f0f;
+}
+
+#footer {
+   margin-top: 2em;
+   border-top: 1px solid #ccc;
+   padding-top: 1em;
+   text-align: center;
+   font-family: monospace;
+   margin-bottom: 2em;
+}
+
+/* default styles */
+#main {
+   font: 0.9em Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif;
+   color: #222;
+}
+a, a:visited { color: #009; text-decoration: none; }
+a:hover { color: #b00; text-shadow: 1px 1px 0 #ccc; }
+h1, h2 { margin-bottom: 0; padding-bottom: 0; font-family: Verdana, sans-serif; font-weight: normal; }
+h1 { border-bottom: 1px solid #ccc; margin-top: 1em; }
+hr { border-width: 0; border-top: 1px solid #ccc; }
+dt { font-weight: bold; }
+dd { margin-left: 2em; margin-bottom: 1em; }
+img { border-width: 0; }
+ul li { list-style: square; }
+
+/* quicklinks styles */
+#quicklinks table {
+   width: 100%;
+   background: url('images/quicklinks.png') 0 60% no-repeat;
+}
+#quicklinks td { vertical-align: top; }
+#quicklinks li.listHead { border-bottom: 1px solid #ccc; font-weight: bold; list-style-type: none; }
+
+/* news style */
+#news {
+   overflow: auto;
+   height: 300px;
+   border-bottom: 1px solid #ccc;
+   border-left: 1px solid #ccc;
+}
+
+/* documentation styles */
+ul.ecommands { overflow: hidden; list-style-type: square; }
+ul.ecommands li {
+   display: block;
+   list-style-type: square;
+   width: 32%;
+   float: left;
+}
+img.square {
+   vertical-align: middle;
+   margin-bottom: 0.1em;
+   border: 1px solid black;
+   height: 0.5em;
+   width: 0.5em;
+}
+.error { background-color: #f88; }
+.warning { background-color: #ff8; }
+
+/* faq styles */
+dl.faq { counter-reset: faq; margin-left: 2em; }
+dl.faq dt { font-style: italic; margin-bottom: 0.5em; font-weight: normal; color: #009; cursor: pointer; }
+dl.faq dt:before { content: counter(faq) ". "; counter-increment: faq; }
+dl.faq dd { border-left: 3px solid #ccc; padding: 1em; }
+dl.faq dt:hover { color: #b00; text-shadow: 1px 1px 0 #ccc; }
+
+/* screenshot styles */
+ul.gallery li {
+   display: inline-block;
+   border: 1px solid #ccc;
+   background-color: #eee;
+
+   text-align: center;
+   vertical-align: top;
+   margin: 0.5em;
+   padding: 0.5em;
+   font-size: smaller;
+}
+ul.gallery li a {
+   display: block;
+}
+

@@ -1,0 +1,61 @@
+diff -r 6f26959ade30 src/commands.c
+--- a/src/commands.c	Tue Dec 28 12:20:32 2010 +0100
++++ b/src/commands.c	Tue Dec 28 17:44:42 2010 -0500
+@@ -363,13 +363,17 @@
+   GtkAdjustment *a = arg->n == Left || arg->n == Right 
+     ? gtk_scrolled_window_get_hadjustment(GTK_SCROLLED_WINDOW(v->scroll)) 
+     : gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(v->scroll));
+-  int sign = arg->n == Up || arg->n == PageUp || arg->n == Left ? -1 : 1;
++  int sign = arg->n == Up || arg->n == PageUp || arg->n == HalfPageUp || arg->n == Left ? -1 : 1;
+ 
+   double value = gtk_adjustment_get_value(a);
+ 
+-  double inc = arg->n == PageUp || arg->n == PageDown 
+-    ? gtk_adjustment_get_page_increment(a) 
+-    : gtk_adjustment_get_step_increment(a);
++  double inc;
++  if (arg->n == PageUp || arg->n == PageDown)
++    inc = gtk_adjustment_get_page_increment(a);
++  else if (arg->n == HalfPageUp || arg->n == HalfPageDown)
++    inc = gtk_adjustment_get_page_increment(a) / 2;
++  else
++    inc = gtk_adjustment_get_step_increment(a);
+ 
+   double lower  = gtk_adjustment_get_lower(a);
+   double upper = gtk_adjustment_get_upper(a) - gtk_adjustment_get_page_size(a) + lower;
+diff -r 6f26959ade30 src/config.h
+--- a/src/config.h	Tue Dec 28 12:20:32 2010 +0100
++++ b/src/config.h	Tue Dec 28 17:44:42 2010 -0500
+@@ -34,6 +34,8 @@
+   { "scroll_bottom",            {   "G",         0,                   },  },  
+   { "scroll_down",              {   "j",         0,                   },  },  
+   { "scroll_left",              {   "h",         0,                   },  },  
++  { "scroll_halfpage_down",     {   "d",         GDK_CONTROL_MASK,    },  },  
++  { "scroll_halfpage_up",       {   "u",         GDK_CONTROL_MASK,    },  },  
+   { "scroll_page_down",         {   "f",         GDK_CONTROL_MASK,    },  },  
+   { "scroll_page_up",           {   "b",         GDK_CONTROL_MASK,    },  },  
+   { "scroll_right",             {   "l",         0,                   },  },  
+diff -r 6f26959ade30 src/dwb.c
+--- a/src/dwb.c	Tue Dec 28 12:20:32 2010 +0100
++++ b/src/dwb.c	Tue Dec 28 17:44:42 2010 -0500
+@@ -120,6 +120,8 @@
+   { { "scroll_bottom",         "Scroll to  bottom of the page",     }, 1, (Func)dwb_com_scroll,              NULL,                              AlwaysSM,    { .n = Bottom }, },
+   { { "scroll_down",           "Scroll down",                       }, 0, (Func)dwb_com_scroll,              "Bottom of the page",              AlwaysSM,    { .n = Down, }, },
+   { { "scroll_left",           "Scroll left",                       }, 0, (Func)dwb_com_scroll,              "Left side of the page",           AlwaysSM,    { .n = Left }, },
++  { { "scroll_halfpage_down",  "Scroll one-half page down",         }, 0, (Func)dwb_com_scroll,              "Bottom of the page",              AlwaysSM,    { .n = HalfPageDown, }, },
++  { { "scroll_halfpage_up",    "Scroll one-half page up",           }, 0, (Func)dwb_com_scroll,              "Top of the page",                 AlwaysSM,    { .n = HalfPageUp, }, },
+   { { "scroll_page_down",      "Scroll one page down",              }, 0, (Func)dwb_com_scroll,              "Bottom of the page",              AlwaysSM,    { .n = PageDown, }, },
+   { { "scroll_page_up",        "Scroll one page up",                }, 0, (Func)dwb_com_scroll,              "Top of the page",                 AlwaysSM,    { .n = PageUp, }, },
+   { { "scroll_right",          "Scroll left",                       }, 0, (Func)dwb_com_scroll,              "Right side of the page",          AlwaysSM,    { .n = Right }, },
+diff -r 6f26959ade30 src/dwb.h
+--- a/src/dwb.h	Tue Dec 28 12:20:32 2010 +0100
++++ b/src/dwb.h	Tue Dec 28 17:44:42 2010 -0500
+@@ -157,6 +157,8 @@
+   Down = GDK_SCROLL_DOWN,
+   Left = GDK_SCROLL_LEFT, 
+   Right = GDK_SCROLL_RIGHT, 
++  HalfPageUp,
++  HalfPageDown,
+   PageUp,
+   PageDown, 
+   Top,

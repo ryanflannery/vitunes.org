@@ -1,0 +1,393 @@
+
+<html>
+<head>
+   <title>vitunes e-commands</title>
+</head>
+<body>
+<pre>
+
+<a name="init"></a>
+<b>VITUNES COMMAND:</b>
+	init - initialize vitunes directories/database
+
+<b>SYNOPSIS:</b>
+	init
+
+<b>DESCRIPTION:</b>
+   The init command is used to setup the initial files and directories
+   used by vitunes.  This includes:
+
+      ~/.vitunes              The vitunes core directory where everything
+                              is stored.
+      ~/.vitunes/vitunes.db   The library database containing the meta
+                              information of all media files.
+      ~/.vitunes/playlists/   Directory where all playlists are stored.
+
+   The database created is initially empty.
+   If any of the above files/directories exists, nothing will be changed.
+   This command takes no parameters.
+
+   It is not strictly necessary to run this command to start using
+   vitunes, as you could use an existing installation, or create the
+   files/directories yourself.  It is provided for convenience.
+
+<b>EXAMPLE:</b>
+      $ vitunes -e init
+
+
+
+
+
+
+
+
+<a name="add"></a>
+<b>VITUNES COMMAND:</b>
+	add - add files to the vitunes database
+
+<b>SYNOPSIS:</b>
+	add /path/to/files1 [ path2 ... ]
+
+<b>DESCRIPTION:</b>
+   The add command is used to add files to the database used by vitunes.
+   For every file/directory provided as a parameter, vitunes will scan that
+   file or directory (recursively) searching for media files that contain
+   any meta information.  Any such files found are added to the database
+   used by vitunes.  If any of the files found are already in the database
+   then they will be re-scanned and any changes will be updated.
+
+   Note that vitunes only maintains information about the file, and not the
+   file itself.  It does NOT move/copy/modify the files in its database in
+   any way.
+
+   The information vitunes stores for each file includes:
+      *  Filename                *  Track Number
+      *  Artist Name             *  Year
+      *  Album Name              *  Genre
+      *  Song/Video Title        *  Play Length (seconds)
+
+   The filename stored is the absolute pathname obtained from realpath(3),
+   and serves as the key-field within the database.
+
+   If any file encountered has no meta information, it is NOT added to the
+   database.
+
+<b>EXAMPLE:</b>
+   $ vitunes -e add ~/music /usr/local/share/music
+
+
+
+
+
+
+
+
+<a name="addurl"></a>
+<b>VITUNES COMMAND:</b>
+	addurl - add a URL (or other) to the vitunes database
+
+<b>SYNOPSIS:</b>
+	addurl URL
+
+<b>DESCRIPTION:</b>
+   To add non-standard-files to the vitunes database (things like URL's for
+   Internet radio streams), one can use the addurl command. It takes a single
+   parameter: the URL/filename to be added to the database. After that, you
+   will be prompted to enter meta-information for each field vitunes indexes
+   (artist, album, title, track, year, and genre). You may leave any/all of
+   the fields blank.
+
+   Basically, anything "foo" that mplayer can play by a simple:
+      $ mplayer foo
+   can be added to the database using this command.  Although regular files
+   could also be added using this command, the add command is preferred, as
+   it attempts to extract meta information automatically.
+
+   Note that files added to the database using the addurl command are NOT
+   checked for updates during an update command.
+
+   Note that the addurl command can also be used to change the meta-
+   information of an existing URL within the database.
+
+<b>EXAMPLE:</b>
+   $ vitunes -e addurl "http://198.234.121.118:80"
+   Artist: WVXU Online Radio<b style="color: magenta;">&lt;ENTER&gt;</b>
+    Album: Cincinnati Public Radio<b style="color: magenta;">&lt;ENTER&gt;</b>
+    Title: NPR<b style="color: magenta;">&lt;ENTER&gt;</b>
+    Track: <b style="color: magenta;">&lt;ENTER&gt;</b>
+     Year: <b style="color: magenta;">&lt;ENTER&gt;</b>
+    Genre: Radio<b style="color: magenta;">&lt;ENTER&gt;</b>
+   Length: INF<b style="color: magenta;">&lt;ENTER&gt;</b>
+
+<b>NOTES:</b>
+   When the vitunes database has to be re-built (because of say, an upgrade
+   where the database format has changed, or you simply deleted your
+   database), re-adding URL's can be tedious.  To ease this, consider using
+   a shell script such as the 'add_urls.sh' script found on the vitunes
+   website for storing & adding all of your URL's.  The script simply
+   executes the addurl command with all meta-information provided.  As an
+   example, the above EXAMPLE could be automated as:
+
+      #!/bin/sh
+      echo "WVXU Online Radio\n\
+      Cincinnati Public Radio\n\
+      NPR\n\
+      \n\
+      \n\
+      Radio\n\
+      INF\n" | vitunes -e addurl "http://198.234.121.118:80"
+
+
+
+
+
+
+
+
+<a name="check"></a>
+<b>VITUNES COMMAND:</b>
+	check - check files for meta-info and if they're in the DB
+
+<b>SYNOPSIS:</b>
+	check [-rsd] file1 [ file2 ... ]
+
+<b>DESCRIPTION:</b>
+   The check command will scan each filename provided to see to see if
+   vitunes can extract any meta-information, to see how vitunes "sanitizes"
+   the meta-information (see below), or what information vitunes currently has
+   in the database for this file.
+
+   Note that at least one of the -r, -s, or -d flags must be present.
+
+   The options are as follows:
+
+   -r    Show the raw information extracted directly from each file.
+
+   -s    Show the sanitized information after extracting it from each file.
+         See the section SANITATION below for details on what this is.
+
+   -d    Load the vitunes database and check if the each exists within it.
+         If so, show the information in the vitunes database.
+
+   If multiple files are provided, each will be checked in order.
+
+<b>SANITATION:</b>
+   By "sanitation" above, the following is meant: some media files have
+   non-printable characters in their meta information for one reason or
+   another (often, it's a faulty ripper/tagging application).  Sometimes
+   these non-printable characters can be control sequences used by [n]curses
+   and thus cause problems with the curses display of vitunes.  The way
+   vitunes sanitizes such data is to replace all such control characters with
+   an '?'.
+
+<b>EXAMPLE:</b>
+   $ vitunes -e check -r /path/to/file.mp3
+
+
+
+
+
+
+
+
+<a name="rmfile"></a>
+<b>VITUNES COMMAND:</b>
+	rm - remove a single file/URL from the vitunes database
+
+<b>SYNOPSIS:</b>
+	rm [-f] filename/URL
+
+<b>DESCRIPTION:</b>
+   To remove a single file/URL from the vitunes database, the rm command may
+   be used.  It takes a single parameter: the filename/URL of the file to
+   remove.  Normally, you will be prompted if you are sure you want to
+   remove the file as a safety measure.  This prompt can be avoided using
+   the '-f' flag, to force the removal.
+
+   Note that to remove files, the full, absolute path to the file must be
+   provided, as obtained from realpath(3).
+
+<b>EXAMPLE:</b>
+   $ vitunes -e rm -f "http://198.234.121.118/listen.pls"
+
+<b>ALIAS:</b>
+	rmfile  -  As e-commands, "rmfile" and "rm" are interchangeable.
+
+
+
+
+
+
+
+
+<a name="update"></a>
+<b>VITUNES COMMAND:</b>
+	update - update vitunes database
+
+<b>SYNOPSIS:</b>
+	update [-s]
+
+<b>DESCRIPTION:</b>
+   The update command loads the existing meta information database used
+   by vitunes and for each media file listed in the database, the file is
+   checked to see if it has been removed or modified since it was added
+   to the database.
+
+   If the file has been removed, it will be removed from the database.  If
+   the file has been modified, it's meta information will be extracted
+   again and the database will be updated.
+   Note that if there are errors while checking the file, the error will be
+   reported but the file, and its meta information, will remain in the
+   vitunes database.
+
+      -s       When present, files that are skipped because they have not
+               been modified will also be reported to stdout.  Normally,
+               only files that are updated are reported.
+
+   In short, anytime you remove/modify media files already in the vitunes
+   database, you should run this command.
+
+<b>NOTE ABOUT URLS:</b>
+   Note that files added to the database using the 'addurl' e-command will
+   NOT be checked/updated in any way, for obvious reasons.
+
+<b>EXAMPLE:</b>
+      $ vitunes -e update
+
+
+
+
+
+
+
+
+<a name="flush"></a>
+<b>VITUNES COMMAND:</b>
+	flush - dump output of vitunes database to terminal
+
+<b>SYNOPSIS:</b>
+	flush [-t time-format]
+
+<b>DESCRIPTION:</b>
+   The flush command simply outputs the contents of the meta-information
+   database used by vitunes to stdout, in a fairly easy to read (but very
+   easy to parse/grep through) format.
+
+   The one optional parameter, time-format, can be any string acceptable
+   to strftime(3) and is used when displaying the 'last-updated' field of
+   each record in the database (when the file was last checked for meta-
+   information).
+
+   The format used is a simple comma-separated-value (CSV) one, where most
+   fields (any that can contain spaces/commas) are within double quotes.
+   The first line contains the field names, and those fields that are quoted
+   are also quoted in this header row.
+
+<b>EXAMPLE:</b>
+   $ vitunes -e flush
+
+   To see which files were last updated this month:
+   $ vitunes -e flush -t "%M %Y" | grep "January 2010"
+
+<b>REFERENCES:</b>
+   For some quick sed(1) one-liners on how to parse CSV data like the
+   output of this command, you can visit the following website:
+               http://sed.sourceforge.net/sedfaq4.html
+
+
+
+
+
+
+
+
+<a name="tag"></a>
+<b>VITUNES COMMAND:</b>
+	tag - set meta-information tags to raw files
+
+<b>SYNOPSIS:</b>
+	tag [--artist=string] [-a string] [--album=string] [-A value]
+	    [--title=string] [-t string] [--genre=string] [-g string]
+	    [--track=number] [-T number] [--year=number] [-y number]
+	    [--comment=string] [-c string]
+	    file1 [ file2 ... ]
+
+<b>DESCRIPTION:</b>
+   The tag command is provided to add/change the meta-information tags of
+   media files.  The meta-information fields that can be set are: artist,
+   album, title, genre, track, and year.
+
+   Please note that this command only changes the meta-information in the
+   raw files themselves and NOT in the vitunes database.  To update the
+   vitunes database after tagging, use the 'update' e-command.
+
+   The tag command takes a series of field/value specifiers and any number
+   of files.  For each file specified, the given field will be set to the
+   provided value.
+
+   The options are as follows:
+
+   --artist=string
+   -a string            Sets the artist field to the provided string.
+
+   --album=string
+   -A string            Sets the album field to the provided string.
+
+   --title=string
+   -t string            Sets the title field to the provided string.
+
+   --genre=string
+   -g string            Sets the genre field to the provided string.
+
+   --comment=string
+   -c string            Sets the comment field to the provided string.
+
+   --track=number
+   -T number            Sets the track field to the provided number.
+                        Note that the number must be between 0 and
+                        INT_MAX.
+
+   --year=number
+   -y number            Sets the year field to the provided number.
+                        Note that the number must be between 0 and
+                        INT_MAX.
+
+   At least one tag option must be provided and at least one file must
+   be provided.
+
+<b>IMPORTANT NOTE:</b>
+   Just to reiterate a comment above, this command only changes the meta-
+   information in the raw files themselves and NOT in the vitunes database.
+   To update the vitunes database after tagging, use the 'update' or 'add'
+   e-commands.
+
+<b>EXAMPLE:</b>
+   CD rippers frequently pull information from CDDB (or other databases)
+   where, for example, a "The" is missing from an artist/album name
+   when it is, in fact, appropriate.  Below is an example of correcting
+   this and then updating the vitunes database:
+
+   $ vitunes -e tag --artist="The White Stripes" /path/to/De_Stijl/*
+   $ vitunes -e update
+
+
+
+
+
+
+
+
+<a name="help"></a>
+You're a damn fool if you need help with help.
+
+
+
+
+
+
+
+
+</pre>
+</body>
+</html>
+

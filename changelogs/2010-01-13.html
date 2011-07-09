@@ -1,0 +1,45 @@
+<html>
+<head>
+   <title>Changelog: 2010 January 13</title>
+</head>
+<body>
+<pre>
+
+<big>Changelog: 2010-01-13: 1.0.3 Release</big>
+<b>Major-Changes</b>
+   *  Removed use of libid3tag, libvorbis, and libmp4v2.  Now using <a href="http://developer.kde.org/~wheeler/taglib.html">TagLib</a>
+      for all meta-info extraction (and changing)
+   *  Added liscense (ISC, <a href="/LICENSE.txt">click here</a>)
+   *  Database version and format bumped to 1.1.0.  This means that any existing
+      database will no longer work.  Sorry, but necessary and worth it... TagLib
+      provides much better meta-info extraction.
+
+<b>Bug-Fixes:</b>
+   *  Fixed bug when hitting 'play' in an empty playlist
+   *  Added documentation about 'set save-sorts' to man page
+   *  Extraction of play-length is now almost always correct, thanks to TagLib
+   *  FINALLY got around to re-implementing the "flush" e-command again, although
+      as I write this, I realize I have not yet updated the "help flush" output.
+
+<b>New Features:</b>
+   *  New e-command "tag" can be used to add/modify the meta-info of raw-files.
+      Click <a href="/e-commands.html#tag">here</a> for details.
+   *  Changed the syntax/semantics of the "check" e-command.  More sane now.
+      Click <a href="/e-commands.html#check">here</a> for details.
+   *  New keybinding 'm' can be used in the playlist window to show the filename and
+      meta-information of the currently selected file.
+   *  The play-length of each file is now shown in the playlist window with the
+      format of "hh:mm:ss"
+   *  The display, sort, and color commands can now all make use of the play-length
+      field using the field name "length".
+   *  The "addurl" e-command can now be used to change the meta-info of an
+      existing URL in the database
+      Click <a href="/e-commands.html#addurl">here</a> for details.
+   *  The "add_urls.sh" script has been updated, with more documentation
+      View it <a href="/add_urls.sh">here</a>
+   *  More descriptive stats, now with a legend, when running "update" or "add"
+      e-commands.
+
+</pre>
+</body>
+</html>

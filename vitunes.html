@@ -1,0 +1,752 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC
+	"-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style type="text/css">
+	BODY {font-family: arial, helvetica, sans-serif; }
+	SPAN.bold { color: navy; }
+	SPAN.underline { color: purple; }
+	A:link {color: blue; text-decoration: none; }
+	A:visited {color: blue; text-decoration: none; }
+	A:hover {text-decoration: underline; }
+</style>
+<title>Man Page Lookup - vitunes
+</title>
+</head>
+<body>
+<pre>
+VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
+
+<span class="bold">NAME</span>
+     <span class="bold">vitunes</span> - A curses media indexer and player for vi-users
+
+<span class="bold">SYNOPSIS</span>
+     <span class="bold">vitunes</span> [<span class="bold">-d</span> <span class="underline">database-file</span>] [<span class="bold">-e</span> <span class="underline">command</span> [argument ...]] [<span class="bold">-f</span> <span class="underline">config-file</span>]
+             [<span class="bold">-m</span> <span class="underline">media-player</span>] [<span class="bold">-p</span> <span class="underline">playlist-dir</span>]
+
+<span class="bold">DESCRIPTION</span>
+     <span class="bold">vitunes</span> is a curses-based music player and playlist manager for *nix
+     whose goals are a minimalistic appearance, strong vi-like bindings, and
+     quick playlist creation/management.
+
+     It is not intended to be a feature-rich media player, but rather a quick,
+     vi-like media indexer and playlist manager that also happens to be able
+     to play the media it indexes (via mplayer(1)).
+
+     <span class="bold">vitunes</span> accepts the following command line options:
+
+     <span class="bold">-d</span> <span class="underline">database-file</span>
+                 Specifies the database containing all known media files and
+                 their meta information that <span class="bold">vitunes</span> should use.  If you're
+                 using this option in conjunction with an e-command, this
+                 option <span class="bold">must</span> be specified before the e-command.
+
+                 The default location is <span class="underline">~/.vitunes/vitunes.db</span>.
+
+     <span class="bold">-e</span> <span class="underline">command</span> <span class="bold">options</span>
+                 Execute one of the available e-commands to manipulate the
+                 database that <span class="bold">vitunes</span> uses.  See the section below titled
+                 <span class="underline">E-COMMANDS</span> for more information.
+
+     <span class="bold">-f</span> <span class="underline">config-file</span>
+                 Specifies the path of the configuration file <span class="bold">vitunes</span> should
+                 load.  See the section below titled <span class="underline">CONFIGURATION</span> <span class="underline">FILE</span> for
+                 information on what the configuration may contain.
+
+                 The default location is <span class="underline">~/.vitunes/vitunes.conf</span>.
+
+     <span class="bold">-m</span> <span class="underline">media-player-path</span>
+                 Specifies the path to the media player to use.  Currently
+                 only mplayer(1) is supported.
+
+                 The default location is <span class="underline">/usr/local/bin/mplayer</span>.
+
+     <span class="bold">-p</span> <span class="underline">playlist-dir</span>
+                 Specifies the directory containing all of the playlists
+                 <span class="bold">vitunes</span> will load and use.  Any new playlists created while
+                 running <span class="bold">vitunes</span> will be created here.
+
+                 The default location is <span class="underline">~/.vitunes/playlists/</span>.
+
+   <span class="bold">Getting</span> <span class="bold">Started</span>
+     <span class="bold">vitunes</span> works by maintaining a database of tagged media files.  The
+     database <span class="bold">must</span> be created and populated before <span class="bold">vitunes</span> can be run
+     normally.
+
+     After that, files can be added, modified, or removed from the database,
+     and on the next invocation, <span class="bold">vitunes</span> will see the changes (additionally,
+     the database can be re-loaded at runtime).
+
+     <span class="bold">o</span>   All database management is done using "e-commands", which are always
+         of the form:
+               $ vitunes -e command-name [parameters ...]
+
+     <span class="bold">o</span>   Once the database has been created, <span class="bold">vitunes</span> can be run normally with
+         the following:
+               $ vitunes
+
+     <span class="bold">o</span>   All playlist management is done while <span class="bold">vitunes</span> is running normally.
+
+     See the <span class="underline">E-COMMANDS</span> section below for more information on database
+     management.  To get started quickly, simply do the following:
+
+     1.   Create initial empty database with
+                $ vitunes -e init
+
+     2.   Add files to your database with
+                $ vitunes -e add ~/music/ /path/to/more/music/
+
+     3.   Then just start normally with
+                $ vitunes
+
+   <span class="bold">The</span> <span class="bold">Display</span>
+     When run normally, the default display will show the following 4 windows:
+
+     player      This window occupies the top row of the display and contains
+                 information about the currently playing song (if any) and the
+                 current play-mode.
+
+     command/status
+                 This window occupies the bottom row of the display.  It
+                 behaves very similar to the command/status window in vi(1).
+
+     library     This window occupies the left-side of the screen and shows
+                 each playlist, in addition to the library and filter-buffer.
+                 The filter buffer is where the results of every :<span class="bold">filter</span> <span class="underline">...</span>
+                 command are temporarily stored.
+                 Playlists with unsaved changes appear bold.
+
+     playlist    This window is to the right of the library window and
+                 occupies most of the display.  It shows the contents of
+                 whichever playlist has currently been selected in the library
+                 window.
+
+   <span class="bold">Useful</span> <span class="bold">Keybindings</span>
+     The following is only a partial listing keybindings, but are the most
+     frequently used.
+
+     <span class="bold">Enter</span>   Load the selected playlist for viewing or begin playback of the
+             selected file.
+
+     <span class="bold">Tab</span>     Toggle focus between the library and playlist windows.
+
+     <span class="bold">z</span>       Pause playback.
+
+     <span class="bold">s</span>       Stop playback.
+
+     <span class="bold">f/b</span>     Seek forwards/backwards 10 seconds.
+
+     <span class="bold">F/B</span>     Seek forwards/backwards 1 minute.
+
+     <span class="bold">m</span>       In the playlist window, show/hide information for the current
+             file.
+
+     See the <span class="underline">KEYBINDING</span> <span class="underline">ACTIONS</span> section for a complete listing.
+
+<span class="bold">E-COMMANDS</span>
+     Below is a brief summary of each e-command available in <span class="bold">vitunes</span>.  More
+     detailed usage information and examples for each can be obtained by
+     issuing:
+           $ vitunes -e help command-name
+
+     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">init</span>
+             Create the necessary database file and playlist directory used by
+             <span class="bold">vitunes</span>.  This command only needs to be run once, when <span class="bold">vitunes</span> is
+             first run.  If either of these already exist, they remain
+             unchanged.
+
+     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">add</span> <span class="underline">path1</span> [<span class="underline">path2</span> <span class="underline">...</span>]
+             This command takes any number of files/directories as parameters.
+             Each file is scanned for meta-information and if found, added to
+             the database.  Directories are search recursively.
+
+             TagLib(3) is used for all meta-extraction, which includes the
+             following fields: album, artist, comment, play-length, title,
+             track number, and year.
+
+     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">addurl</span> <span class="underline">url</span>
+             This command is used to add non-files (things like URL's for
+             Internet radio stations) to the database, where the meta-
+             information cannot be determined automatically.  It can also be
+             used to update the meta-info of an existing URL in the database.
+
+             After executing, you are prompted to enter all of your own
+             information.
+
+     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">check</span> [<span class="bold">-rsd</span>] <span class="underline">file1</span> [<span class="underline">file2</span> <span class="underline">...</span>]
+             Scan the files specified and display their meta-information as
+             present in the files themselves or in the <span class="bold">vitunes</span> database.  This
+             is useful for checking if a file is in the database.
+
+     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">flush</span> [<span class="bold">-t</span> <span class="underline">time-format</span>]
+             Dump the contents of the database to stdout in an easy-to-parse
+             format, optionally with the specified strftime(3) compatible
+             format for times.
+
+     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">help</span> <span class="underline">command</span>
+             Display detailed usage information and examples for the e-command
+             specified by <span class="underline">command</span>.
+
+     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">rm</span> [<span class="bold">-f</span>] <span class="underline">file/url</span>
+             Remove a file/URL from the database.
+
+     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">rmfile</span> [<span class="bold">-f</span>] <span class="underline">file/url</span>
+             Alias for the "rm" e-command.
+
+     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">tag</span> [options] <span class="underline">file1</span> [<span class="underline">file2</span> <span class="underline">...</span>]
+             Add/modify the meta-information tags of raw files.  There are
+             many options to this e-command.  See the help page for more
+             information:
+                   $ vitunes -e help tag
+
+     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">update</span> [<span class="bold">-s</span>]
+             Load the existing database and check each file to see if its
+             meta-information has been updated, or if the file has been
+             removed.  The database is updated accordingly.
+
+<span class="bold">RUN-TIME</span> <span class="bold">COMMANDS</span>
+     Below is a listing of all run-time commands supported by <span class="bold">vitunes</span>.
+
+     All commands are entered by typing ':' followed by the command name and
+     any parameters (just like in vi(1)).
+
+     Note that abbreviations are also supported.  That is, entering any non-
+     ambiguous abbreviation of a command name will also execute the command.
+
+     :<span class="bold">bind</span> <span class="underline">action</span> <span class="underline">keycode</span>
+             This will bind the action specified by <span class="underline">action</span> to the keycode
+             specified by <span class="underline">keycode</span>.  After this command is issued, entering the
+             inputting the specified <span class="underline">keycode</span> will result in firing the
+             specified <span class="underline">action</span>.
+
+             See the section <span class="underline">SPECIFYING</span> <span class="underline">KEYCODES</span> for details on how to specify
+             <span class="underline">keycode</span>, and section <span class="underline">KEYBINDING</span> <span class="underline">ACTIONS</span> for a listing of all
+             actions <span class="bold">vitunes</span> supports.
+
+     :<span class="bold">color</span> <span class="bold">item</span>=<span class="underline">fg</span>,<span class="underline">bg</span>
+             Change the color of the given <span class="bold">item</span> to <span class="underline">fg</span> colored text on a <span class="underline">bg</span>
+             colored background.
+
+             Available values for <span class="bold">item</span> are:
+
+                   <span class="underline">Item</span> <span class="underline">Name</span>         <span class="underline">Description</span>
+                   <span class="bold">bars</span>              The bars dividing the various windows.
+                   <span class="bold">player</span>            The player window.
+                   <span class="bold">status</span>            The status window.
+                   <span class="bold">library</span>           The library window.
+                   <span class="bold">playlist</span>          The playlist window.
+                   <span class="bold">errors</span>            Error messages in the status window.
+                   <span class="bold">messages</span>          Informational messages in the status
+                                     window.
+                   <span class="bold">tildas-library</span>    The tildas in empty rows of the library
+                                     window.
+                   <span class="bold">tildas-playlist</span>   The tildas in empty rows of the playlist
+                                     window.
+                   <span class="bold">playing-library</span>   Currently playing playlist in the library
+                                     window.
+                   <span class="bold">playing-playlist</span>  Currently playing file in the playlist
+                                     window.
+                   <span class="bold">artist</span>            The artist column in the playlist window.
+                   <span class="bold">album</span>             The album column in the playlist window.
+                   <span class="bold">title</span>             The title column in the playlist window.
+                   <span class="bold">track</span>             The track column in the playlist window.
+                   <span class="bold">year</span>              The year column in the playlist window.
+                   <span class="bold">genre</span>             The genre column in the playlist window.
+                   <span class="bold">comment</span>           The comment column in the playlist
+                                     window.
+                   <span class="bold">length</span>            The play-length column in the playlist
+                                     window.
+
+             Available colors for <span class="underline">fg</span> and <span class="underline">bg</span> are: white, black, red, green,
+             yellow, blue, magenta, and cyan.
+
+     :<span class="bold">display</span> (<span class="bold">reset</span> | <span class="bold">show</span> | <span class="underline">display-description</span>)
+             The display command is used to change which columns are displayed
+             in the playlist window, their order, their width, and their
+             alignment.
+
+             The format of <span class="underline">display-description</span> is a comma separated list of:
+             "[<span class="underline">-</span>]<span class="underline">field</span>.<span class="underline">size</span>".
+
+             Valid values for <span class="underline">field</span> are: album, artist, comment, genre,
+             length, title, track, and year.  The <span class="underline">size</span> field indicates the
+             number of columns.  If <span class="underline">field</span> is preceded with a <span class="underline">-</span> the field will
+             be right-aligned.  As an example, the command:
+
+             :<span class="bold">display</span> <span class="underline">title.10,artist.20,-track.4</span>
+
+             would only show the title, artist, and track fields, in that
+             order, where the title field is 10 columns wide, the artist field
+             is 20 columns wide, and the track field is 4 columns wide and
+             right-aligned.
+
+             The default display can be restored with:
+
+             :<span class="bold">display</span> <span class="bold">reset</span>
+
+             The current display description can be seen with:
+
+             :<span class="bold">display</span> <span class="bold">show</span>
+
+     :<span class="bold">filter</span>[!] <span class="underline">token</span> [<span class="underline">token2</span> <span class="underline">...</span>]
+             The filter command is used to filter out all songs from the
+             currently viewed playlist that do not match (or do match) the
+             provided list of tokens.  A song matches the list of tokens if
+             each token appears somewhere in the song's meta-information or
+             filename.
+
+             If ":<span class="bold">filter</span>" is used, all records not matching the list of tokens
+             are removed from the current playlist.  If ":<span class="bold">filter!</span>" is used,
+             all records that do match the list of tokens are removed from the
+             current playlist.
+
+             The list of tokens is simply any list of strings, each possibly
+             preceded with an exclamation point.  If a token is preceded with
+             an exclamation point, it will only match a song if it does not
+             appear anywhere in the song's meta-information or filename.
+
+             For example, the following:
+
+             :<span class="bold">filter</span> <span class="underline">nine</span> <span class="underline">nails</span>
+
+             would match all songs that contained both "nine" and "nails", and
+             remove all other songs from the current playlist.  However,
+
+             :<span class="bold">filter!</span> <span class="underline">nine</span> <span class="underline">nails</span>
+
+             would remove all songs that DO contain both "nine" and "nails."
+
+             The query:
+
+             :<span class="bold">filter</span> <span class="underline">nine</span> <span class="underline">!nails</span>
+
+             would match all songs that contain "nine" and NOT "nails".  All
+             other songs would be removed from the current playlist.
+
+     :<span class="bold">mode</span> (<span class="bold">linear</span> | <span class="bold">loop</span> | <span class="bold">random</span>)
+             Set the current playmode to one of the three available options.
+             The options are:
+
+             <span class="bold">linear</span>      Songs in a playlist are played in the order they
+                         appear until the end is reached.
+
+             <span class="bold">loop</span>        Like linear, but when the end of the playlist is
+                         reached, playback continues at the beginning of the
+                         playlist.
+
+             <span class="bold">random</span>      Songs are chosen at random from the playlist.
+
+     :<span class="bold">new</span> [<span class="underline">name</span>]
+             Create a new, empty playlist.  If <span class="underline">name</span> is provided, the new
+             playlist will be named accordingly unless a playlist with that
+             name already exists.  If no name is provided, the default is
+             "untitled".
+
+     :<span class="bold">q</span>[!]   Quit <span class="bold">vitunes</span>.  If there are playlists with unsaved changes, then
+             you are notified of this and prevented from quitting.  You can
+             forcefully quit by using :<span class="bold">q</span>!, and any unsaved changes to any
+             playlists will be lost.
+
+             Note that playlists with unsaved changes appear bold in the
+             library window.
+
+     :<span class="bold">reload</span> (<span class="bold">db</span> | <span class="bold">conf</span>)
+             The reload command is used to reload either the database or
+             configuration file while <span class="bold">vitunes</span> is running.  Handy if you update
+             your database using an e-command while also running <span class="bold">vitunes</span>.
+
+     :<span class="bold">set</span> <span class="bold">property</span>=<span class="underline">value</span>
+             The set command is used to set various properties within vitunes.
+             For properties that accept a value of <span class="underline">bool</span>, valid values are
+             'true' and 'false'.
+
+             The following properties are available:
+
+             <span class="bold">lhide</span>=<span class="underline">bool</span>  If set to true, the library window will be hidden
+                         (disappear) when it does not have focus.
+
+             <span class="bold">lwidth</span>=<span class="underline">number</span>
+                         Set the width of the library window to <span class="underline">number</span> columns
+                         wide.  Note that the number provided must be greater
+                         than 0 and less than the width of the terminal.
+
+             <span class="bold">match-fname</span>=<span class="underline">bool</span>
+                         When searching or filtering a playlist, normally the
+                         filenames are also included in the matching
+                         algorithm.  This can sometimes be undesirable,
+                         particularly if, for example, all of your music/media
+                         reside in a directory named "media" and you're trying
+                         to search for a file with the word "media" in the
+                         title.
+
+                         To disable this behavior, set match-fnames to false.
+
+             <span class="bold">save-sorts</span>=<span class="underline">bool</span>
+                         Most operations that change a playlist (such as
+                         paste/cut) set the 'needs-saving' flag on the
+                         playlist, such that you are prompted on exiting
+                         vitunes that there is a playlist with unsaved
+                         changes.  By default, sorting a playlist does not do
+                         this.
+
+                         To change this behavior, and be prompted to save
+                         sorts on exit, set this option to true.
+
+     :<span class="bold">sort</span> <span class="underline">sort-description</span>
+             Sort the currently viewing playlist using the provided
+             <span class="underline">sort-description</span>, which is a comma separated list of: "[<span class="underline">-</span>]<span class="underline">field</span>",
+             specifying which fields to sort by and if they should be sorted
+             ascending or descending.
+
+             Valid values for <span class="underline">field</span> are: album, artist, comment, genre,
+             length, title, track, and year.  Each field is sorted ascending
+             by default, unless the field is preceeded with the dash <span class="underline">-</span>, in
+             which case that field is sorted descending.
+
+             As an example, the following command:
+
+             <span class="bold">:sort</span> <span class="bold">artist,-album,title</span>
+
+             would sort all records in the current playlist by artist
+             (ascending) first, then album-name (descending), then title
+             (ascending).
+
+             Note that while most operations on playlists set the "needs-
+             saving" flag (so you are prompted when quiting <span class="bold">vitunes</span> that the
+             playlist has unsaved changes), sorting a playlist does not do
+             this.  This is intentional.  If you wish this behavior to be
+             changed, see the "save-sorts" option for the <span class="bold">set</span> command.
+
+     :<span class="bold">unbind</span> (<span class="bold">*</span> | <span class="bold">action</span> <span class="underline">action</span> | <span class="bold">key</span> <span class="underline">keycode</span>)
+             This command is used to remove existing keybindings.  It has
+             three forms.  The first is simply:
+
+             <span class="bold">unbind</span> <span class="underline">*</span>
+
+             which will remove all existing keybindings.  This is handy in a
+             configuration file where you may want to define all custom
+             keybindings.  Issuing this at runtime will leave you with an
+             instance of <span class="bold">vitunes</span> that will not respond to any keybdings!
+
+             The second form is used to unbind actions:
+
+             <span class="bold">unbind</span> <span class="bold">action</span> <span class="underline">action</span>
+
+             This will remove any keybindings for the action specified by
+             <span class="underline">action</span>.
+
+             The third form is used to unbind keys:
+
+             <span class="bold">unbind</span> <span class="bold">key</span> <span class="underline">keycode</span>
+
+             This will remove any action currently bound to the key specified
+             by <span class="underline">keycode</span>.
+
+             See the section <span class="underline">SPECIFYING</span> <span class="underline">KEYCODES</span> for details on how to specify
+             <span class="underline">keycode</span>, and section <span class="underline">KEYBINDING</span> <span class="underline">ACTIONS</span> for a listing of all
+             actions <span class="bold">vitunes</span> supports.
+
+     :<span class="bold">w</span>[!] [<span class="underline">name</span>]
+             Save the currently viewing playlist.  If a <span class="underline">name</span> is provided, then
+             the playlist will be saved with this new name.  If, however, a
+             playlist already exists with that name, then you will be
+             prevented from saving with that name unless '!' is provided, in
+             which case the existing playlist with that name will be deleted.
+
+<span class="bold">SPECIFYING</span> <span class="bold">KEYCODES</span>
+     This section describes how to specify keycodes used in both the :<span class="bold">bind</span> and
+     :<span class="bold">unbind</span> commands.
+
+     Keycodes are specified in the following fashion:
+
+           [<span class="bold">Control</span>] (<span class="underline">key</span> | <span class="underline">SpecialKey</span>)
+
+     Here, <span class="underline">key</span> is used to specify the actual, printable character entered
+     which is case-sensitive (e.g. 'j', 'p', 'P'), and <span class="underline">SpecialKey</span> is used to
+     specify various non-printable characters (such as the Page-Up key).
+
+     If the string "Control" is also specified, then the keycode only applies
+     when the control key is pressed in conjunction with the <span class="underline">key</span> or
+     <span class="underline">SpecialKey</span>.
+
+     Although <span class="bold">key</span> is case-sensitive ('p' and 'P' are treated differently),
+     both <span class="underline">SpecialKey</span> and "Control" are case-insensitive.
+
+     The currently supported list of non-printable characters available for
+     <span class="underline">SpecialKey</span> are:
+
+           <span class="underline">Value</span>     <span class="underline">Description</span>
+           <span class="bold">PageUp</span>    The page-up key.
+           <span class="bold">PageDown</span>  The page-down key.
+           <span class="bold">Up</span>        The up-arrow key.
+           <span class="bold">Down</span>      The down-arrow key.
+           <span class="bold">Left</span>      The left-arrow key.
+           <span class="bold">Right</span>     The right-arrow key.
+           <span class="bold">Backspace</span> The backspace key.
+           <span class="bold">Enter</span>     The enter key.
+           <span class="bold">Space</span>     The space key.
+           <span class="bold">Tab</span>       The tab key.
+
+     Some examples of using keycodes and the :<span class="bold">bind</span> run-time command are:
+
+        bind  paste_after   p
+        bind  paste_bofore  P
+
+        bind  scroll_up_halfpage    Control u
+        bind  scroll_down_halfpage  Control d
+
+<span class="bold">KEYBINDING</span> <span class="bold">ACTIONS</span>
+     The current list of available actions that keys may be bound to is the
+     following.  For each action, the default keys bound to them are also
+     listed.
+
+     <span class="underline">Action</span> <span class="underline">Name</span>            <span class="underline">Description</span>
+
+     <span class="bold">scroll_up</span>              Scroll the current row in the current window up by
+                            one line.
+                            DEFAULT BINDINGS: <span class="bold">k,</span> <span class="bold">-,</span> <span class="bold">Up</span>
+
+     <span class="bold">scroll_down</span>            Scroll the current row in the current window down
+                            by one line.
+                            DEFAULT BINDINGS: <span class="bold">j,</span> <span class="bold">Down</span>
+
+     <span class="bold">scroll_up_page</span>         Scroll the current window up by one line.
+                            DEFAULT BINDINGS: <span class="bold">Control</span> <span class="bold">y</span>
+
+     <span class="bold">scroll_down_page</span>       Scroll the current window down by one line.
+                            DEFAULT BINDINGS: <span class="bold">Control</span> <span class="bold">e</span>
+
+     <span class="bold">scroll_up_halfpage</span>     Scroll the current window up one half-page.
+                            DEFAULT BINDINGS: <span class="bold">Control</span> <span class="bold">u</span>
+
+     <span class="bold">scroll_down_halfpage</span>   Scroll the current window down one half-page.
+                            DEFAULT BINDINGS: <span class="bold">Control</span> <span class="bold">d</span>
+
+     <span class="bold">scroll_up_wholepage</span>    Scroll the current window up one whole page.
+                            DEFAULT BINDINGS: <span class="bold">Control</span> <span class="bold">b,</span> <span class="bold">PageUp</span>
+
+     <span class="bold">scroll_down_wholepage</span>  Scroll the current window down one whole page.
+                            DEFAULT BINDINGS: <span class="bold">Control</span> <span class="bold">f,</span> <span class="bold">PageDown</span>
+
+     <span class="bold">scroll_left</span>            Scroll the current window to the left one column.
+                            DEFAULT BINDINGS: <span class="bold">h,</span> <span class="bold">Left,</span> <span class="bold">Backspace</span>
+
+     <span class="bold">scroll_right</span>           Scroll the current window to the right one column.
+                            DEFAULT BINDINGS: <span class="bold">l,</span> <span class="bold">Right,</span> <span class="bold">Space</span>
+
+     <span class="bold">scroll_leftmost</span>        Scroll the current window to the left as far as
+                            possible.
+                            DEFAULT BINDINGS: <span class="bold">^,</span> <span class="bold">0,</span> <span class="bold">|</span>
+
+     <span class="bold">scroll_rightmost</span>       Scroll the current window to the right as far as
+                            possible.
+                            DEFAULT BINDINGS: <span class="bold">$</span>
+
+     <span class="bold">jumpto_screen_top</span>      Move the current line to the first line in the
+                            current window.
+                            DEFAULT BINDINGS: <span class="bold">H</span>
+
+     <span class="bold">jumpto_screen_middle</span>   Move the current line to the middle line in the
+                            current window.
+                            DEFAULT BINDINGS: <span class="bold">M</span>
+
+     <span class="bold">jumpto_screen_bottom</span>   Move the current line to the bottom line in the
+                            current window.
+                            DEFAULT BINDINGS: <span class="bold">L</span>
+
+     <span class="bold">jumpto_line</span>            Jump to either a specified line (if a global input
+                            number is present) or to the last line in the
+                            current window's buffer.
+                            DEFAULT BINDINGS: <span class="bold">G</span>
+
+     <span class="bold">jumpto_percent</span>         Using the global input number N, jump to the line
+                            N% the way through the current window's buffer.
+                            DEFAULT BINDINGS: <span class="bold">%</span>
+
+     <span class="bold">search_forward</span>         Begin a search for the entered string searching
+                            forward in the current window.  The current row
+                            will be updated to the next matching row.
+                            DEFAULT BINDINGS: <span class="bold">/</span>
+
+     <span class="bold">search_backward</span>        Begin a search for the entered string searching
+                            backwards in the current The current row will be
+                            updated to the next matching row.  window.
+                            DEFAULT BINDINGS: <span class="bold">?</span>
+
+     <span class="bold">find_next_forward</span>      Using the previous search-string, search in the
+                            same direction as the search was input for the
+                            next matching row.
+                            DEFAULT BINDINGS: <span class="bold">n</span>
+
+     <span class="bold">find_next_backward</span>     Using the previous search-string, search in the
+                            opposite direction as the search was input for the
+                            next matching row.
+                            DEFAULT BINDINGS: <span class="bold">N</span>
+
+     <span class="bold">cut</span>                    Remove the following N lines from the current
+                            window, placing them in the copy buffer, where N
+                            is the global input number.  Note that if the
+                            library window is active, only one row (playlist)
+                            can be cut/deleted at a time, and that this action
+                            cannot be undone.
+                            DEFAULT BINDINGS: <span class="bold">d</span>
+
+     <span class="bold">yank</span>                   Copy the following N lines from the current window
+                            into the copy buffer, where N is the global input
+                            number.  This action cannot be used in the library
+                            window.
+                            DEFAULT BINDINGS: <span class="bold">y</span>
+
+     <span class="bold">paste_after</span>            Paste the contents of the copy buffer after the
+                            current row in the playlist window.  This action
+                            cannot be used in the library window.
+                            DEFAULT BINDINGS: <span class="bold">p</span>
+
+     <span class="bold">paste_before</span>           Paste the contents of the copy buffer before the
+                            current row in the playlist window.  This action
+                            cannot be used in the library window.
+                            DEFAULT BINDINGS: <span class="bold">P</span>
+
+     <span class="bold">undo</span>                   Undo the previous action on the currently viewed
+                            playlist.  This action cannot be used in the
+                            library window.
+                            DEFAULT BINDINGS: <span class="bold">u</span>
+
+     <span class="bold">redo</span>                   Redo the previously undone action on the currently
+                            viewed playlist.  This action cannot be used in
+                            the library window.
+                            DEFAULT BINDINGS: <span class="bold">Control</span> <span class="bold">r</span>
+
+     <span class="bold">quit</span>                   Exit <span class="bold">vitunes</span>.  If there are unsaved changes in any
+                            playlists you will be prevented from exiting until
+                            you either save those changes or issue a ":q!"
+                            command.
+                            DEFAULT BINDINGS: <span class="bold">Control</span> <span class="bold">c,</span> <span class="bold">Control</span> <span class="bold">/</span>
+
+     <span class="bold">redraw</span>                 Clear and re-draw the entire display.
+                            DEFAULT BINDINGS: <span class="bold">Control</span> <span class="bold">l</span>
+
+     <span class="bold">command_mode</span>           Enter command-mode, where the commands listed in
+                            the <span class="underline">RUN-TIME</span> <span class="underline">COMMANDS</span> section may be issued.
+                            DEFAULT BINDINGS: <span class="bold">:</span>
+
+     <span class="bold">shell</span>                  Enter a command to be executed outsite of <span class="bold">vitunes</span>
+                            and in the current shell environment.  The output
+                            of the execution is shown before control and the
+                            display returns to <span class="bold">vitunes</span>.
+                            DEFAULT BINDINGS: <span class="bold">!</span>
+
+     <span class="bold">switch_windows</span>         Toggle focus between the library and playlist
+                            windows.
+                            DEFAULT BINDINGS: <span class="bold">Tab</span>
+
+     <span class="bold">show_file_info</span>         Show the file information (including meta-
+                            information) for the current row/file in the
+                            playlist window.  This action does not work in the
+                            library window.
+                            DEFAULT BINDINGS: <span class="bold">m</span>
+
+     <span class="bold">load_playlist</span>          Load the playlist specified by the current row in
+                            the library window.
+                            DEFAULT BINDINGS: <span class="bold">Enter</span>
+
+     <span class="bold">media_play</span>             Begin playing the file specified by the current
+                            row in the playlist window.
+                            DEFAULT BINDINGS: <span class="bold">Enter</span>
+
+     <span class="bold">media_pause</span>            Pause playback of any playing media.
+                            DEFAULT BINDINGS: <span class="bold">z</span>
+
+     <span class="bold">media_stop</span>             Stop all playback of any playing media.
+                            DEFAULT BINDINGS: <span class="bold">s</span>
+
+     <span class="bold">seek_forward_seconds</span>   Seek forwards 10 seconds in any playing media.
+                            DEFAULT BINDINGS: <span class="bold">f,</span> <span class="bold">]</span>
+
+     <span class="bold">seek_backward_seconds</span>  Seek backwards 10 seconds in any playing media.
+                            DEFAULT BINDINGS: <span class="bold">b,</span> <span class="bold">[</span>
+
+     <span class="bold">seek_forward_minutes</span>   Seek forwards 1 minute in any playing media.
+                            DEFAULT BINDINGS: <span class="bold">F,</span> <span class="bold">}</span>
+
+     <span class="bold">seek_backward_minutes</span>  Seek backwards 1 minute in any playing media.
+                            DEFAULT BINDINGS: <span class="bold">B,</span> <span class="bold">{</span>
+
+     Some examples of using the above actions and keycodes to define the
+     default keybdings are:
+
+        bind  paste_after   p
+        bind  paste_bofore  P
+
+        bind  scroll_up_halfpage    Control u
+        bind  scroll_down_halfpage  Control d
+
+<span class="bold">CONFIGURATION</span> <span class="bold">FILE</span>
+     The configuration file loaded by <span class="bold">vitunes</span> is relatively straight-forward.
+     Each line may be one of the following:
+
+     <span class="bold">o</span>   A comment, which starts with a '#'.
+     <span class="bold">o</span>   An empty line.
+     <span class="bold">o</span>   One of the commands from the <span class="underline">RUN-TIME</span> <span class="underline">COMMANDS</span> section above.
+
+     That's it.  As such, review the list of commands above.
+
+     An example configuration file that would setup some hideous DOS-like
+     colors is:
+
+        # setup colors
+        color bars=white,blue
+        color player=yellow,blue
+        color library=green,blue
+        color playlist=white,blue
+        color status=red,blue
+
+        # format for playlist window
+        display artist.20,album.20,title.20,track.4,year.4
+
+        # show most recent work of an artist first in library window
+        sort artist,-year
+
+        # make library window 20 columns wide and hide when not active
+        set lwidth=20
+        set lhide=true
+
+<span class="bold">FILES</span>
+     <span class="underline">~/.vitunes/vitunes.conf</span>
+             Default configuration file.
+     <span class="underline">~/.vitunes/vitunes.db</span>
+             Default database file.
+     <span class="underline">~/.vitunes/playlists/</span>
+             Default playlist directory.
+     <span class="underline">/usr/local/bin/mplayer</span>
+             Default path to the mplayer(1) binary.
+
+<span class="bold">SEE</span> <span class="bold">ALSO</span>
+     mplayer(1), realpath(3), strftime(3), vi(1).
+
+     More information about TagLib can be found on the TagLib website:
+     <span class="underline"><a href="http://developer.kde.org/~wheeler/taglib.html">http://developer.kde.org/~wheeler/taglib.html</a></span>
+
+     The <span class="bold">vitunes</span> website has additional information, such as a list of
+     frequently asked questions, a mailing list, and up-to-date bug
+     information.
+
+     <span class="underline"><a href="http://www.vitunes.org">http://www.vitunes.org</a></span>
+
+<span class="bold">AUTHORS</span>
+     <span class="bold">vitunes</span> was written by Ryan Flannery &lt;<span class="underline">ryan.flannery@gmail.com</span>&gt;.
+
+<span class="bold">BUGS</span>
+     None known.
+
+     If you happen to find any, please send a detailed description to me at
+     <span class="underline">ryan.flannery@gmail.com</span>.
+
+OpenBSD 4.8                     January 9, 2011                    OpenBSD 4.8
+</pre>
+</body>
+</html>

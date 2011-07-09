@@ -1,0 +1,525 @@
+<html>
+<head>
+   <title>vitunes</title>
+   <style>
+      h1 { margin-bottom: 0px; }
+      a, a:visited { color: blue; }
+      img { margin: 1em; }
+      dt { font-weight: bold; font-family: courier; }
+      dd { margin-bottom: 0.75em; }
+   </style>
+</head>
+<body>
+
+<center>
+   <h1>vitunes</h1>
+   <i>Play your tunes and create/manage playlists with a <tt>vi</tt>-like
+   interface</i>
+   <br /><br />
+   <a href="#description">[description]</a>
+   &nbsp;&nbsp;&nbsp;
+   <a href="#features">[features]</a>
+   &nbsp;&nbsp;&nbsp;
+   <a href="#documentation">[documentation]</a>
+   &nbsp;&nbsp;&nbsp;
+   <a href="#download">[download]</a>
+</center>
+
+<a name="description"></a>
+<h2>Description</h2>
+<tt>vitunes</tt> is a curses-based <i>playlist manager</i> and media player
+for *nix operating systems with <a href="http://www.vim.org">vim</a>-like
+keybinds.  It's primary goal is to serve as an index of "tagged" multimedia
+files and provide a quick, easy interface for browsing &amp; searching your
+files, and creating playlists.
+<br /><br />
+It is similar in function to a certain graphical program used by
+many on other operating systems.  <tt>vitunes</tt> works by extracting the
+meta-information from media files and storing them in a central database,
+forming a "Library" from which you can play your music and build playlists.
+<tt>vitunes</tt> uses <a href="http://www.mplayerhq.hu">mplayer</a> as a
+back-end for actually playing all media.
+<br /><br />
+<b>NOTE:</b> <tt>vitunes</tt> is still under heavy development.  None-the-less,
+it's reached a point where it's usable for others who may care to try it.
+<br /><br />
+<b>NOTE:</b> <tt>vitunes</tt> is developed on
+<a href="http://www.openbsd.org">OpenBSD</a> and only OpenBSD.  As such, there
+are (probably) many OpenBSD-isms in the code that would prevent it from
+building and/or running on other *nix-like OS's.  <b>Cope.</b>
+
+<img style="float: right;" src="screenshots/old.png" />
+
+<a name="features"></a>
+<h2>Features</h2>
+<tt>vitunes</tt>...
+<ul>
+   <li>never moves / modifies your media files in any way</li>
+   <li>never creates / modifies / deletes any files outside of
+      <tt>~/.vitunes</tt></li>
+   <li>uses <a href="http://www.mplayerhq.hu">mplayer</a> to play media,
+      so it can play anything <tt>mplayer</tt> can</li>
+   <li>allows creating / managing playlists in a fast, <tt>vi</tt>-like
+      fashion</li>
+   <li>allows searching your library and playlists based on meta-information
+      from the media files in the database</li>
+</ul>
+<tt>vitunes</tt> can extract meta-information from the following files:
+<ul>
+   <li>ID3v1 (and variants), ID3v2.x
+      <br />
+      (via <a href="http://www.underbit.com/products/mad/">libid3tag</a>)</li>
+   <li>OGG/Vorbis comments
+      <br />
+      (via <a href="http://www.xiph.org/vorbis/">libvorbis</a>)</li>
+   <li>MP4/AAC comments
+      <br />
+      (via <a href="http://resare.com/libmp4v2/">libmp4v2</a>)</li>
+</ul>
+<tt>vitunes</tt> is <b>NOT</b>...
+<ul>
+   <li>a media meta-information editor (you can't edit ID3 tags, vorbis
+      comments, etc., from within <tt>vitunes</tt>).  Use other tools
+      for that.</li>
+   <li>a media-file organizer.  it leaves your files wherever you have
+      them, untouched.  It requires only read access to the files to
+      extract meta-information and play the file through mplayer.</li>
+   <li>a full-featured, fancy-shmancy media <i>player</i>.  It's a playlist
+      organizer at best, that can play music.</li>
+</ul>
+
+<a name="documentation"></a>
+<h2>Documentation</h2>
+<ul>
+   <li><a href="#overview">1. Quick Overview</a>
+      <b>&larr; READ THIS FIRST!</b>
+   </li>
+   <li><a href="#buildinstall">2. Building &amp; Installing</a></li>
+   <li><a href="#buildlibrary">3. Building &amp; Updating the Library</a></li>
+   <li><a href="#running">4. Running <tt>vitunes</tt> Normally</a></li>
+   <ul>
+      <li><a href="#ui">4.1. The User Interface</a></li>
+      <li><a href="#keybindings">4.2. Key Bindings</a></li>
+      <li><a href="#commandmode">4.3. Command Mode</a></li>
+   </ul>
+   <li><a href="#faq">Appendix A. F.A.Q.</a></li>
+   <li><a href="#todo">Appendix B. TODO</a></li>
+</ul>
+
+<a name="overview"></a>
+<h3>1. Quick Overview <b>&larr; READ THIS FIRST!</b></h3>
+<p>
+   <tt>vitunes</tt> works by first building a meta-information database, which
+   is a database containing all media files and their meta information
+   (artist, album, title, track number, year, genre, and playtime).  This
+   database forms the "LIBRARY" which is all of the media files
+   <tt>vitunes</tt> is capable of playing and working with.
+   <ul>
+      <li>&there4; IF a media file is <b>NOT</b> in the library,
+         THEN that file will <b>NOT</b> appear within <tt>vitunes</tt>!
+   </ul>
+</p>
+<p>
+   This database is built using "<tt>vitunes -e createdb ...</tt>", and as
+   you add/remove/modify any of your media files, you can update the
+   database using "<tt>vitunes -e updatedb ...</tt>".  See
+   <a href="#buildlibrary">&sect; 3. Building &amp; Updating the Library</a>
+   for details.
+</p>
+<p>
+   After the library has been created, <tt>vitunes</tt> can be run normally
+   (simply "<tt>vitunes</tt>"), and you can browse your library, search it,
+   create &amp; manage playlists, etc.
+</p>
+<p>
+   The database <tt>vitunes</tt> builds and uses is stored in the file
+   <tt>~/.vitunes/vitunes.db</tt>.  Additionally, the playlists it
+   creates/manages are all stored in the directory
+   <tt>~/.vitunes/playlists/</tt>.  These are created when the library
+   database is first created.
+</p>
+<p>
+   <b>NOTE:</b> It's important to remember that when you build/update your
+   library, only files with meta information (ID3v* tags, vorbis comments,
+   or MP4/AAC comments) are recorded.  Any other media files are simply
+   ignored.
+   <ul>
+      <li>&there4; IF you want a media file (song/video) in the library,
+         THEN that file <b>must</b> have some meta information.</li>
+   </ul>
+</p>
+
+<a name="buildinstall"></a>
+<h3>2. Building &amp; Installing</h3>
+<p>
+   <tt>vitunes</tt> requires the following libraries to be installed to build:
+   <ul>
+      <li><a href="http://www.underbit.com/products/mad/">libid3tag</a>
+         (OpenBSD package name: <tt>libid3tag</tt>)
+      </li>
+      <li><a href="http://www.xiph.org/vorbis/">libvorbis</a>
+         (OpenBSD package name: <tt>libvorbis</tt>)
+      </li>
+      <li><a href="http://resare.com/libmp4v2/">libmp4v2</a>
+         (OpenBSD package name: <tt>libmp4v2</tt>)
+      </li>
+   </ul>
+   Additionally, to have vitunes actually play music,
+   <a href="http://www.mplayerhq.hu">mplayer</a> must be installed
+   (OpenBSD package name: <tt>mplayer</tt>).
+</p>
+<p>
+   After these are installed, a simple
+   <pre>
+      # make
+      # make install
+   </pre>
+   <i>should</i> build and install <tt>vitunes</tt>.
+</p>
+
+<a name="buildlibrary"></a>
+<h3>3. Building &amp; Updating the Library</h3>
+<p>
+   Before <tt>vitunes</tt> will run, you must build the meta-information
+   database containing all of the meta-information of the media files you want
+   to be able to play in <tt>vitunes</tt>.  To do this, do the following:
+   <pre>
+      # vitunes -e createdb /path/to/music1 [ /path/to/music2 ... ]
+   </pre>
+   This will recursively search all the paths provided and for each file
+   encountered, <tt>vitunes</tt> will attempt to extract any meta-information.
+   If such information is found, the file's information is added to the database
+   <tt>~/.vitunes/vitunes.db</tt>.
+</p>
+<p>
+   Additionally, whenever you add/remove/update your media files, you can run
+   <pre>
+      # vitunes -e updatedb [ /path/to/moremusic1 ... ]
+   </pre>
+   to have <tt>vitunes</tt> update its database (re-scan all files currently
+   in the database to see if the meta information has changed and remove any
+   entries for files that have been removed), and even add new directories
+   (searched recursively) to the library.
+</p>
+<p>
+   <b>IMPORTANT NOTE:</b> <i>only</i> files for which some meta information is
+   found are added to the library.  All others are skipped.
+   <br />
+   You can parse the output of the <tt>createdb</tt> and <tt>updatedb</tt>
+   commands easily to see which files were added or not.
+</p>
+<p>
+   For a list of all e-commands <tt>vitunes</tt> has, run
+   <pre>
+      # vitunes -e help
+   </pre>
+   For more information on a specific e-command and its usage, run
+   <pre>
+      # vitunes -e help command
+   </pre>
+</p>
+
+<a name="running"></a>
+<h3>4. Running <tt>vitunes</tt> Normally</h3>
+<p>
+   Once you have created the database above, you can run <tt>vitunes</tt>
+   normally by simply
+   <pre>
+      # vitunes
+   </pre>
+   This will launch a curses-based interface similar to what you see in the
+   screenshot on this page.
+</p>
+<p>
+   What follows next are descriptions of the user interface, the
+   key-bindings, and commands available in "command-mode" for altering the
+   state of <tt>vitunes</tt>.
+</p>
+
+<a name="ui"></a>
+<h3>4.1. The User Interface</h3>
+The user interface is divided into 4 sections, which are in different colors
+in the screenshot below:
+<center><img src="screenshots/old-tiny.png" /></center>
+<ol>
+   <li><b>Play Window</b> The top row (colored
+      <span style="color: #ffff00; background-color: black;">yellow</span>
+      above)
+      <br />
+      This window provides information on the currently playing file, if any.
+      If no file is currently playing, the window is empty except for a
+      shameless shout-out to <tt>vitunes</tt> in the right.<br />
+      If a file is playing, then the following information is displayed:
+      <ol>
+         <li>A <b>play-mode character</b>, which is one of:
+            <ul>
+               <li>"<b><tt>-</tt></b>" for linear mode (files in the playlist
+                  are played in-order until the end of the playlist is
+                  reached).
+               </li>
+               <li>"<b><tt>O</tt></b>" for loop (like linear, only once the
+                  end of the playlist is reached, playing resumes with the
+                  first file in the playlist).
+               </li>
+               <li>"<b><tt>?</tt></b>" for random (where files from the
+                  playlist are chosen at random to be played).
+               </li>
+            </ul>
+            The default is loop.
+         </li>
+         <li>A <b>pause-indicator</b>, which is the string
+            "<b><tt>[PAUSED]</tt></b>" if playback is currently paused, and
+            empty otherwise.
+         </li>
+         <li>The <b>time into the current file</b> which is in the format
+            "<b><tt>hh:mm:ss</tt></b>".
+         </li>
+         <li>The <b>position into the current file as a percent</b>, if
+            the total playlength of the file is available, -1 otherwise.
+         </li>
+         <li>The <b>Title</b> of the current file if available, otherwise
+            as much of the filename as will fit in the window.
+         </li>
+      </ol>
+      <br /><br />
+   </li>
+   <li><b>Command Window</b> The bottom row (colored
+      <span style="color: #00ffff; background-color: black;">cyan</span>
+      above)
+      <br />
+      This window serves two purposes.
+      <br />
+      When <i>not</i> in command mode it provides the following information
+      about the <tt>vitunes</tt> interface.
+      <ol>
+         <li>The <b>currently focused window</b> (one of either
+            "<b><tt>[playlist]</tt></b>" or "<b><tt>[medialist]</tt></b>" is
+            displayed.
+         </li>
+         <li>The <b>vertical and horizontal offsets</b> are displayed as
+            the pair "<b><tt>i,j</tt></b>" where <b><tt>i</tt></b> is the
+            line number of the currently selected row in either the playlist
+            or medialist window (whichever has focus), and <b><tt>j</tt></b>
+            is the amount of horizontal scrolling used (again, for either the
+            playlist or medialist window, whichever has focus).
+         </li>
+         <li>The <b>vertical percent</b> into the current buffer (playlist or
+            medialist window), which is basically the current row number
+            divided by the total number of rows times 100.
+         </li>
+      </ol>
+      <br />
+      When in command mode, the command window is cleared and commands may
+      be entered to alter <tt>vitunes</tt> (e.g. the command
+      "<b><tt>:q</tt></b>" is used to exist <tt>vitunes</tt>).
+      <br /><br />
+   </li>
+   <li><b>Playlist Window</b> The left-window (colored
+      <span style="color: #ff00ff; background-color: black;">magenta</span>
+      above)
+      <br />
+      This window always shows a list of all playlists available, loaded
+      from the <tt>~/.vitunes/playlists/</tt> directory when <tt>vitunes</tt>
+      starts.
+      <br /><br />
+      The first two entries are always shown and are <i>pseudo-playlists</i>.
+      They are:
+      <ol>
+         <li>"<b><tt>--LIBRARY--</tt></b>" which is the database of all songs
+            in the vitunes meta-information database.
+         </li>
+         <li>"<b><tt>&lt;search results&gt;</tt></b>" which is a playlist
+            built/destroyed every time a search of any playlist is performed.
+         </li>
+      </ol>
+      <br /><br />
+   </li>
+   <li><b>Medialist Window</b> The right-window row (colored
+      <span style="color: #ffffff; background-color: black;">white</span>
+      above)
+      <br />
+      This window always shows the contents of whatever playlist was
+      selected for viewing.  The information shown for each file is all of
+      the meta-information available.  If no information is available, the
+      filename is shown instead.
+      <br /><br />
+   </li>
+</ol>
+
+<a name="keybindings"></a>
+<h3>4.2. Key Bindings</h3>
+The following key-bindings are used to interact with <tt>vitunes</tt>.
+They should be familiar to any vi/vim users.
+<dl>
+   <dt>TAB</dt>
+   <dd>Switch focus between the playlist/medialist windows</dd>
+
+   <dt>j / k</dt>
+   <dd>Move current row (highlighted) down/up one row (works in both playlist
+      and medialist windows)</dd>
+
+   <dt>h / l</dt>
+   <dd>Horizontal scroll left / right one character (works in both playlist
+      and medialist windows)</dd>
+
+   <dt>CTRL-u / CTRL-d</dt>
+   <dd>Scroll up / down 1/2 page (works in both playlist and medialist
+      windows)</dd>
+
+   <dt>ENTER</dt>
+   <dd>If focus is in the playlist window, this loads the currently selected
+      playlist in the medialist window.
+      If focus is in the medialist window, this plays the current file.</dd>
+
+   <dt>z</dt>
+   <dd>Pause/un-pause current playback (works in either playlist or medialist
+      windows).</dd>
+
+   <dt>s</dt>
+   <dd>Stop current playback (works in either playlist or medialist
+      windows).</dd>
+
+   <dt>f / b</dt>
+   <dd>Skip forward / backward 10 seconds in playing of current file (works
+      in either playlist or medialist windows).</dd>
+
+   <dt>yy</dt>
+   <dd>If focus is in medialist window, copies ("yanks") current file to
+      copy-buffer.  If focus is in playlist window, does nothing.<br />
+      Use of "<tt>y<i>X</i></tt>" will work as in <tt>vim</tt> (i.e. it will
+      copy the next <i>X</i> lines).
+      </dd>
+
+   <dt>dd</dt>
+   <dd>Delete current playlist (if focus is in playlist window) or current
+      file (if focus is in medialist window).<br />
+      Use of "<tt>d<i>X</i></tt>" will work as in <tt>vim</tt> (i.e. it will
+      delete the next <i>X</i> lines).
+      </dd>
+
+   <dt>p / P</dt>
+   <dd>Paste any file(s) in the copy-buffer before / after the current
+      row in the current playlist.  Only works when focus is on medialist
+      window.</dd>
+
+   <dt>CTRL+l</dt>
+   <dd>Clear and re-draw the entire screen.</dd>
+
+   <dt>"/"</dt>
+   <dd>Start searching the currently viewing playlist.  The query entered
+      is first tokenized, and all entries in the current playlist that match
+      <i>all</i> tokens (case-insensitive) are displayed.  These search
+      results form the pseudo-playlist "&lt;search results&gt;", which can
+      be saved as a regular playlist using "<b><tt>:w name</tt></b>".
+   </dd>
+
+   <dt>":"</dt>
+   <dd>Enter command-mode (see below for commands).</dd>
+</dl>
+
+<a name="commandmode"></a>
+<h3>4.3. Command Mode</h3>
+Similar to command mode in vi/vim, <tt>vitunes</tt> command mode allows you
+to execute various commands.  This is a list of all such commands.
+<dl>
+   <dt>:q</dt>
+   <dd>Exit <tt>vitunes</tt></dd>
+
+   <dt>:w[!] [name]</dt>
+   <dd>Use "<b><tt>:w</tt></b>" to save the current playlist being viewed in
+      the medialist window.  Use "<b><tt>:w name</tt></b>" to save the
+      playlist as "name" instead.  If a playlist with the given name already
+      exists, use "<b><tt>:w! name</tt></b>" to force.<br />
+      NOTE: You cannot save the "--LIBRARY--" or "&lt;search-results&gt;"
+      pseudo-playlists, since they do not actually exist as playlists.
+      You can save them as a new playlist, however, using
+      "<b><tt>:w name</tt></b>".
+   </dd>
+
+   <dt>:new playlist</dt>
+   <dd>Create a new, empty playlist</dd>
+
+   <dt>:mode [ linear | loop | random ]</dt>
+   <dd>Set the current playmode to one of linear (all files in the playlist
+      are played in the order they appear, until the end of the playlist is
+      reached), loop (like linear, but playing of the playlist loops
+      indefinitely), or random (where files from the playlist are played in
+      a random order).
+</dl>
+
+<a name="faq"></a>
+<h3>Appendix A. F. A. Q.</h3>
+<dl>
+   <dt>What license is <tt>vitunes</tt> distributed under?</dt>
+   <dd>That's a good question, and I'm still trying to figure it out.
+      The <tt>libmp4v2</tt> dependency has some rather strict licensing.
+      I'm still investigating what license <tt>vitunes</tt> needs to be
+      under.
+   </dd>
+</dl>
+
+<i>more is forthcoming</i>
+
+<a name="todo"></a>
+<h3>Appendix B. TODO.</h3>
+Before the "1.0" release, the following will be finished...
+<ul>
+   <li><i>much</i> more testing to flush out the bugs that no-doubt inhabit
+      <tt>vitunes</tt>.
+   </li>
+   <li>ADD: runtime ability &amp; command line switch to set/change playlist
+      width
+   </li>
+   <li><del>ADD: support for resizing display!</del>
+      <i>It now works beautifully with
+      <a href="http://www.peereboom.us/scrotwm/html/scrotwm.html">scrotwm(1)</a>!</i>
+   </li>
+   <li>ADD: ability to sort files in medialist by user specified order</li>
+   <li>ADD: ability to change listing format for media</li>
+   <li>ADD: ability to change colors</li>
+   <li>ADD: a config file!  wooooo!</li>
+   <li>FIX: get genre's from mp4/aac audio files.
+      (I think this is a bug in the mp4 library, where it sometimes returns a
+      pointer to static memory rather than malloc(3)'d memory... I think when
+      it's an ID3v1-style genre).
+   </li>
+   <li>FIX: get playtime from mpeg (including mp3) files.</li>
+   <li><del>FIX: createdb function works, but updatedb is currently
+      un-implemented.</del>
+   </li>
+   <li><del>FIX: backspace/delete/left stuff when user inputs a string</del></li>
+   <li>FIX: redraws are currently very expensive... anytime anything changes
+      in a window, the entire thing is re-drawn.
+   </li>
+   <li>FIX: remove all (or most) statically-sized arrays.
+      <br />
+      <b>UPDATE:</b> Only playlists are now statically sized (to 1,000 songs).
+   </li>
+   <li><del>ADD/FIX: the help switch output</del></li>
+   <li>ADD/FIX: the man pages</li>
+   <li>ADD/FIX: this website</li>
+   <li>FIX: Respect <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=style&apropos=0&sektion=0&manpath=OpenBSD+Current&arch=i386&format=html">style(9)</a></li>
+</ul>
+
+
+
+<a name="download"></a>
+<h2>Download</h2>
+Remember that <tt>vitunes</tt> is still under heavy development.
+None-the-less, it's now reached a point where it's usable should someone
+want to give it a try.
+<br />
+If you encounter problems, please first read the documentation above and then
+<a href="mailto:ryan.flannery@gmail.com">email me</a>.
+<ul>
+   <li><a href="files/vitunes-0.9.tgz">vitunes-0.9.tgz</a> (1 March 2009)</li>
+   <li><a href="files/vitunes-0.92.tgz">vitunes-0.92.tgz</a> (11 March 2009)</li>
+   <li><a href="files/vitunes-0.92p0.tgz">vitunes-0.92p0.tgz</a> (12 March 2009)</li>
+   <li><a href="files/vitunes-0.93.tgz">vitunes-0.93.tgz</a> (8 May 2009)</li>
+</ul>
+
+<hr />
+<tt>Copyright (c) 2009 Ryan Flannery &lt;ryan.flannery@gmail.com&gt;</tt>
+
+</body>
+</html>

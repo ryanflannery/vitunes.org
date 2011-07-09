@@ -1,0 +1,1130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <meta http-equiv="expires" content="0" />
+   <meta name="copyright" content="This document copyright 2008-2011 by Ryan Flannery" />
+   <meta name="description" content="vitunes, a curses multimedia indexer and player" />
+
+   <link rel="stylesheet" type="text/css" href="styles.css" />
+   <link rel="stylesheet" type="text/css" href="js/tablescroll/jquery.tablescroll.css" />
+   <title>vitunes</title>
+</head>
+<body>
+
+<div><a href="http://github.com/ryanflannery/vitunes"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://assets2.github.com/img/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf?repo=&amp;url=http%3A%2F%2Fs3.amazonaws.com%2Fgithub%2Fribbons%2Fforkme_right_red_aa0000.png&amp;path=" alt="Fork me on GitHub" /></a></div>
+
+
+<div id="header">
+   <img alt="vitunes" src="logo.png" />
+   <br />
+   <b>a curses media indexer and player for vi users</b>
+   <div id="navigation">
+      <a href="#about">about</a>
+      &#9642;
+      <a href="#features">features</a>
+      &#9642;
+      <a href="#newsRef">news</a>
+      &#9642;
+      <a href="#documentation">documentation</a>
+      &#9642;
+      <a href="#screenshots">screenshots</a>
+      &#9642;
+      <a href="#faq">f.a.q.</a>
+      &#9642;
+      <a href="#download">download</a>
+      &#9642;
+      <a href="#roadmap">roadmap</a>
+   </div>
+</div>
+
+
+<div id="main">
+
+
+<a name="about"></a>
+<h1>About</h1>
+<p>
+   vitunes is a curses-based music player and playlist manager for *nix whose
+   goals are: 1. a minimalistic appearance, 2. strong vi-like bindings, and
+   3. quick playlist creation/management.  vitunes does not strive to be a
+   feature-rich media <i>player</i>, but rather a quick, vi-like media
+   <i>indexer</i> and <i>playlist manager</i>, that just happens to be able
+   to play the music it indexes.
+</p>
+<p>
+   Additionally, vitunes never needs write-access to anything outside of its
+   work directory (default is <b><tt>~/.vitunes/</tt></b>).  It never touches/modifies
+   anything outside of there and doesn't leave junk files anywhere.
+</p>
+
+<div id="quicklinks">
+<table cellspacing="0">
+<tr>
+<td>
+   <ul>
+      <li class="listHead">Repositories</li>
+      <li><a href="http://hg.ryanflannery.net/vitunes">Personal</a> (master)</li>
+      <li><a href="https://github.com/ryanflannery/vitunes">GitHub</a></li>
+      <li><a href="http://bitbucket.org/ryanflannery/vitunes">BitBucket</a></li>
+   </ul>
+</td>
+<td>
+   <ul>
+      <li class="listHead">Support</li>
+      <li><a href="#documentation">Doc's</a> and <a href="#faq">F.A.Q.</a> (below)</li>
+      <li><a href="http://www.freelists.org/list/vitunes">Mailing List</a> (<a href="http://www.freelists.org/archive/vitunes">archives</a>)</li>
+      <li><a href="https://github.com/ryanflannery/vitunes/issues">Bug/Issue
+         Tracker</a></li>
+   </ul>
+</td>
+<td>
+   <ul>
+      <li class="listHead">Ports</li>
+      <li><a href="http://openports.se/multimedia/vitunes">OpenBSD</a></li>
+      <li><a href="http://www.freebsd.org/cgi/cvsweb.cgi/ports/audio/vitunes/">FreeBSD</a></li>
+      <li><a href="https://aur.archlinux.org/packages.php?ID=30313">ArchLinux</a></li>
+   </ul>
+</td>
+<td>
+   <ul>
+      <li class="listHead">On the Web</li>
+      <li><a href="http://freshmeat.net/projects/vitunes">freshmeat</a></li>
+      <li><a href="http://www.ohloh.net/p/vitunes">ohloh</a></li>
+   </ul>
+</td>
+</tr>
+</table>
+</div>
+
+
+<a name="features"></a>
+<h1>Features</h1>
+<p>vitunes...</p>
+<ul>
+   <li>can create, modify, search, filter, and sort playlists in a quick,
+      vi-like fashion.</li>
+   <li>doesn't need write-access to anything outside of <b><tt>~/.vitunes/</tt></b>
+      (by default).</li>
+   <li>uses <a href="http://www.mplayerhq.hu/">mplayer</a> to play all media,
+      so it can play anything mplayer can.</li>
+   <li>uses
+      <a href="http://developer.kde.org/~wheeler/taglib.html">TagLib</a> for
+      meta-data extraction, so it supports any format it does (nearly everything).
+   </li>
+   <li>Supports undo/redo.</li>
+   <li>Supports custom key-bindings.</li>
+   <!--
+   <li><i>Fast</i> indexing.  10,000+ files indexed in 90 seconds.  Checking for
+      updates in less than 5 seconds.
+   </li>
+   -->
+   <li>Can index non-files (things like URL's)...pretty much anything mplayer
+      can play.</li>
+   <li>Has an easily customizable display, including format &amp; color</li>
+   <li><i>Loads</i> more...</i></li>
+</ul>
+
+
+<a name="newsRef"></a>
+<h1>News</h1>
+<div id="news">
+<dl>
+   <dt>15 March 2011: Brief Hiatus</dt>
+   <dd>
+      With end-of-quarter grading, research, job-hunting, and dealing with my
+      University closing my department (Computer Science.... !?!?!?), I'll be
+      rather busy for the next few weeks and unable to contribute to the project.
+      <br /><br />
+      Keep an eye on the
+      &ldquo;<a href="https://github.com/ryanflannery/vitunes/network">Network</a>&rdquo;
+      tab in the GitHub repo for some of the other contributor's work until I return.
+   </dd>
+
+   <dt>16 February 2011: ArchLinux Port Updated!</dt>
+   <dd>
+      With many thanks, Peter Polacik has updated the ArchLinux port of vitunes!
+   </dd>
+
+   <dt>10 February 2011: Linux Support Now Working!</dt>
+   <dd>
+      With much thanks to Daniel Walter and Peter Polacik, vitunes now compiles and
+      runs on Linux!  It requires a newer version of mplayer on Debian, and has some
+      compile warnings (working on that), but it works!
+      <br /><br />
+      Mplayer version 1.0rc3 or later will do.  Alternatively, any version built with
+      a checkout of the source <i>after</i> December 27, 2009 should do.
+   </dd>
+
+   <dt>9 January 2011: Version 2.2 Released</dt>
+   <dd>
+      This release adds no new functional features from version 2.1.  It does include
+      a much better man-page and a build that works on Mac OS X.  That's it.
+   </dd>
+
+   <dt>7 January 2011: Mac OS X Support Added -- Needs Testing</dt>
+   <dd>
+      In the past few days I have added support for a clean build on Mac OS X.  That is,
+      vitunes should build cleanly, as-is, on a Mac.  Only the following needs addressing
+      by any Mac users:
+      <ul>
+         <li>Update the install locations in the Makefile (<tt>PREFIX</tt>)
+            appropriately.</li>
+         <li><span style="text-decoration: line-through;">
+            Edit the <tt>LDFLAGS</tt> variable in the Makefile to include
+            <tt>-lncursesw</tt> rather than <tt>-lncurses</tt>.
+            <br />
+            </span>
+            This is no longer required.
+         </li>
+         <li>Either manually modify the <tt>DEFAULT_PLAYER_PATH</tt> variable in
+            <tt>config.h</tt>, <i>or</i> simply run vitunes with the <tt>-m</tt>
+            flag and a proper path to <tt>mplayer</tt>.</li>
+      </ul>
+      With this, it should be rather trivial for a porter to get this into either
+      <a href="http://www.macports.org">MacPorts</a> or similar.
+      <br /><br />
+      Thanks to Joshua Conner and Andr&eacute; Berger for their help.
+      <br /><br />
+      <b>NOTE:</b> This isn't in any release yet, including the most recent, as it still
+      needs heavy testing.  Use the repositories directly.
+   </dd>
+
+   <dt>5 January 2011: Version 2.1 Released: Small Bugfix Release</dt>
+   <dd>
+      There were some rather nasty formatting errors with the man page that shipped with
+      the 2.0 release a few days ago.  They didn't show up during testing (e.g. with
+      &ldquo;<tt>mandoc vitunes.1 | less</tt>&rdquo;), but did after installation (with
+      &ldquo;<tt>man vitunes</tt>&rdquo;).
+      <br /><br />
+      This corrects those formatting problems (with a few other small patches as well).
+   </dd>
+
+   <dt>1 January 2011: Version 2.0 Released</dt>
+   <dd>
+      Version 2.0 is officially released.  Many new features, including support for custom
+      keybindings (via the bind and unbind commands), undo/redo support, vastly improved
+      synchronization between vitunes and mplayer, new display elements that are colorable,
+      and new keybindings.
+      <br /><br />
+      View a repository for a complete changelog.
+      <br /><br />
+      This brings vitunes almost to a completion, at least in terms of what I always wanted
+      it to be.  I'll be maintaining it indefinitely since I use it heavily, but I don't
+      really foresee any major new features.  If you have ideas, let me know.
+      <br /><br />
+      Happy 2011!
+   </dd>
+
+   <dt>29 December 2010: Massive Re-Write Underway</dt>
+   <dd>
+      So my &ldquo;minor clean-up and a few feature additions&rdquo; has turned into a hackathon on my part.
+      It rocks.  Far better synchronization with <tt>mplayer</tt> (less skipping), undo/redo, <tt>:map</tt>,
+      more color-able stuff, support for the comment-field of media files, and cleaner syntax for all commands
+      are all in the works.
+      <br /><br />
+      Unfortunately, these updates will either break compatability with previous versions of vitunes or require
+      super-extra-massive effort on my part to make it backwards compatable by adding loads of goey goey c.
+      Pondering...
+      <br /><br />
+      For the daring sort, you can use one of the repositories listed above to get a copy of the current
+      development version and build yer own.  And hey, if you just feel like contributing something back,
+      that'd be sweet.
+   </dd>
+
+   <dt>17 December 2010: Mailing List Up and New Stuff in the Works</dt>
+   <dd>
+      There is now a vitunes mailing list, hosted by <a href="http://www.freelists.org">freelists.org</a>.
+      You can subscribe to the mailing list by visiting 
+      <a href="http://www.freelists.org/list/vitunes">this webpage</a>, and searchable archives are available
+      <a href="http://www.freelists.org/archive/vitunes">here</a>.
+      <br /><br />
+      Now that school is out for the holiday break, I'm on a research binge during the day and a hacking binge
+      during the night.  New features in the works...
+   </dd>
+
+   <dt>27 April 2010: 1.0.5 Released (Documentation Cleanup)</dt>
+   <dd>
+      New release, 1.0.5 made today.  A simple documentation cleanup.  The man page and
+      output of all &ldquo;<tt>vitunes -e help COMMAND</tt>&rdquo; have been made more
+      complete.  The man page is now the sole source of documentation (although the
+      complete list of keybindings will remain here on the website, maintained).
+   </dd>
+
+   <dt>17 February 2010: Podcast Support?</dt>
+   <dd>
+      I'm contemplating adding podcast support.  I don't wish to have vitunes automatically
+      download any files within a podcast (a simple shell script, or any number of other
+      existing utilities could be used for that).  Rather, i'd like vitunes to just parse an
+      RSS feed, extract info to view in vitunes, and pass the filenames to mplayer
+      (mplayer handles URL's quite nicely).
+      <br /><br />
+      If anyone actually reads this.. any good ideas on how to integrate this into the vitunes ui?
+      Remember that a podcast is essentially a playlist, with multiple files.  Just an informal
+      &ldquo;RFC.&rdquo;
+   </dd>
+
+   <dt>28 January 2010: FreeBSD Port!?</dt>
+   <dd>
+      Catching up on <a href="http://www.freshports.org/">freshports</a> yesterday, I
+      noticed that vitunes has been ported (for some time now!) to
+      <a href="http://www.freebsd.org">FreeBSD</a> by Dennis Herrmann.  Many thanks
+      to him!
+   </dd>
+
+   <dt>20 January 2010: 1.0.4 Released (Last one for a while)
+      (<a href="changelogs/2010-01-20.html">changelog</a>)
+   </dt>
+   <dd>
+      Last release for a while, baring any bug fixes.  A few bugs fixed, documentation
+      updated, and I finally re-wrote the player code (only stuff untouched from
+      previous rewrite).  Can now search in the library window.  Command abbreviations
+      supported. Can right-align columns in display.
+      See complete changelog <a href="changelogs/2010-01-20.html">here</a>.
+   </dd>
+
+   <dt>14 January 2010: 1.0.3 Released
+      (<a href="changelogs/2010-01-13.html">changelog</a>)
+   </dt>
+   <dd>
+      Big news... I removed the dependency on libid3tag, libvorbis, and libmp4v2.  Now
+      <a href="http://developer.kde.org/~wheeler/taglib.html">TagLib</a> is used for
+      all meta-extraction.  Much cleaner.  Some bug fixes also.  This does, however,
+      bump the version &amp; format of the database, thus all vitunes databases will
+      have to be re-built.  It's much faster now though.
+      See the full changelog <a href="changelogs/2010-01-13.html">here</a>.
+   </dd>
+
+   <dt>12 January 2010: Upcoming Release</dt>
+   <dd>
+      While browsing the intertubes today, I noticed that
+      <a href="http://ktown.kde.org/~wheeler/taglib.html">TagLib</a> was updated recently
+      and now includes MP4/AAC metadata including iTunes-style metadata.  This is awesome,
+      as TagLib is both way cleaner, faster, and overall better than the libraries I'm
+      currently using.  I'm updating vitunes now to use this new library.  When finished,
+      vitunes will also be able to tag files.
+      <br /><tt>:D</tt>
+   </dd>
+
+   <dt>9 January 2010: 1.0.2 Released
+      (<a href="changelogs/2010-01-09.html">changelog</a>)
+   </dt>
+   <dd>
+      A small bug-fix release with a few new features.  See the changelog
+      <a href="changelogs/2010-01-09.html">here</a>.
+   </dd>
+
+   <dt>3 January 2010: 1.0.1 Released</dt>
+   <dd>A simple bug-fix release, fixing an issue where &ldquo;reload db&rdquo;
+      would sometimes segfault due to a use-after-free.
+   </dd>
+
+   <dt>30 December 2009: 1.0 Released!
+      (<a href="changelogs/2009-12-30.html">changelog</a>)
+   </dt>
+   <dd>
+      After much work, including a nearly complete re-write of everything, the
+      initial <b>1.0 release</b> has been made!  There are <i>many</i> new
+      features.  See a complete changelog
+      <a href="changelogs/2009-12-30.html">here</a>.
+   </dd>
+</dl>
+</div>
+
+
+<a name="documentation"></a>
+<h1>Documentation</h1>
+
+<h2>Man Page</h2>
+<p>
+   The primary source of documentation is the man page, which you can view online
+   here: <a href="vitunes.html">vitunes(1)</a>.
+   Be sure to start with the &ldquo;Getting Started&rdquo; section of the man
+   page first, to understand the basics of how vitunes works.
+</p>
+
+<h2>e-Commands</h2>
+<p>
+   vitunes has its own help system for e-commands, but you can view the help
+   output for each e-command below (i.e. <tt>vitunes -e help <i>cmd</i></tt>).
+</p>
+<ul class="ecommands">
+   <li>&#9642; <a href="e-commands.html#init">init</a></li>
+   <li>&#9642; <a href="e-commands.html#add">add</a></li>
+   <li>&#9642; <a href="e-commands.html#addurl">addurl</a></li>
+   <li>&#9642; <a href="e-commands.html#check">check</a></li>
+   <li>&#9642; <a href="e-commands.html#rmfile">rm</a></li>
+   <li>&#9642; <a href="e-commands.html#update">update</a></li>
+   <li>&#9642; <a href="e-commands.html#flush">flush</a></li>
+   <li>&#9642; <a href="e-commands.html#tag">tag</a></li>
+   <li>&#9642; <a href="e-commands.html#help">help</a></li>
+</ul>
+
+<h2>Complete List of Keybindings</h2>
+<br />
+<table id="keybindings" cellspacing="0">
+<thead>
+   <tr>
+      <td>key</td>
+      <td>scope</td>
+      <td>action</td>
+   </tr>
+</thead>
+<tbody>
+   <tr class="first">
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td colspan="3" class="headerRow">
+         vitunes-specific
+         <br />
+         <small>these are subject to change, but easily configurable in <tt>config.h</tt></small>
+      </td>
+   </tr>
+   <tr>
+      <td>&lt;ENTER&gt;</td>
+      <td>Library Window</td>
+      <td>Load currently selected playlist for viewing &amp; switch focus to playlist window</td>
+   </tr>
+   <tr>
+      <td>&lt;ENTER&gt;</td>
+      <td>Playlist Window</td>
+      <td>Begin playback of currently selected song</td>
+   </tr>
+   <tr>
+      <td>&lt;TAB&gt;</td>
+      <td>Library Window</td>
+      <td>Switch focus to playlist window</td>
+   </tr>
+   <tr>
+      <td>&lt;TAB&gt;</td>
+      <td>Playlist Window</td>
+      <td>Switch focus to library window</td>
+   </tr>
+   <tr>
+      <td>s</td>
+      <td>Global</td>
+      <td>stop playback</td>
+   </tr>
+   <tr>
+      <td>z</td>
+      <td>Global</td>
+      <td>pause/unpause playback</td>
+   </tr>
+   <tr>
+      <td>^p</td>
+      <td>Global</td>
+      <td><tt>"&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;&nbsp;&nbsp;&nbsp;"</tt></td>
+   </tr>
+   <tr>
+      <td><i>n</i>b / <i>n</i>f</td>
+      <td>Global</td>
+      <td>Seek backwards/forwards <i>n</i> * 10 seconds in currently playing song</td>
+   </tr>
+   <tr>
+      <td><i>n</i>[ / <i>n</i>]</td>
+      <td>Global</td>
+      <td><tt>"&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;&nbsp;&nbsp;&nbsp;"</tt></td>
+   </tr>
+   <tr>
+      <td><i>n</i>B / <i>n</i>F</td>
+      <td>Global</td>
+      <td>Seek backwards/forwards <i>n</i> * 1 minute(s) in currently playing song</td>
+   </tr>
+   <tr>
+      <td><i>n</i>{ / <i>n</i>}</td>
+      <td>Global</td>
+      <td><tt>"&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;&nbsp;&nbsp;&nbsp;"&nbsp;&nbsp;&nbsp;&nbsp;"</tt></td>
+   </tr>
+   <tr>
+      <td>m</td>
+      <td>Playlist Window</td>
+      <td>Show/hide the filename &amp; meta-info for the currently
+         selected file.</td>
+   </tr>
+
+
+   <tr>
+      <td colspan="3" class="headerRow">
+         Keybindings: Moving-Around &amp; Misc.
+      </td>
+   </tr>
+   <tr>
+      <td>:</td>
+      <td>Global</td>
+      <td>Enter command mode.  See <a href="vitunes.html#commands">vitunes(1)</a> for list of all commands.</td>
+   </tr>
+   <tr>
+      <td>!<i>cmd</i></td>
+      <td>Global</td>
+      <td>Exit curses-mode and execute external command <i>cmd</i></td>
+   </tr>
+   <tr>
+      <td>^l</td>
+      <td>Global</td>
+      <td>Erase and redraw display</td>
+   </tr>
+   <tr>
+      <td><i>n</i>j</td>
+      <td>Global</td>
+      <td>Move current row down <i>n</i> * 1 lines</td>
+   </tr>
+   <tr>
+      <td><i>n</i>&lt;KEY_DOWN&gt;</td>
+      <td>Global</td>
+      <td>Move current row down <i>n</i> * 1 lines</td>
+   </tr>
+   <tr>
+      <td><i>n</i>k</td>
+      <td>Global</td>
+      <td>Move current row up <i>n</i> * 1 lines</td>
+   </tr>
+   <tr>
+      <td><i>n</i>&lt;KEY_UP&gt;</td>
+      <td>Global</td>
+      <td>Move current row up <i>n</i> * 1 lines</td>
+   </tr>
+   <tr>
+      <td><i>n</i>-</td>
+      <td>Global</td>
+      <td>Move current row up <i>n</i> * 1 lines</td>
+   </tr>
+   <tr>
+      <td><i>n</i>h</td>
+      <td>Global</td>
+      <td>Horizontally scroll left <i>n</i> * 1 columns</td>
+   </tr>
+   <tr>
+      <td><i>n</i>&lt;KEY_LEFT&gt;</td>
+      <td>Global</td>
+      <td>Horizontally scroll left <i>n</i> * 1 columns</td>
+   </tr>
+   <tr>
+      <td><i>n</i>&lt;BACKSPACE&gt;</td>
+      <td>Global</td>
+      <td>Horizontally scroll left <i>n</i> * 1 columns</td>
+   </tr>
+   <tr>
+      <td><i>n</i>l</td>
+      <td>Global</td>
+      <td>Horizontally scroll right <i>n</i> * 1 columns</td>
+   </tr>
+   <tr>
+      <td><i>n</i>&lt;KEY_RIGHT&gt;</td>
+      <td>Global</td>
+      <td>Horizontally scroll right <i>n</i> * 1 columns</td>
+   </tr>
+   <tr>
+      <td><i>n</i>' '</td>
+      <td>Global</td>
+      <td>Horizontally scroll right <i>n</i> * 1 columns
+         <br /><b>Note:</b> that's a space.
+      </td>
+   </tr>
+   <tr>
+      <td>$</td>
+      <td>Global</td>
+      <td>Scroll all the way to the right</td>
+   </tr>
+   <tr>
+      <td>'^'</td>
+      <td>Global</td>
+      <td>Scroll all the way to the left
+         <br /><b>Note:</b> that's a carrot, not a "CONTROL+"
+      </td>
+   </tr>
+   <tr>
+      <td>0</td>
+      <td>Global</td>
+      <td>Scroll all the way to the left</td>
+   </tr>
+   <tr>
+      <td><i>n</i>^e</td>
+      <td>Global</td>
+      <td>Scroll screen down <i>n</i> * 1 line(s)</td>
+   </tr>
+   <tr>
+      <td><i>n</i>^y</td>
+      <td>Global</td>
+      <td>Scroll screen up <i>n</i> * 1 line(s)</td>
+   </tr>
+   <tr>
+      <td><i>n</i>^u</td>
+      <td>Global</td>
+      <td>Scroll screen up <i>n</i> * 1 half page(s)</td>
+   </tr>
+   <tr>
+      <td><i>n</i>^d</td>
+      <td>Global</td>
+      <td>Scroll screen down <i>n</i> * 1 half page(s)</td>
+   </tr>
+   <tr>
+      <td><i>n</i>^b</td>
+      <td>Global</td>
+      <td>Scroll screen up <i>n</i> * 1 full page(s)</td>
+   </tr>
+   <tr>
+      <td><i>n</i>&lt;PAGE_UP&gt;</td>
+      <td>Global</td>
+      <td>Scroll screen up <i>n</i> * 1 full page(s)</td>
+   </tr>
+   <tr>
+      <td><i>n</i>^f</td>
+      <td>Global</td>
+      <td>Scroll screen down <i>n</i> * 1 full page(s)</td>
+   </tr>
+   <tr>
+      <td><i>n</i>&lt;PAGE_DOWN&gt;</td>
+      <td>Global</td>
+      <td>Scroll screen down <i>n</i> * 1 full page(s)</td>
+   </tr>
+   <tr>
+      <td>G</td>
+      <td>Global</td>
+      <td>Goto last row</td>
+   </tr>
+   <tr>
+      <td><i>n</i>G</td>
+      <td>Global</td>
+      <td>Goto row <i>n</i></td>
+   </tr>
+   <tr>
+      <td><i>n</i>%</td>
+      <td>Global</td>
+      <td>Goto the row <i>n%</i> through the total number of rows</td>
+   </tr>
+   <tr>
+      <td><i>n</i>H</td>
+      <td>Global</td>
+      <td>Goto the <i>n</i><sup>th</sup> row from the top of current page</td>
+   </tr>
+   <tr>
+      <td>M</td>
+      <td>Global</td>
+      <td>Goto the middle row of the current page</td>
+   </tr>
+   <tr>
+      <td><i>n</i>L</td>
+      <td>Global</td>
+      <td>Goto the <i>n</i><sup>th</sup> row from the bottom of current page</td>
+   </tr>
+
+
+   <tr>
+      <td colspan="3" class="headerRow">
+         Keybindings: Searching
+      </td>
+   </tr>
+   <tr>
+      <td>/</td>
+      <td>Global</td>
+      <td>Get query from user and search <b>forwards</b> in current window
+         for first playlist/file that matches the query.  The structure of the query
+         specified is identical to that of the <b><tt>:filter</tt></b> command
+         below.  See that for more info.
+         <br />
+         <b>Note:</b> In the Library window, only the playlist name is matched against.
+      </td>
+   </tr>
+   <tr>
+      <td>?</td>
+      <td>Global</td>
+      <td>Get query from user and search <b>backwards</b> in current window
+         for first playlist/file that matches the query.  The structure of the query
+         specified is identical to that of the <b><tt>:filter</tt></b> command
+         below.  See that for more info.
+         <br />
+         <b>Note:</b> In the Library window, only the playlist name is matched against.
+      </td>
+   </tr>
+   <tr>
+      <td>n</td>
+      <td>Global</td>
+      <td>Jump to the next row in the current window matching the
+         last provided query.  If the last query made was done using
+         '<b><tt>/</tt></b>', then this search is <b>forwards</b>, otherwise
+         it is <b>backwards</b>.
+      </td>
+   </tr>
+   <tr>
+      <td>N</td>
+      <td>Global</td>
+      <td>Jump to the next row in the current window matching the
+         last provided query.  If the last query made was done using
+         '<b><tt>/</tt></b>', then this search is <b>backwards</b>,
+         otherwise it is <b>forwards</b>.
+      </td>
+   </tr>
+
+
+   <tr>
+      <td colspan="3" class="headerRow">
+         Keybindings: Yank/Delete/Paste/Undo/Redo
+      </td>
+   </tr>
+   <tr>
+      <td><i>n</i>yy</td>
+      <td>Playlist</td>
+      <td>Yank the next <i>n</i> rows into the copy buffer</td>
+   </tr>
+   <tr>
+      <td>yG</td>
+      <td>Playlist</td>
+      <td>Yank the rest of the current playlist into the copy buffer</td>
+   </tr>
+   <tr class="error">
+      <td>*y*</td>
+      <td>Library</td>
+      <td>
+         Currently can't yank at all in library window.
+         <br />
+         <b>Note:</b>
+         I don't really see a way of doing this in an intuitive way, so it will
+         probably never be added.
+      </td>
+   </tr>
+   <tr>
+      <td><i>n</i>dd</td>
+      <td>Playlist</td>
+      <td>Delete the next <i>n</i> rows and copy them into the copy buffer</td>
+   </tr>
+   <tr>
+      <td>dG</td>
+      <td>Playlist</td>
+      <td>Delete the rest of the files in the current playlist
+         after copying them into the copy buffer
+       </td>
+   </tr>
+   <tr class="warning">
+      <td>dd</td>
+      <td>Library</td>
+      <td>Delete the currently selected playlist
+         <br />
+         <b>Note:</b>
+         Currently, no <i>n</i> can be applied to this in the library window.  I simply
+         do not want to be able to delete all of my playlists accidentally.
+      </td>
+   </tr>
+   <tr>
+      <td>p</td>
+      <td>Playlist</td>
+      <td>Paste the contents of the copy buffer <b>after</b> the currently selected row.</td>
+   </tr>
+   <tr>
+      <td>P</td>
+      <td>Playlist</td>
+      <td>Paste the contents of the copy buffer <b>before</b> the currently selected row.</td>
+   </tr>
+   <tr>
+      <td>p</td>
+      <td>Library</td>
+      <td>Paste the contents of the copy buffer at the <b>end</b> the currently selected
+         playlist.</td>
+   </tr>
+   <tr>
+      <td>P</td>
+      <td>Library</td>
+      <td>Paste the contents of the copy buffer at the <b>beginning</b> the currently selected
+         playlist.</td>
+   </tr>
+   <tr class="warning">
+      <td>u</td>
+      <td>Playlist</td>
+      <td>
+         Un-do the previous cut/paste to the currently viewed playlist.
+      </td>
+   </tr>
+   <tr class="warning">
+      <td>^r</td>
+      <td>Playlist</td>
+      <td>
+         Re-do the previously undone cut/paste to the currently viewed playlist.
+      </td>
+   </tr>
+</tbody>
+</table>
+<p>
+   <b>Legend:</b>
+   &nbsp;&nbsp;&nbsp;&nbsp;
+   <img src="/images/spacer.gif" alt="error-row" class="square error" />
+   Feature is not working yet.
+   &nbsp;&nbsp;&nbsp;&nbsp;
+   <img src="/images/spacer.gif" alt="warning-row" class="square warning" />
+   Feature works, but not as many would expect.
+</p>
+
+<h2>Mailing List</h2>
+<p>
+   vitunes has a mailing list that you can subscrbe to and ask questions about.  You can also
+   search the archives if you have any questions.
+</p>
+<ul>
+   <li>To subscribe, visit: <tt><a href="http://www.freelists.org/list/vitunes">http://www.freelists.org/list/vitunes</a></tt></li>
+   <li>The searchable archives are here: <tt><a href="http://www.freelists.org/archive/vitunes">http://www.freelists.org/archive/vitunes</a></tt></li>
+</ul>
+
+
+<a name="screenshots"></a>
+<h1>Screenshots</h1>
+<p>Obligatory.  Click each to embiggen.</p>
+<ul class="gallery">
+   <li>
+      <a href="screenshots/default.png">
+         <img alt="default look" src="screenshots/default.thumb.png" />
+      </a>
+      Default look.
+   </li>
+
+   <li>
+      <a href="screenshots/default-tiny.png">
+         <img alt="smaller version" src="screenshots/default-tiny.thumb.png" />
+      </a>
+      Smaller version.
+   </li>
+
+   <li>
+      <a href="screenshots/default-tiny-lhide.png">
+         <img alt="library window hidden" src="screenshots/default-tiny-lhide.thumb.png" />
+      </a>
+      Library window hidden.
+   </li>
+
+   <li>
+      <a href="screenshots/hideous-colors.png">
+         <img alt="some hideous colors" src="screenshots/hideous-colors.thumb.png" />
+      </a>
+      Some hideous colors.
+   </li>
+
+   <li>
+      <a href="screenshots/mac-vitunes.png">
+         <img alt="on Mac OS X" src="screenshots/mac-vitunes.thumb.png" />
+      </a>
+      On Mac OS X.
+      <small style="font-style: italic;">
+         <br />
+         From Andr&eacute; Berger
+      </small>
+   </li>
+
+   <li>
+      <a href="screenshots/mac-vitunes2.png">
+         <img alt="on Mac OS X" src="screenshots/mac-vitunes2.thumb.png" />
+      </a>
+      On Mac OS X.
+      <small style="font-style: italic;">
+         <br />
+         From Joshua Conner
+      </small>
+   </li>
+
+   <li>
+      <a href="screenshots/old.png">
+         <img alt="older version" src="screenshots/old.thumb.png" />
+      </a>
+      Older version.
+   </li>
+
+   <li>
+      <a href="screenshots/old-tiny.png">
+         <img alt="tiny older version" src="screenshots/old-tiny.thumb.png" />
+      </a>
+      Smaller older version.
+   </li>
+</ul>
+
+
+<a name="faq"></a>
+<h1>Frequently Asked Questions</h1>
+
+<h2>General Usage Questions</h2>
+<dl class="faq">
+   <dt>How do I change the meta-information of a file within vitunes?</dt>
+   <dd>
+      Use the <a href="e-commands.html#tag">tag</a> e-command (or another application)
+      followed by an <a href="e-commands.html#update">update</a>.
+      <br /><br />
+      The next time you launch <tt>vitunes</tt> you will see the changes (or
+      you can issue a <b><tt>:reload db</tt></b> command within vitunes).
+   </dd>
+
+   <dt>I moved a bunch of my music around.  How do I update vitunes?</dt>
+   <dd>
+      Use the <a href="e-commands.html#update">update</a> e-command to remove any moved
+      files and then simply <a href="e-commands.html#add">add</a> your moved files again.
+   </dd>
+
+   <dt>For some songs, the percent-complete in the player window is always negative?</dt>
+   <dd>
+      When vitunes extracts the meta-information from songs, including playlength, it uses
+      <a href="http://developer.kde.org/~wheeler/taglib.html">TagLib</a>.  If TagLib isn't
+      able to determine determine the play length of the file, vitunes will attempt to
+      determine the length when loading the file, but this isn't always possible either.
+      In these cases, the percent will be negative.
+      <br /><br />
+      Note: on OpenBSD, the current port of mplayer has problems with ogg files frequently,
+      and the result is often a negative percent/play-time for those files.
+   </dd>
+
+   <dt>How do I backup the vitunes database?</dt>
+   <dd>
+      Just copy the <b><tt>~/.vitunes/</tt></b> directory.  If you have your
+      database/playlists stored elsewhere, just backup those.
+   </dd>
+
+   <dt>Can I have my database/playlists/config-file stored elsewhere?</dt>
+   <dd>Yes.  Use the <tt>-d</tt>, <tt>-p</tt>, and <tt>-f</tt> flags as described
+      in the
+      <a href="vitunes.html">man page</a>.
+   </dd>
+
+   <dt>I have an old version of vitunes with an existing database.  When I run the new
+      version, it tells me to rebuild my database.  How do I do this?</dt>
+   <dd>
+      I had to slightly change the format of the database for this new version.  Also,
+      I never included any &ldquo;version&rdquo; information in the previous format.
+      This has now been changed.  To upgrade an existing setup, download the most recent
+      version below and 1) remove the existing database, 2) re-init the database, then
+      3) re-add all of your files. e.g.
+      <pre class="code">
+         $ rm ~/.vitunes/vitunes.db
+         $ vitunes -e init
+         $ vitunes -e add <i>/path/to/music/</i> <i>...</i></pre>
+   </dd>
+
+   <dt>Adding regular files to the database is easy, but adding URL's is somewhat painful.
+      Is there an easy way to automate this?</dt>
+   <dd>
+      Of course!  You're using *nix, so use a shell script to add all of your URL's,
+      like this one: <a href="add_urls.sh"><tt>add_urls.sh</tt></a>.
+   </dd>
+
+   <dt>When exiting vitunes, it seems to hang for one half-second.  Why?</dt>
+   <dd>
+      This is intentional.  The <tt>fork()'d</tt> mplayer child will <tt>fork()</tt>
+      an instance of itself whenever it plays an internet radio stream (or similar)
+      to handle the buffering.  As such, vitunes needs to wait for this
+      &lsquo;grandchild&rsquo; instance of mplayer to exit before quitting.
+   </dd>
+</dl>
+
+<h2>Bugs &amp; Other Questions</h2>
+<dl class="faq">
+   <dt>I think I found a bug... what should I do?</dt>
+   <dd>
+      First, do the following, in this order:
+      <ol>
+         <li>Read the <a href="vitunes.html">man page</a> (humor me)</li>
+         <li>Read the <a href="#faq">F.A.Q.</a> above</li>
+         <li>Search the mailing list archives to see if your &ldquo;bug&rdquo;
+            has popped-up before.</li>
+         <li>Search the
+            <a href="https://github.com/ryanflannery/vitunes/issues">Bug/Issue
+            database</a> to see if your bug is already known, and if so, add a
+            comment that you too are experiencing it.  Provide as many details
+            as possible.
+         </li>
+      </ol>
+      <br />
+      If you've done the above and haven't found your bug/issue mentioned and
+      resolved elsewhere, then email either the mailing list or
+      <a href="mailto:ryan.flannery@gmail.com">me</a>, and include
+      an extremely detailed description of your bug and how to reproduce it.
+   </dd>
+
+   <dt>After a song finishes playing, the next song isn't automatically started.</dt>
+   <dd>
+      Most likely you're on a Linux with an older version of mplayer.  You need
+      mplayer version 1.0rc3 or greater.  Alternatively, any version of mplayer built
+      from a checkout of the source <i>after</i> December 29, 2009 will work.
+   </dd>
+
+   <dt>The cursor is always visible, even when I'm not in command mode... what gives?</dt>
+   <dd>
+      This is most likely a mis-configured <tt>$TERM</tt> environment variable.  Specifically,
+      it's set to something that does not support this particular feature.  See the
+      documentation for your OS &amp; terminal emulator (e.g. xterm/rxvt/etc.) for what this
+      should be set to.  Note that &ldquo;<tt>xterm-color</tt>&rdquo; almost always has
+      limitations (see
+      <a href="http://invisible-island.net/ncurses/ncurses.faq.html#xterm_color">here</a>
+      for more information).
+      <br /><br />
+      On OpenBSD pre <b>4.7</b>, your <tt>$TERM</tt> variable, when using <tt>xterm</tt>, should
+      always be set to <tt>xterm-xfree86</tt>.  After <b>4.7</b>, just leave your <tt>$TERM</tt>
+      variable alone.
+   </dd>
+
+   <dt>Scrolling, redrawing, and resizing are all very slow.  Is this normal?</dt>
+   <dd>
+      If you're using an <i>actual</i>
+      <a href="http://en.wikipedia.org/wiki/VT100"><tt>VT100</tt></a> (or similar)
+      <i>or</i> if you have 1,000,000,000,000+ songs in your library, then yes.
+      Otherwise, no.  This is mostly likely a misconfigured <tt>$TERM</tt> environment
+      variable.  See the previous F.A.Q.  entry.
+   </dd>
+
+   <dt>What license is vitunes distributed under?</dt>
+   <dd>
+      <a href="LICENSE.txt">ISC</a>.
+   </dd>
+</dl>
+
+
+<a name="download"></a>
+<h1>Download &amp; Installation</h1>
+<p>
+   The current release of vitunes can be downloaded here:
+   <a href="files/vitunes-2.2.tgz">vitunes-2.2.tgz</a>.
+   <br />
+   Previous versions can be found here: <a href="files/">files/</a>.
+   <br />
+   You can clone / browse my Mercurial repository here:
+</p>
+<pre>
+   $ hg clone <a href="http://hg.ryanflannery.net/vitunes">http://hg.ryanflannery.net/vitunes</a>           (mirrors: <a href="https://github.com/ryanflannery/vitunes">GitHub</a> / <a href="http://bitbucket.org/ryanflannery/vitunes">BitBucket</a>)
+</pre>
+<dl>
+   <dt>Build Dependencies:</dt>
+   <dd>
+      Version 1.0.3 and later:
+      <a href="http://developer.kde.org/~wheeler/taglib.html">TagLib</a>
+      <br />
+      Versions prior to 1.0.3:
+      <a href="http://www.underbit.com/products/mad/">libid3tag</a>,
+      <a href="http://www.xiph.org/vorbis/">libvorbis</a>, and
+      <a href="http://resare.com/libmp4v2/">libmp4v2</a>.
+   </dd>
+   <dt>Runtime Dependency:</dt>
+   <dd>
+      <a href="http://www.mplayerhq.hu/">mplayer</a> (version 1.0rc3 or later, or any version
+      built with a checkout of the source <i>after</i> December 27, 2009)
+   </dd>
+   <dt>Building &amp; Installing:</dt>
+   <dd>
+      The following should suffice:
+      <pre>
+         $ make install </pre>
+      For Linux, use the following instead:
+      <pre>
+         $ make linux install </pre>
+      By default, vitunes and its man page are installed under
+      <tt>/usr/local/{bin,man}</tt>.  If you don't like this, edit the relevant
+      variables in the <tt>Makefile</tt> to your liking first.
+   </dd>
+   <dt>Uninstallation:</dt>
+   <dd>
+      To uninstall vitunes, simply remove the binary and man page, which are installed by
+      default into:
+      <ul>
+         <li><tt>/usr/local/bin/vitunes</tt></li>
+         <li><tt>/usr/local/man/man1/vitunes.1</tt></li>
+      </ul>
+   </dd>
+   <dt style="color: #a22;">Notes for Porting/Porters:</dt>
+   <dd>
+      vitunes is developed on OpenBSD, and makes use of a few OpenBSD-specific things such
+      as 
+      <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=err&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"><tt>err(3)/warn(3)</tt></a>,
+      <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fparseln&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"><tt>fparseln(3)</tt></a>,
+      <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=strlcpy&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"><tt>strlcat(3)/strlcpy(3)</tt></a>,
+      and
+      <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=strtonum&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"><tt>strtonum(3)</tt></a>.
+      <br /><br />
+      Most of these are picked-up during the build on Linux &amp; Mac OS X and will be added,
+      if needed.
+      <br /><br />
+      See also the file <tt>config.h</tt> for setting the default path to mplayer.
+   </dd>
+</dl>
+
+
+<a name="roadmap"></a>
+<h1>Roadmap (Future Work)</h1>
+<p>Long term goals (i.e. <i>not for a while!</i>):</p>
+<ul>
+   <li>Now that OpenBSD supports UTF8, support that (waiting for ncurses(3) support)</li>
+   <li>Now that OpenBSD supports 256 color xterms, support that (coming soon!)</li>
+   <li>ASCII-art audio visualization.... f' yeah!</li>
+</ul>
+
+
+<h1>P.S. If you like vitunes...</h1>
+<p>
+   ... then you may also enjoy these fine projects:
+</p>
+<ul>
+   <li><a href="https://bitbucket.org/portix/dwb">dwb</a> - a really amazing browser using webkit
+      with strong vi bindings and ... <i>tiling!</i>  It rocks.  A little buggy still, but it
+      looks promising.  Once I finish with a cleanup of vitunes here, I'd like to take some time to
+      hack on this.
+   </li>
+   <li><a href="http://yllr.net/vimprobable/">vimprobable</a> - a minimalistic browser using webkit
+      with strong vi-like usage.
+   </li>
+   <li><a href="http://surf.suckless.org/">surf</a> - another browser like vimprobable, based on
+      webkit and with a srong vi-like usage.  from the great devs of
+      <a href="http://suckless.org">suckless.org</a>.
+   </li>
+   <li><a href="http://www.vimperator.org/">vimperator</a> - firefox plugin that make it more
+      vi-like.  the first attempt to bring vi to a graphical web browser, and inspiration for
+      vimprobable/surf.
+   </li>
+   <li><a href="http://cmus.sourceforge.net/">cmus</a> - another curses based music player
+      similar to vitunes.
+   </li>
+   <li><a href="http://pms.sourceforge.net/">practical music search</a> - a curses front-end for
+      <a href="http://mpd.wikia.com/">mpd</a>.
+   </li>
+</ul>
+
+
+</div> <!-- end main -->
+
+
+<div id="footer">
+   <img alt="slogan" src="slogan.png" />
+   <br />
+   <span style="float: left;">
+      by <a href="http://www.ryanflannery.net">Ryan Flannery</a> &lt;ryan.flannery@gmail.com&gt;
+   </span>
+   <span style="float: right;">last edited: 15 March 2011 at 9:49:02 am</span>
+   <span id="fileLastMod"></span>
+   <br />
+   valid:
+   <a href="http://validator.w3.org/check/referer">xhtml-1.0-strict</a> |
+   <a href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3">css3</a>
+   <br /><br />
+   <!--
+   <script type="text/javascript" src="http://jc.revolvermaps.com/p.js"></script>
+   <script type="text/javascript">rm2d_ki101('0','256','128','2jMM3LcSPwB','ff0000',0);</script>
+   <br />
+   <small>(does not track downloads)</small>
+   -->
+</div>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/tablescroll/jquery.tablescroll.js"></script>
+<script type="text/javascript">
+   /*<![CDATA[*/
+   $(document).ready(function($) {
+      $('#keybindings').tableScroll({height:300});
+   });
+
+   $(document).ready(function(){
+      $("dl.faq > dd").hide();
+   });
+
+   $("dl.faq > dt").click(function(){
+      $(this).next().slideToggle(500)
+      return false;
+   });
+
+   /*]]>*/
+</script>
+
+
+</body>
+</html>

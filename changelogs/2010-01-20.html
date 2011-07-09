@@ -1,0 +1,43 @@
+<html>
+<head>
+   <title>Changelog: 2010 January 20</title>
+</head>
+<body>
+<pre>
+
+<big>Changelog: 2010-01-20: 1.0.4 Release</big>
+
+<b>Bug-Fixes:</b>
+   *  Updated flush e-command help output (vitunes -e help flush)
+   *  Re-worked player handling.  Much cleaner.  Better error messages with
+      buggy/misbehaving mplayer.  Moving towards goal of supporting other
+      media players.
+   *  Improved support for tag e-command.  Better error messages if TagLib
+      has problems.
+   *  When entering a command, all signals are now handled and the cursor is
+      visible only in the command window.
+   *  Fixed segfault with some bad sort-descriptions in ":sort ..."
+   *  Seeking through playback now respects global input num (e.g. 3f will seek
+      forward 3 * 10 = 30 seconds)
+   *  'm' now hides fileinfo if it's currently showing
+   *  Fixed bug when deleting new playlist that had not yet been saved
+   *  Updated DEVELOPERS.txt
+
+<b>New Features:</b>
+   *  Command abbreviations are now supported (e.g. ":f" for ":filter").
+   *  Can now search in the library window.
+   *  Can now paste in the library window.  Pasted files go to the end (p) or
+      beginning (P) of the currently selected playlist.
+   *  Can now right-align columns in the display by preceding field names with
+      a '-' in the :display command.
+   *  Can use ":display show" to view the current display setup.
+   *  Added -m switch to specify path to mplayer.
+   *  The update e-command now suppresses the output of files skipped because
+      they haven't been modified since last checked.  A -s switch can force
+      reporting of these files to stdout.
+
+</pre>
+
+</body>
+</html>
+
