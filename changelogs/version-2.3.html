@@ -1,0 +1,41 @@
+<html>
+<head>
+   <title>Changelog: Version 2.3 (2 January 2012)</title>
+</head>
+<body>
+<pre>
+
+<big>Changelog: 2012-01-02: Version 2.3 Release</big>
+
+<b>New Features:</b>
+   *  New command ':toggle &lt;register&gt; <i>command-list</i>', which
+      allows the user to quickly toggle through a list of commands.  This
+      is useful for switching through sort and display schemas that one
+      may frequently use.
+   *  New command-line option '-c <i>command</i>' to execute <i>command</i>
+      in a currently running instance of vitunes.  The command specified
+      can be either a run-time command or keybinding.  This makes it easy
+      to control vitunes from other windows or applications.
+      Thanks to @knk for this.
+   *  New command ':playlist <i>name</i>' allowing one to load a named
+      playlist.
+      Thanks to @knk for this.
+   *  Volume level can now be controlled via vitunes.  Default keybindings
+      are '&lt;' &amp; '&gt;' for volume up/down, respectively.
+   *  New colorable item 'current-inactive', allowing you to specify the
+      color of the current row in the window without focus.
+   *  Playlists with unsaved changes now have a '+' preceeding their name
+      in the Library window, more like regular vim.
+
+<b>Bug-Fixes:</b>
+   *  Linux build corrected.
+   *  Allow running vitunes with no playlists.
+   *  Memory leak patch.  Thanks to @altenmueller.
+   *  Many small bugfixes and performance improvements.
+   *  Much improved man page.
+
+</pre>
+
+</body>
+</html>
+
