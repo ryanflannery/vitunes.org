@@ -26,7 +26,7 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
 
 <span class="bold">SYNOPSIS</span>
      <span class="bold">vitunes</span> [<span class="bold">-d</span> <span class="underline">database-file</span>] [<span class="bold">-e</span> <span class="underline">command</span> [argument ...]] [<span class="bold">-f</span> <span class="underline">config-file</span>]
-             [<span class="bold">-m</span> <span class="underline">media-player</span>] [<span class="bold">-p</span> <span class="underline">playlist-dir</span>]
+             [<span class="bold">-m</span> <span class="underline">media-backend</span>] [<span class="bold">-p</span> <span class="underline">playlist-dir</span>]
 
 <span class="bold">DESCRIPTION</span>
      <span class="bold">vitunes</span> is a curses-based music player and playlist manager for *nix
@@ -52,6 +52,8 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
                  database that <span class="bold">vitunes</span> uses.  See the section below titled
                  <span class="underline">E-COMMANDS</span> for more information.
 
+     <span class="bold">-c</span> <span class="underline">command</span>  Execute a command in the running <span class="bold">vitunes</span> instance.
+
      <span class="bold">-f</span> <span class="underline">config-file</span>
                  Specifies the path of the configuration file <span class="bold">vitunes</span> should
                  load.  See the section below titled <span class="underline">CONFIGURATION</span> <span class="underline">FILE</span> for
@@ -59,11 +61,15 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
 
                  The default location is <span class="underline">~/.vitunes/vitunes.conf</span>.
 
-     <span class="bold">-m</span> <span class="underline">media-player-path</span>
-                 Specifies the path to the media player to use.  Currently
-                 only mplayer(1) is supported.
+     <span class="bold">-m</span> <span class="underline">media-backend</span>
+                 Specify the media backend to use for playback.  The current
+                 list of supported media backends are:
 
-                 The default location is <span class="underline">/usr/local/bin/mplayer</span>.
+                 <span class="bold">mplayer</span>  Uses a fork(2) / execvp(3)'d instance of mplayer(1)
+                          for all playback.  Note that the mplayer binary <span class="bold">must</span>
+                          be in your PATH environment variable.
+
+                 Currently only <span class="bold">mplayer</span> is supported.
 
      <span class="bold">-p</span> <span class="underline">playlist-dir</span>
                  Specifies the directory containing all of the playlists
@@ -118,7 +124,8 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
                  each playlist, in addition to the library and filter-buffer.
                  The filter buffer is where the results of every :<span class="bold">filter</span> <span class="underline">...</span>
                  command are temporarily stored.
-                 Playlists with unsaved changes appear bold.
+                 Playlists with unsaved changes appear bold and have their
+                 name preceded with a '+'.
 
      playlist    This window is to the right of the library window and
                  occupies most of the display.  It shows the contents of
@@ -250,6 +257,7 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
                                      window.
                    <span class="bold">playing-playlist</span>  Currently playing file in the playlist
                                      window.
+                   <span class="bold">current-inactive</span>  Current row in the inactive window.
                    <span class="bold">artist</span>            The artist column in the playlist window.
                    <span class="bold">album</span>             The album column in the playlist window.
                    <span class="bold">title</span>             The title column in the playlist window.
@@ -262,7 +270,9 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
                                      window.
 
              Available colors for <span class="underline">fg</span> and <span class="underline">bg</span> are: white, black, red, green,
-             yellow, blue, magenta, and cyan.
+             yellow, blue, magenta, cyan, and default.  The color default is
+             whatever the terminal uses as the default foreground or
+             background color.
 
      :<span class="bold">display</span> (<span class="bold">reset</span> | <span class="bold">show</span> | <span class="underline">display-description</span>)
              The display command is used to change which columns are displayed
@@ -421,6 +431,32 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
              this.  This is intentional.  If you wish this behavior to be
              changed, see the "save-sorts" option for the <span class="bold">set</span> command.
 
+     :<span class="bold">toggle</span> <span class="underline">register</span> <span class="underline">command-list</span>
+             This command will associate a list of commands specified by
+             <span class="underline">command-list</span> to register <span class="underline">register</span>.  Once set, the list of
+             commands can be quickly toggled through using the <span class="bold">toggle_forward</span>
+             and <span class="bold">toggle_backward</span> keybindings (which default to <span class="bold">t</span> and <span class="bold">T</span>,
+             respectively).
+
+             Toggle-lists can be useful to quickly alternate through, for
+             example, various sorting or display schemes that the user may
+             prefer.
+
+             <span class="underline">register</span> is any single lower-case letter (a - z) or uppercase
+             letter (A - Z).  <span class="underline">command-list</span> is any list of valid commands
+             listed here, each separated by a backslash character '/'.
+
+             As an example, the following would allow one to quickly toggle
+             through various sorting schemes:
+
+             <span class="bold">toggle</span> <span class="bold">s</span> <span class="bold">sort</span> <span class="bold">artist,-year,track</span> <span class="bold">/</span> <span class="bold">sort</span> <span class="bold">artist,album,track</span> <span class="bold">/</span> <span class="bold">sort</span>
+             <span class="bold">-year</span>
+
+             Once issued, the three individual sorts specified above can be
+             toggled using the <span class="underline">s</span> register.  With the default keybindings this
+             would be done using either <span class="underline">ts</span> (to toggle forward through the
+             list) or <span class="underline">Ts</span> (to toggle backward through the list).
+
      :<span class="bold">unbind</span> (<span class="bold">*</span> | <span class="bold">action</span> <span class="underline">action</span> | <span class="bold">key</span> <span class="underline">keycode</span>)
              This command is used to remove existing keybindings.  It has
              three forms.  The first is simply:
@@ -494,7 +530,7 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
      Some examples of using keycodes and the :<span class="bold">bind</span> run-time command are:
 
         bind  paste_after   p
-        bind  paste_bofore  P
+        bind  paste_before  P
 
         bind  scroll_up_halfpage    Control u
         bind  scroll_down_halfpage  Control d
@@ -567,6 +603,14 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
                             N% the way through the current window's buffer.
                             DEFAULT BINDINGS: <span class="bold">%</span>
 
+     <span class="bold">go</span>                     Go to a specific location within the current
+                            window.  This is planned to be similar to vim(1)'s
+                            use of the 'g' keybinding, with multiple suffixes.
+                            For now, only 'gg' is supported, and this takes
+                            you to the first line in the current window's
+                            buffer.
+                            DEFAULT BINDINGS: <span class="bold">g</span>
+
      <span class="bold">search_forward</span>         Begin a search for the entered string searching
                             forward in the current window.  The current row
                             will be updated to the next matching row.
@@ -594,6 +638,14 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
                             can be cut/deleted at a time, and that this action
                             cannot be undone.
                             DEFAULT BINDINGS: <span class="bold">d</span>
+
+     <span class="bold">visual</span>                 Begin visual mode.  This is only available in the
+                            playlist window, and once begun, only keybindings
+                            that move the cursor within the current window are
+                            allowed.  Visual mode is exited when either a yank
+                            or delete operation has been performed, or when
+                            the Escape key is pressed.
+                            DEFAULT BINDINGS: <span class="bold">v,</span> <span class="bold">V</span>
 
      <span class="bold">yank</span>                   Copy the following N lines from the current window
                             into the copy buffer, where N is the global input
@@ -676,11 +728,31 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
      <span class="bold">seek_backward_minutes</span>  Seek backwards 1 minute in any playing media.
                             DEFAULT BINDINGS: <span class="bold">B,</span> <span class="bold">{</span>
 
+     <span class="bold">media_next</span>             Play the next song in the playlist.
+                            DEFAULT BINDINGS: <span class="bold">)</span>
+
+     <span class="bold">media_prev</span>             Play the previous song in the playlist.
+                            DEFAULT BINDINGS: <span class="bold">(</span>
+
+     <span class="bold">volume_decrease</span>        Decrease the volume.
+                            DEFAULT BINDINGS: <span class="bold">&lt;</span>
+
+     <span class="bold">volume_increase</span>        Increase the volume.
+                            DEFAULT BINDINGS: <span class="bold">&gt;</span>
+
+     <span class="bold">toggle_forward</span>         Execute the next command from the toggle list
+                            specified by the provided register.
+                            DEFAULT BINDINGS: <span class="bold">t</span>
+
+     <span class="bold">toggle_backward</span>        Execute the previous command from the toggle list
+                            specified by the provided register.
+                            DEFAULT BINDINGS: <span class="bold">T</span>
+
      Some examples of using the above actions and keycodes to define the
      default keybdings are:
 
         bind  paste_after   p
-        bind  paste_bofore  P
+        bind  paste_before  P
 
         bind  scroll_up_halfpage    Control u
         bind  scroll_down_halfpage  Control d
@@ -746,7 +818,7 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
      If you happen to find any, please send a detailed description to me at
      <span class="underline">ryan.flannery@gmail.com</span>.
 
-OpenBSD 4.8                     January 9, 2011                    OpenBSD 4.8
+OpenBSD 4.9                     January 2, 2012                    OpenBSD 4.9
 </pre>
 </body>
 </html>
