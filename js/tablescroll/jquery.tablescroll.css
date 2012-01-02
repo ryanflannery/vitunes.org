@@ -8,7 +8,8 @@
    padding: 3px 5px;
    border: 1px solid #888;
 }
-.tablescroll td i { color: blue; }
+.tablescroll tbody td i { color: blue; }
+.tablescroll tbody td b.register { color: green; font-weight: bold; }
 .tablescroll tbody td:first-child { font-family: monospace; white-space: nowrap; }
 .tablescroll tbody tr.first td { background-color: black; border-color: black; border-top: 0; }
 

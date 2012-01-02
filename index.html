@@ -449,6 +449,153 @@
       <td>Show/hide the filename &amp; meta-info for the currently
          selected file.</td>
    </tr>
+   <tr>
+      <td><i>n</i>t<b class="register">register</b></td>
+      <td>Global</td>
+      <td>Execute the <i>n</i><sup>th</sup> next command in the toggle list associated with
+      register <b class="register">register</b>.<br />
+      See the man page documentation for the <b>:toggle</b> command.</td>
+   </tr>
+   <tr>
+      <td><i>n</i>T<b class="register">register</b></td>
+      <td>Global</td>
+      <td>Execute the <i>n</i><sup>th</sup> previous command in the toggle list associated with
+      register <b class="register">register</b>.<br />
+      See the man page documentation for the <b>:toggle</b> command.</td>
+   </tr>
+
+
+   <tr>
+      <td colspan="3" class="headerRow">
+         Keybindings: Searching
+      </td>
+   </tr>
+   <tr>
+      <td>/</td>
+      <td>Global</td>
+      <td>Get query from user and search <b>forwards</b> in current window
+         for first playlist/file that matches the query.  The structure of the query
+         specified is identical to that of the <b><tt>:filter</tt></b> command
+         below.  See that for more info.
+         <br />
+         <b>Note:</b> In the Library window, only the playlist name is matched against.
+      </td>
+   </tr>
+   <tr>
+      <td>?</td>
+      <td>Global</td>
+      <td>Get query from user and search <b>backwards</b> in current window
+         for first playlist/file that matches the query.  The structure of the query
+         specified is identical to that of the <b><tt>:filter</tt></b> command
+         below.  See that for more info.
+         <br />
+         <b>Note:</b> In the Library window, only the playlist name is matched against.
+      </td>
+   </tr>
+   <tr>
+      <td>n</td>
+      <td>Global</td>
+      <td>Jump to the next row in the current window matching the
+         last provided query.  If the last query made was done using
+         '<b><tt>/</tt></b>', then this search is <b>forwards</b>, otherwise
+         it is <b>backwards</b>.
+      </td>
+   </tr>
+   <tr>
+      <td>N</td>
+      <td>Global</td>
+      <td>Jump to the next row in the current window matching the
+         last provided query.  If the last query made was done using
+         '<b><tt>/</tt></b>', then this search is <b>backwards</b>,
+         otherwise it is <b>forwards</b>.
+      </td>
+   </tr>
+
+
+   <tr>
+      <td colspan="3" class="headerRow">
+         Keybindings: Yank/Delete/Paste/Undo/Redo
+      </td>
+   </tr>
+   <tr>
+      <td><i>n</i>yy</td>
+      <td>Playlist</td>
+      <td>Yank the next <i>n</i> rows into the copy buffer</td>
+   </tr>
+   <tr>
+      <td>yG</td>
+      <td>Playlist</td>
+      <td>Yank the rest of the current playlist into the copy buffer</td>
+   </tr>
+   <tr class="error">
+      <td>*y*</td>
+      <td>Library</td>
+      <td>
+         Currently can't yank at all in library window.
+         <br />
+         <b>Note:</b>
+         I don't really see a way of doing this in an intuitive way, so it will
+         probably never be added.
+      </td>
+   </tr>
+   <tr>
+      <td><i>n</i>dd</td>
+      <td>Playlist</td>
+      <td>Delete the next <i>n</i> rows and copy them into the copy buffer</td>
+   </tr>
+   <tr>
+      <td>dG</td>
+      <td>Playlist</td>
+      <td>Delete the rest of the files in the current playlist
+         after copying them into the copy buffer
+       </td>
+   </tr>
+   <tr class="warning">
+      <td>dd</td>
+      <td>Library</td>
+      <td>Delete the currently selected playlist
+         <br />
+         <b>Note:</b>
+         Currently, no <i>n</i> can be applied to this in the library window.  I simply
+         do not want to be able to delete all of my playlists accidentally.
+      </td>
+   </tr>
+   <tr>
+      <td>p</td>
+      <td>Playlist</td>
+      <td>Paste the contents of the copy buffer <b>after</b> the currently selected row.</td>
+   </tr>
+   <tr>
+      <td>P</td>
+      <td>Playlist</td>
+      <td>Paste the contents of the copy buffer <b>before</b> the currently selected row.</td>
+   </tr>
+   <tr>
+      <td>p</td>
+      <td>Library</td>
+      <td>Paste the contents of the copy buffer at the <b>end</b> the currently selected
+         playlist.</td>
+   </tr>
+   <tr>
+      <td>P</td>
+      <td>Library</td>
+      <td>Paste the contents of the copy buffer at the <b>beginning</b> the currently selected
+         playlist.</td>
+   </tr>
+   <tr class="warning">
+      <td>u</td>
+      <td>Playlist</td>
+      <td>
+         Un-do the previous cut/paste to the currently viewed playlist.
+      </td>
+   </tr>
+   <tr class="warning">
+      <td>^r</td>
+      <td>Playlist</td>
+      <td>
+         Re-do the previously undone cut/paste to the currently viewed playlist.
+      </td>
+   </tr>
 
 
    <tr>
@@ -615,139 +762,6 @@
       <td>Global</td>
       <td>Goto the <i>n</i><sup>th</sup> row from the bottom of current page</td>
    </tr>
-
-
-   <tr>
-      <td colspan="3" class="headerRow">
-         Keybindings: Searching
-      </td>
-   </tr>
-   <tr>
-      <td>/</td>
-      <td>Global</td>
-      <td>Get query from user and search <b>forwards</b> in current window
-         for first playlist/file that matches the query.  The structure of the query
-         specified is identical to that of the <b><tt>:filter</tt></b> command
-         below.  See that for more info.
-         <br />
-         <b>Note:</b> In the Library window, only the playlist name is matched against.
-      </td>
-   </tr>
-   <tr>
-      <td>?</td>
-      <td>Global</td>
-      <td>Get query from user and search <b>backwards</b> in current window
-         for first playlist/file that matches the query.  The structure of the query
-         specified is identical to that of the <b><tt>:filter</tt></b> command
-         below.  See that for more info.
-         <br />
-         <b>Note:</b> In the Library window, only the playlist name is matched against.
-      </td>
-   </tr>
-   <tr>
-      <td>n</td>
-      <td>Global</td>
-      <td>Jump to the next row in the current window matching the
-         last provided query.  If the last query made was done using
-         '<b><tt>/</tt></b>', then this search is <b>forwards</b>, otherwise
-         it is <b>backwards</b>.
-      </td>
-   </tr>
-   <tr>
-      <td>N</td>
-      <td>Global</td>
-      <td>Jump to the next row in the current window matching the
-         last provided query.  If the last query made was done using
-         '<b><tt>/</tt></b>', then this search is <b>backwards</b>,
-         otherwise it is <b>forwards</b>.
-      </td>
-   </tr>
-
-
-   <tr>
-      <td colspan="3" class="headerRow">
-         Keybindings: Yank/Delete/Paste/Undo/Redo
-      </td>
-   </tr>
-   <tr>
-      <td><i>n</i>yy</td>
-      <td>Playlist</td>
-      <td>Yank the next <i>n</i> rows into the copy buffer</td>
-   </tr>
-   <tr>
-      <td>yG</td>
-      <td>Playlist</td>
-      <td>Yank the rest of the current playlist into the copy buffer</td>
-   </tr>
-   <tr class="error">
-      <td>*y*</td>
-      <td>Library</td>
-      <td>
-         Currently can't yank at all in library window.
-         <br />
-         <b>Note:</b>
-         I don't really see a way of doing this in an intuitive way, so it will
-         probably never be added.
-      </td>
-   </tr>
-   <tr>
-      <td><i>n</i>dd</td>
-      <td>Playlist</td>
-      <td>Delete the next <i>n</i> rows and copy them into the copy buffer</td>
-   </tr>
-   <tr>
-      <td>dG</td>
-      <td>Playlist</td>
-      <td>Delete the rest of the files in the current playlist
-         after copying them into the copy buffer
-       </td>
-   </tr>
-   <tr class="warning">
-      <td>dd</td>
-      <td>Library</td>
-      <td>Delete the currently selected playlist
-         <br />
-         <b>Note:</b>
-         Currently, no <i>n</i> can be applied to this in the library window.  I simply
-         do not want to be able to delete all of my playlists accidentally.
-      </td>
-   </tr>
-   <tr>
-      <td>p</td>
-      <td>Playlist</td>
-      <td>Paste the contents of the copy buffer <b>after</b> the currently selected row.</td>
-   </tr>
-   <tr>
-      <td>P</td>
-      <td>Playlist</td>
-      <td>Paste the contents of the copy buffer <b>before</b> the currently selected row.</td>
-   </tr>
-   <tr>
-      <td>p</td>
-      <td>Library</td>
-      <td>Paste the contents of the copy buffer at the <b>end</b> the currently selected
-         playlist.</td>
-   </tr>
-   <tr>
-      <td>P</td>
-      <td>Library</td>
-      <td>Paste the contents of the copy buffer at the <b>beginning</b> the currently selected
-         playlist.</td>
-   </tr>
-   <tr class="warning">
-      <td>u</td>
-      <td>Playlist</td>
-      <td>
-         Un-do the previous cut/paste to the currently viewed playlist.
-      </td>
-   </tr>
-   <tr class="warning">
-      <td>^r</td>
-      <td>Playlist</td>
-      <td>
-         Re-do the previously undone cut/paste to the currently viewed playlist.
-      </td>
-   </tr>
 </tbody>
 </table>
 <p>
@@ -757,7 +771,7 @@
    Feature is not working yet.
    &nbsp;&nbsp;&nbsp;&nbsp;
    <img src="/images/spacer.gif" alt="warning-row" class="square warning" />
-   Feature works, but not as many would expect.
+   Feature works, but not as may be expected.
 </p>
 
 <h2>Mailing List</h2>
