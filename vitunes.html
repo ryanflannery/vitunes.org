@@ -25,8 +25,8 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
      <span class="bold">vitunes</span> - A curses media indexer and player for vi-users
 
 <span class="bold">SYNOPSIS</span>
-     <span class="bold">vitunes</span> [<span class="bold">-d</span> <span class="underline">database-file</span>] [<span class="bold">-e</span> <span class="underline">command</span> [argument ...]] [<span class="bold">-f</span> <span class="underline">config-file</span>]
-             [<span class="bold">-m</span> <span class="underline">media-backend</span>] [<span class="bold">-p</span> <span class="underline">playlist-dir</span>]
+     <span class="bold">vitunes</span> [<span class="bold">-c</span> <span class="underline">command</span>] [<span class="bold">-d</span> <span class="underline">database-file</span>] [<span class="bold">-e</span> <span class="underline">command</span> [argument ...]]
+             [<span class="bold">-f</span> <span class="underline">config-file</span>] [<span class="bold">-m</span> <span class="underline">media-backend</span>] [<span class="bold">-p</span> <span class="underline">playlist-dir</span>]
 
 <span class="bold">DESCRIPTION</span>
      <span class="bold">vitunes</span> is a curses-based music player and playlist manager for *nix
@@ -38,6 +38,28 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
      to play the media it indexes (via mplayer(1)).
 
      <span class="bold">vitunes</span> accepts the following command line options:
+
+     <span class="bold">-c</span> <span class="underline">command</span>  Execute the specified command in the currently running
+                 <span class="bold">vitunes</span> instance, and exit.  This is useful for controlling
+                 <span class="bold">vitunes</span> from other windows or scripts.
+
+                 The commands that may be specified are both those named in
+                 the <span class="underline">RUN-TIME</span> <span class="underline">COMMANDS</span> section below and keybindings specified
+                 by their keybinding action name, listed in the <span class="underline">KEYBINDING</span>
+                 <span class="underline">ACTIONS</span> section below.
+
+                 To execute multiple commands, use this option repeatedly as
+                       $ vitunes -c command1 -c command2 ...
+
+                 For example, to have the currently running <span class="bold">vitunes</span> load and
+                 play a playlist, one could issue:
+                       $ vitunes -c `playlist SomePlaylist' -c media_play
+
+                 Note that for this to work, when <span class="bold">vitunes</span> starts up it
+                 attempts to create a socket at <span class="underline">/tmp/.vitunes</span> that are used by
+                 this option to communicate with the original instance.  If
+                 this socket cannot be created for any reason, this option
+                 will not work.
 
      <span class="bold">-d</span> <span class="underline">database-file</span>
                  Specifies the database containing all known media files and
@@ -51,8 +73,6 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
                  Execute one of the available e-commands to manipulate the
                  database that <span class="bold">vitunes</span> uses.  See the section below titled
                  <span class="underline">E-COMMANDS</span> for more information.
-
-     <span class="bold">-c</span> <span class="underline">command</span>  Execute a command in the running <span class="bold">vitunes</span> instance.
 
      <span class="bold">-f</span> <span class="underline">config-file</span>
                  Specifies the path of the configuration file <span class="bold">vitunes</span> should
@@ -355,6 +375,9 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
              playlist will be named accordingly unless a playlist with that
              name already exists.  If no name is provided, the default is
              "untitled".
+
+     :<span class="bold">playlist</span> <span class="underline">name</span>
+             Load the playlist named by <span class="underline">name</span> in the playlist window.
 
      :<span class="bold">q</span>[!]   Quit <span class="bold">vitunes</span>.  If there are playlists with unsaved changes, then
              you are notified of this and prevented from quitting.  You can
@@ -794,6 +817,9 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
              Default database file.
      <span class="underline">~/.vitunes/playlists/</span>
              Default playlist directory.
+     <span class="underline">/tmp/.vitunes</span>
+             Default location for the socket created on start-up that can be
+             used to control <span class="bold">vitunes</span>.
      <span class="underline">/usr/local/bin/mplayer</span>
              Default path to the mplayer(1) binary.
 
