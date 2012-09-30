@@ -60,8 +60,7 @@ ul li { list-style: square; }
 #news {
    overflow: auto;
    height: 300px;
-   border-bottom: 1px solid #ccc;
-   border-left: 1px solid #ccc;
+   border: 1px solid #ccc;
 }
 
 /* documentation styles */
