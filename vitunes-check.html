@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC
+	"-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style type="text/css">
+	BODY {font-family: arial, helvetica, sans-serif; }
+	SPAN.bold { color: navy; }
+	SPAN.underline { color: purple; }
+	A:link {color: blue; text-decoration: none; }
+	A:visited {color: blue; text-decoration: none; }
+	A:hover {text-decoration: underline; }
+</style>
+<title>Man Page Lookup - vitunes-check
+</title>
+</head>
+<body>
+<pre>
+
+VITUNES-CHECK(1)          BSD General Commands Manual         VITUNES-CHECK(1)
+
+<span class="bold">NAME</span>
+     <span class="bold">vitunes-check</span> -- check files for meta-information
+
+<span class="bold">SYNOPSIS</span>
+     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">check</span> <span class="bold">-d</span> | <span class="bold">-r</span> | <span class="bold">-s</span> <span class="underline">path</span> [...]
+
+<span class="bold">DESCRIPTION</span>
+     The <span class="bold">check</span> e-command will scan each file provided to see if any media
+     meta-information is present in the file, how vitunes-add(1) will sanitize
+     that meta-information (see below), or what information vitunes(1) cur-
+     rently has in the database for the file.
+
+     The options are as follows:
+
+     <span class="bold">-d</span>          Load the vitunes(1) database and check to see if each file
+                 exists within it.  If so, show the information contained in
+                 the database.
+
+     <span class="bold">-r</span>          Show the raw information extracted directly from each file.
+
+     <span class="bold">-s</span>          Show the sanitized information after extracting it from each
+                 file.  See the section <span class="underline">SANITATION</span> below for details on what
+                 this is.
+
+     If multiple files are provided, each will be checked in order.
+
+<span class="bold">SANITATION</span>
+     Some media files have non-printable characters in their meta-information
+     for one reason or another (often, it's a faulty ripper/tagging applica-
+     tion).  Sometimes these non-printable characters can be control sequences
+     used by ncurses(3) and thus cause problems with the display of
+     vitunes(1).
+
+     To prevent any such problems, vitunes-add(1) sanitizes such data by
+     replacing any problematic characters with '?'.
+
+<span class="bold">EXAMPLES</span>
+     To show raw information from a file:
+
+           $ vitunes -e check -r /path/to/file.mp3
+
+<span class="bold">SEE</span> <span class="bold">ALSO</span>
+     vitunes(1), vitunes-add(1), ncurses(3)
+
+<span class="bold">AUTHORS</span>
+     Ryan Flannery &lt;<span class="underline">ryan.flannery@gmail.com</span>&gt;.
+
+BSD                            November 7, 2014                            BSD
+</pre>
+</body>
+</html>

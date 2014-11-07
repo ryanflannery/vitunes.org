@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC
+	"-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style type="text/css">
+	BODY {font-family: arial, helvetica, sans-serif; }
+	SPAN.bold { color: navy; }
+	SPAN.underline { color: purple; }
+	A:link {color: blue; text-decoration: none; }
+	A:visited {color: blue; text-decoration: none; }
+	A:hover {text-decoration: underline; }
+</style>
+<title>Man Page Lookup - vitunes-rm
+</title>
+</head>
+<body>
+<pre>
+
+VITUNES-RM(1)             BSD General Commands Manual            VITUNES-RM(1)
+
+<span class="bold">NAME</span>
+     <span class="bold">vitunes-rm</span> -- remove a file or a URL from the database
+
+<span class="bold">SYNOPSIS</span>
+     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">rm</span> [<span class="bold">-f</span>] <span class="underline">URL</span> | <span class="underline">path</span>
+
+<span class="bold">DESCRIPTION</span>
+     To remove a single file or <span class="underline">URL</span> from the vitunes(1) database, the <span class="bold">rm</span> e-
+     command may be used.
+
+     Normally, a prompt is shown as a safety measure.  This prompt can be
+     avoided using the <span class="bold">-f</span> flag, to force the removal.
+
+     Note that to remove files, the full, absolute path to the file must be
+     provided, as obtained from realpath(3).
+
+<span class="bold">EXAMPLES</span>
+     To remove a single file from the vitunes(1) database, use:
+
+           $ vitunes -e rm /path/to/file.mp3
+
+     To remove a URL, such as that for an Internet radio stream, use:
+
+           $ vitunes -e rm -f "<a href="http://198.234.121.118/listen.pls">http://198.234.121.118/listen.pls</a>"
+
+<span class="bold">SEE</span> <span class="bold">ALSO</span>
+     vitunes(1), vitunes-add(1), realpath(3)
+
+<span class="bold">AUTHORS</span>
+     Ryan Flannery &lt;<span class="underline">ryan.flannery@gmail.com</span>&gt;.
+
+BSD                            November 7, 2014                            BSD
+</pre>
+</body>
+</html>

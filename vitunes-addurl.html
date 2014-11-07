@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC
+	"-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style type="text/css">
+	BODY {font-family: arial, helvetica, sans-serif; }
+	SPAN.bold { color: navy; }
+	SPAN.underline { color: purple; }
+	A:link {color: blue; text-decoration: none; }
+	A:visited {color: blue; text-decoration: none; }
+	A:hover {text-decoration: underline; }
+</style>
+<title>Man Page Lookup - vitunes-addurl
+</title>
+</head>
+<body>
+<pre>
+
+VITUNES-ADDURL(1)         BSD General Commands Manual        VITUNES-ADDURL(1)
+
+<span class="bold">NAME</span>
+     <span class="bold">vitunes-addurl</span> -- add a URL (or non-file playable item) to the database
+
+<span class="bold">SYNOPSIS</span>
+     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">addurl</span> <span class="underline">URL</span> | <span class="underline">path</span>
+
+<span class="bold">DESCRIPTION</span>
+     To add non-standard files to the vitunes(1) database (things like URL's
+     for Internet radio streams), one can use the <span class="bold">addurl</span> e-command.  It takes
+     a single parameter: the <span class="underline">URL</span> or <span class="underline">path</span> to be added to the database.
+
+     Since meta-information can't be extracted automatically for most URL's,
+     it needs to be inputted manually.  Fields can be left blank, if wanted.
+
+     Note that anything mplayer(1) or gstreamer(3) can play may be added.  To
+     test if a <span class="underline">URL</span> is playable by mplayer(1), simply try the following, and if
+     it plays, it may be added:
+           $ mplayer URL
+
+     Although regular files could also be added using this e-command, the <span class="bold">add</span>
+     e-command is preferred, as it attempts to extract meta-information auto-
+     matically.
+
+     Note that files added to the database using the <span class="bold">addurl</span> e-command are <span class="bold">not</span>
+     checked for updates during an <span class="bold">update</span> e-command.
+
+     The <span class="bold">addurl</span> e-command can also be used to change the meta-information of
+     an existing <span class="underline">URL</span> within the database.
+
+<span class="bold">EXAMPLES</span>
+     An example of adding an Internet radio stream would look something like
+     the following:
+
+           $ vitunes -e addurl "<a href="http://198.234.121.118:80">http://198.234.121.118:80</a>"
+
+           Artist: WVXU Online Radio&lt;ENTER&gt;
+           Album: Cincinnati Public Radio&lt;ENTER&gt;
+           Title: NPR&lt;ENTER&gt;
+           Track: &lt;ENTER&gt;
+           Year: &lt;ENTER&gt;
+           Genre: Radio&lt;ENTER&gt;
+           Length: INF&lt;ENTER&gt;
+
+<span class="bold">SEE</span> <span class="bold">ALSO</span>
+     vitunes(1), vitunes-init(1), vitunes-add(1)
+
+<span class="bold">NOTES</span>
+     When the vitunes(1) database has to be re-built (because of say, an
+     upgrade where the database format has changed or the database was
+     deleted), re-adding URL's can be tedious.  To ease this, consider using a
+     shell script like the <span class="underline">add</span><span class="bold">_</span><span class="underline">urls.sh</span> file distributed with <span class="bold">vitunes</span>.
+
+<span class="bold">AUTHORS</span>
+     Ryan Flannery &lt;<span class="underline">ryan.flannery@gmail.com</span>&gt;.
+
+BSD                            November 7, 2014                            BSD
+</pre>
+</body>
+</html>

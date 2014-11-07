@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC
+	"-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style type="text/css">
+	BODY {font-family: arial, helvetica, sans-serif; }
+	SPAN.bold { color: navy; }
+	SPAN.underline { color: purple; }
+	A:link {color: blue; text-decoration: none; }
+	A:visited {color: blue; text-decoration: none; }
+	A:hover {text-decoration: underline; }
+</style>
+<title>Man Page Lookup - vitunes-update
+</title>
+</head>
+<body>
+<pre>
+
+VITUNES-UPDATE(1)         BSD General Commands Manual        VITUNES-UPDATE(1)
+
+<span class="bold">NAME</span>
+     <span class="bold">vitunes-update</span> -- update all files in the database
+
+<span class="bold">SYNOPSIS</span>
+     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">update</span> [<span class="bold">-fs</span>]
+
+<span class="bold">DESCRIPTION</span>
+     The <span class="bold">update</span> e-command loads the existing vitunes(1) database and for each
+     file listed, the file is checked to see if it has been removed or modi-
+     fied since it was added to the database or last updated.  If the file has
+     been removed, it will be removed from the database.  If the file has been
+     modified, it's meta-information will be extracted again and the database
+     will be updated.
+
+     Note that if there are errors while checking any file, the error will be
+     reported but such files, and their meta-information, will remain in the
+     database.
+
+     The options are as follows:
+
+     <span class="bold">-f</span>          Force the update of meta-information of all files, even if
+                 their modification times haven't changed.
+
+     <span class="bold">-s</span>          When present, files that are skipped because they have not
+                 been modified will also be reported to stdout(4).  Normally,
+                 only files that are updated are reported.
+
+     Anytime media files are removed/modified which are already in the
+     vitunes(1) database, the <span class="bold">update</span> e-command should be used.
+
+<span class="bold">NOTES</span>
+     Any files/URLs added to the database using the <span class="bold">addurl</span> e-command will <span class="bold">not</span>
+     be checked/updated in any way, for obvious reasons.
+
+<span class="bold">EXAMPLES</span>
+     To scan all files in the vitunes(1) database for updates, simply use:
+
+           $ vitunes -e update
+
+<span class="bold">SEE</span> <span class="bold">ALSO</span>
+     vitunes(1), vitunes-add(1)
+
+<span class="bold">AUTHORS</span>
+     Ryan Flannery &lt;<span class="underline">ryan.flannery@gmail.com</span>&gt;.
+
+BSD                            November 7, 2014                            BSD
+</pre>
+</body>
+</html>

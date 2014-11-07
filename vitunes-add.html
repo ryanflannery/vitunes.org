@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC
+	"-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style type="text/css">
+	BODY {font-family: arial, helvetica, sans-serif; }
+	SPAN.bold { color: navy; }
+	SPAN.underline { color: purple; }
+	A:link {color: blue; text-decoration: none; }
+	A:visited {color: blue; text-decoration: none; }
+	A:hover {text-decoration: underline; }
+</style>
+<title>Man Page Lookup - vitunes-add
+</title>
+</head>
+<body>
+<pre>
+
+VITUNES-ADD(1)            BSD General Commands Manual           VITUNES-ADD(1)
+
+<span class="bold">NAME</span>
+     <span class="bold">vitunes-add</span> -- add files to the database
+
+<span class="bold">SYNOPSIS</span>
+     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">add</span> <span class="underline">path</span> [...]
+
+<span class="bold">DESCRIPTION</span>
+     The <span class="bold">add</span> e-command is used to add files to the <span class="bold">vitunes</span> database.  For
+     every <span class="underline">path</span> provided as a parameter, <span class="bold">vitunes</span> will scan that file or direc-
+     tory (recursively) searching for media files that contain any meta-infor-
+     mation.  Any such files found are added to the database that was created
+     after running the <span class="bold">init</span> e-command.
+
+     If any files scanned are already in the database they will be re-scanned
+     and any changes will be updated.  Files that are scanned are not moved,
+     copied, or modified in any way.
+
+     The information <span class="bold">vitunes</span> stores for each file includes:
+
+           Filename              Track Number
+           Artist Name           Year
+           Album Name            Genre
+           Song or Video title   Play Length in seconds
+
+     The filename stored is the absolute pathname obtained from realpath(3)
+     and serves as the key-field within the database.
+
+     All meta-data is extracted using TagLib(3).
+
+     If any file encountered has no meta-information, it is not added to the
+     database.
+
+<span class="bold">EXAMPLES</span>
+     To add a single file to the database:
+
+           $ vitunes -e add /path/to/music.mp3
+
+     To search directories recursively and add all files contained:
+
+           $ vitunes -e add ~/music /usr/local/share/music
+
+<span class="bold">SEE</span> <span class="bold">ALSO</span>
+     vitunes(1), vitunes-init(1), realpath(3), TagLib(3)
+
+     More information about TagLib can be found on the TagLib website:
+           <span class="bold"><a href="http://developer.kde.org/~wheeler/taglib.html">http://developer.kde.org/~wheeler/taglib.html</a></span>
+
+<span class="bold">NOTES</span>
+     <span class="bold">vitunes</span> only maintains information about the file and not the file
+     itself.  It does <span class="bold">not</span> move/copy/modify the files in its database in any
+     way.
+
+<span class="bold">AUTHORS</span>
+     Ryan Flannery &lt;<span class="underline">ryan.flannery@gmail.com</span>&gt;.
+
+BSD                            November 7, 2014                            BSD
+</pre>
+</body>
+</html>

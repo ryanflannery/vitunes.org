@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC
+	"-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style type="text/css">
+	BODY {font-family: arial, helvetica, sans-serif; }
+	SPAN.bold { color: navy; }
+	SPAN.underline { color: purple; }
+	A:link {color: blue; text-decoration: none; }
+	A:visited {color: blue; text-decoration: none; }
+	A:hover {text-decoration: underline; }
+</style>
+<title>Man Page Lookup - vitunes-init
+</title>
+</head>
+<body>
+<pre>
+
+VITUNES-INIT(1)           BSD General Commands Manual          VITUNES-INIT(1)
+
+<span class="bold">NAME</span>
+     <span class="bold">vitunes-init</span> -- initialize the media database
+
+<span class="bold">SYNOPSIS</span>
+     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">init</span>
+
+<span class="bold">DESCRIPTION</span>
+     The <span class="bold">init</span> e-command is used to setup the initial files and directories
+     used by vitunes(1), and must be run once.  Running it additional times
+     will have no affect.
+
+     The database created is initially empty, and files must be added before
+     <span class="bold">vitunes-init</span> can be run normally.  See vitunes-add(1) for instructions on
+     doing this.
+
+     It is not strictly necessary to run this e-command to start using
+     vitunes(1), since an existing installation could be used or the files
+     created by hand.  It is provided for convenience.
+
+<span class="bold">FILES</span>
+     ~/.vitunes
+             The vitunes(1) core directory where everything is stored.
+     ~/.vitunes/playlists
+             The directory where all playlists are stored.  This can be over-
+             ridden with the [<span class="bold">-p</span> <span class="underline">playlist-dir</span>] flag.
+     ~/.vitunes/vitunes.db
+             The library database containing the meta-information of all media
+             files.  This can be overridden with the [<span class="bold">-d</span> <span class="underline">database-file</span>] flag.
+
+<span class="bold">EXAMPLES</span>
+     As the <span class="bold">init</span> e-command takes no arguments, it's only usage is the follow-
+     ing:
+
+           $ vitunes -e init
+
+<span class="bold">SEE</span> <span class="bold">ALSO</span>
+     vitunes(1), vitunes-add(1)
+
+<span class="bold">AUTHORS</span>
+     Ryan Flannery &lt;<span class="underline">ryan.flannery@gmail.com</span>&gt;.
+
+BSD                            November 7, 2014                            BSD
+</pre>
+</body>
+</html>

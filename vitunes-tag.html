@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC
+	"-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style type="text/css">
+	BODY {font-family: arial, helvetica, sans-serif; }
+	SPAN.bold { color: navy; }
+	SPAN.underline { color: purple; }
+	A:link {color: blue; text-decoration: none; }
+	A:visited {color: blue; text-decoration: none; }
+	A:hover {text-decoration: underline; }
+</style>
+<title>Man Page Lookup - vitunes-tag
+</title>
+</head>
+<body>
+<pre>
+
+VITUNES-TAG(1)            BSD General Commands Manual           VITUNES-TAG(1)
+
+<span class="bold">NAME</span>
+     <span class="bold">vitunes-tag</span> -- set the meta-information tags in media files
+
+<span class="bold">SYNOPSIS</span>
+     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">tag</span> [<span class="bold">-A</span> <span class="underline">album</span>] [<span class="bold">-a</span> <span class="underline">artist</span>] [<span class="bold">-g</span> <span class="underline">genre</span>] [<span class="bold">-t</span> <span class="underline">title</span>] [<span class="bold">-T</span> <span class="underline">track</span>]
+             [<span class="bold">-y</span> <span class="underline">year</span>] [<span class="bold">-c</span> <span class="underline">comment</span>] <span class="underline">path</span> [...]
+
+<span class="bold">DESCRIPTION</span>
+     The <span class="bold">tag</span> e-command is provided to add or change the meta-information tags
+     of media files.  The meta-information fields that can be set are: artist,
+     album, title, genre, track, year, and comment.
+
+     For each <span class="underline">path</span> specified, the given fields will be set to the provided
+     value.
+
+     The options are as follows:
+
+     <span class="bold">-A</span> <span class="underline">album</span>    Sets the album field to the provided string.
+
+     <span class="bold">-a</span> <span class="underline">artist</span>   Sets the artist field to the provided string.
+
+     <span class="bold">-c</span> <span class="underline">comment</span>  Sets the comment field to the provided string.
+
+     <span class="bold">-g</span> <span class="underline">genre</span>    Sets the genre field to the provided string.
+
+     <span class="bold">-T</span> <span class="underline">track</span>    Sets the track field to the provided number.  Note that the
+                 number must be between 0 and INT_MAX.
+
+     <span class="bold">-t</span> <span class="underline">title</span>    Sets the title field to the provided string.
+
+     <span class="bold">-y</span> <span class="underline">year</span>     Sets the year field to the provided number.  Note that the
+                 number must be between 0 and INT_MAX.
+
+<span class="bold">NOTES</span>
+     This e-command only changes the meta-information in the raw files them-
+     selves and not the values in the vitunes(1) database.  To update the
+     vitunes database after tagging, use the <span class="bold">add</span> or <span class="bold">update</span> e-commands.
+
+<span class="bold">EXAMPLES</span>
+     CD rippers frequently pull information from CDDB (or other databases)
+     where, for example, a "The" is missing from an artist/album name when it
+     is, in fact, appropriate.  Below is an example of correcting this and
+     then updating the vitunes(1) database:
+
+           $ vitunes -e tag -a "The White Stripes" /path/to/De_Stijl/*
+           $ vitunes -e update
+
+<span class="bold">SEE</span> <span class="bold">ALSO</span>
+     vitunes(1), vitunes-add(1), vitunes-update(1)
+
+<span class="bold">AUTHORS</span>
+     Ryan Flannery &lt;<span class="underline">ryan.flannery@gmail.com</span>&gt;.
+
+BSD                            November 7, 2014                            BSD
+</pre>
+</body>
+</html>

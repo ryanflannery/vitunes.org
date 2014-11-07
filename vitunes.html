@@ -19,10 +19,11 @@
 </head>
 <body>
 <pre>
-VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
+
+VITUNES(1)                BSD General Commands Manual               VITUNES(1)
 
 <span class="bold">NAME</span>
-     <span class="bold">vitunes</span> - A curses media indexer and player for vi-users
+     <span class="bold">vitunes</span> -- A curses media indexer and player for vi-users
 
 <span class="bold">SYNOPSIS</span>
      <span class="bold">vitunes</span> [<span class="bold">-c</span> <span class="underline">command</span>] [<span class="bold">-d</span> <span class="underline">database-file</span>] [<span class="bold">-e</span> <span class="underline">command</span> [argument ...]]
@@ -35,25 +36,18 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
 
      It is not intended to be a feature-rich media player, but rather a quick,
      vi-like media indexer and playlist manager that also happens to be able
-     to play the media it indexes (via mplayer(1)).
+     to play the media it indexes (via mplayer(1) ).
 
      <span class="bold">vitunes</span> accepts the following command line options:
 
-     <span class="bold">-c</span> <span class="underline">command</span>  Execute the specified command in the currently running
+     <span class="bold">-c</span> <span class="underline">command</span>  Execute the specified <span class="underline">commands</span> in the currently running
                  <span class="bold">vitunes</span> instance, and exit.  This is useful for controlling
                  <span class="bold">vitunes</span> from other windows or scripts.
 
-                 The commands that may be specified are both those named in
+                 The <span class="underline">commands</span> that may be specified are both those named in
                  the <span class="underline">RUN-TIME</span> <span class="underline">COMMANDS</span> section below and keybindings specified
                  by their keybinding action name, listed in the <span class="underline">KEYBINDING</span>
                  <span class="underline">ACTIONS</span> section below.
-
-                 To execute multiple commands, use this option repeatedly as
-                       $ vitunes -c command1 -c command2 ...
-
-                 For example, to have the currently running <span class="bold">vitunes</span> load and
-                 play a playlist, one could issue:
-                       $ vitunes -c `playlist SomePlaylist' -c media_play
 
                  Note that for this to work, when <span class="bold">vitunes</span> starts up it
                  attempts to create a socket at <span class="underline">/tmp/.vitunes</span> that are used by
@@ -62,68 +56,72 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
                  will not work.
 
      <span class="bold">-d</span> <span class="underline">database-file</span>
-                 Specifies the database containing all known media files and
-                 their meta information that <span class="bold">vitunes</span> should use.  If you're
-                 using this option in conjunction with an e-command, this
-                 option <span class="bold">must</span> be specified before the e-command.
+                 Specifies the <span class="underline">database-file</span> containing all known media files
+                 and their meta-information that <span class="bold">vitunes</span> should use.  If this
+                 option is used in conjunction with an e-command, the option
+                 <span class="bold">must</span> be specified before the e-command.
 
                  The default location is <span class="underline">~/.vitunes/vitunes.db</span>.
 
-     <span class="bold">-e</span> <span class="underline">command</span> <span class="bold">options</span>
+     <span class="bold">-e</span> <span class="underline">command</span> <span class="underline">options</span>
                  Execute one of the available e-commands to manipulate the
                  database that <span class="bold">vitunes</span> uses.  See the section below titled
                  <span class="underline">E-COMMANDS</span> for more information.
 
      <span class="bold">-f</span> <span class="underline">config-file</span>
-                 Specifies the path of the configuration file <span class="bold">vitunes</span> should
-                 load.  See the section below titled <span class="underline">CONFIGURATION</span> <span class="underline">FILE</span> for
-                 information on what the configuration may contain.
+                 Specifies an alternative <span class="underline">config-file</span> <span class="bold">vitunes</span> should load.
+                 See the section below titled <span class="underline">CONFIGURATION</span> <span class="underline">FILE</span> for informa-
+                 tion on what the configuration may contain.
 
                  The default location is <span class="underline">~/.vitunes/vitunes.conf</span>.
 
      <span class="bold">-m</span> <span class="underline">media-backend</span>
-                 Specify the media backend to use for playback.  The current
+                 Specify the <span class="underline">media-backend</span> to use for playback.  The current
                  list of supported media backends are:
 
-                 <span class="bold">mplayer</span>  Uses a fork(2) / execvp(3)'d instance of mplayer(1)
+                 <span class="bold">mplayer</span>  Uses a fork(2) / execvp(3) 'd instance of mplayer(1)
                           for all playback.  Note that the mplayer binary <span class="bold">must</span>
-                          be in your PATH environment variable.
+                          be in the PATH environment variable.
 
-                 Currently only <span class="bold">mplayer</span> is supported.
+                 <span class="bold">gst</span>      Uses the <span class="bold">gstreamer</span> multimedia library for media
+                          playback.  Note that the media formats supported by
+                          this backend depend on what gstreamer plugins are
+                          installed.
+
+                 The default backend is <span class="bold">mplayer</span>.
 
      <span class="bold">-p</span> <span class="underline">playlist-dir</span>
-                 Specifies the directory containing all of the playlists
-                 <span class="bold">vitunes</span> will load and use.  Any new playlists created while
-                 running <span class="bold">vitunes</span> will be created here.
+                 Specifies an alternative <span class="underline">playlist-dir</span> containing all of the
+                 playlists <span class="bold">vitunes</span> will load and use.  Any new playlists cre-
+                 ated while running <span class="bold">vitunes</span> will be created here.
 
                  The default location is <span class="underline">~/.vitunes/playlists/</span>.
 
-   <span class="bold">Getting</span> <span class="bold">Started</span>
-     <span class="bold">vitunes</span> works by maintaining a database of tagged media files.  The
-     database <span class="bold">must</span> be created and populated before <span class="bold">vitunes</span> can be run
-     normally.
+<span class="bold">GETTING</span> <span class="bold">STARTED</span>
+     <span class="bold">vitunes</span> works by maintaining a database of tagged media files.  The data-
+     base <span class="bold">must</span> be created and populated before <span class="bold">vitunes</span> can be run normally.
 
      After that, files can be added, modified, or removed from the database,
      and on the next invocation, <span class="bold">vitunes</span> will see the changes (additionally,
      the database can be re-loaded at runtime).
 
-     <span class="bold">o</span>   All database management is done using "e-commands", which are always
+     <span class="bold">&#8226;</span>   All database management is done using "e-commands", which are always
          of the form:
                $ vitunes -e command-name [parameters ...]
 
-     <span class="bold">o</span>   Once the database has been created, <span class="bold">vitunes</span> can be run normally with
+     <span class="bold">&#8226;</span>   Once the database has been created, <span class="bold">vitunes</span> can be run normally with
          the following:
                $ vitunes
 
-     <span class="bold">o</span>   All playlist management is done while <span class="bold">vitunes</span> is running normally.
+     <span class="bold">&#8226;</span>   All playlist management is done while <span class="bold">vitunes</span> is running normally.
 
-     See the <span class="underline">E-COMMANDS</span> section below for more information on database
-     management.  To get started quickly, simply do the following:
+     See the <span class="underline">E-COMMANDS</span> section below for more information on database manage-
+     ment.  To get started quickly, simply do the following:
 
      1.   Create initial empty database with
                 $ vitunes -e init
 
-     2.   Add files to your database with
+     2.   Add files to the database with
                 $ vitunes -e add ~/music/ /path/to/more/music/
 
      3.   Then just start normally with
@@ -147,10 +145,9 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
                  Playlists with unsaved changes appear bold and have their
                  name preceded with a '+'.
 
-     playlist    This window is to the right of the library window and
-                 occupies most of the display.  It shows the contents of
-                 whichever playlist has currently been selected in the library
-                 window.
+     playlist    This window is to the right of the library window and occu-
+                 pies most of the display.  It shows the contents of whichever
+                 playlist has currently been selected in the library window.
 
    <span class="bold">Useful</span> <span class="bold">Keybindings</span>
      The following is only a partial listing keybindings, but are the most
@@ -175,71 +172,15 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
      See the <span class="underline">KEYBINDING</span> <span class="underline">ACTIONS</span> section for a complete listing.
 
 <span class="bold">E-COMMANDS</span>
-     Below is a brief summary of each e-command available in <span class="bold">vitunes</span>.  More
-     detailed usage information and examples for each can be obtained by
-     issuing:
+     More detailed usage information and examples for each e-command can be
+     obtained by issuing:
            $ vitunes -e help command-name
-
-     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">init</span>
-             Create the necessary database file and playlist directory used by
-             <span class="bold">vitunes</span>.  This command only needs to be run once, when <span class="bold">vitunes</span> is
-             first run.  If either of these already exist, they remain
-             unchanged.
-
-     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">add</span> <span class="underline">path1</span> [<span class="underline">path2</span> <span class="underline">...</span>]
-             This command takes any number of files/directories as parameters.
-             Each file is scanned for meta-information and if found, added to
-             the database.  Directories are search recursively.
-
-             TagLib(3) is used for all meta-extraction, which includes the
-             following fields: album, artist, comment, play-length, title,
-             track number, and year.
-
-     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">addurl</span> <span class="underline">url</span>
-             This command is used to add non-files (things like URL's for
-             Internet radio stations) to the database, where the meta-
-             information cannot be determined automatically.  It can also be
-             used to update the meta-info of an existing URL in the database.
-
-             After executing, you are prompted to enter all of your own
-             information.
-
-     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">check</span> [<span class="bold">-rsd</span>] <span class="underline">file1</span> [<span class="underline">file2</span> <span class="underline">...</span>]
-             Scan the files specified and display their meta-information as
-             present in the files themselves or in the <span class="bold">vitunes</span> database.  This
-             is useful for checking if a file is in the database.
-
-     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">flush</span> [<span class="bold">-t</span> <span class="underline">time-format</span>]
-             Dump the contents of the database to stdout in an easy-to-parse
-             format, optionally with the specified strftime(3) compatible
-             format for times.
-
-     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">help</span> <span class="underline">command</span>
-             Display detailed usage information and examples for the e-command
-             specified by <span class="underline">command</span>.
-
-     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">rm</span> [<span class="bold">-f</span>] <span class="underline">file/url</span>
-             Remove a file/URL from the database.
-
-     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">rmfile</span> [<span class="bold">-f</span>] <span class="underline">file/url</span>
-             Alias for the "rm" e-command.
-
-     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">tag</span> [options] <span class="underline">file1</span> [<span class="underline">file2</span> <span class="underline">...</span>]
-             Add/modify the meta-information tags of raw files.  There are
-             many options to this e-command.  See the help page for more
-             information:
-                   $ vitunes -e help tag
-
-     <span class="bold">vitunes</span> <span class="bold">-e</span> <span class="bold">update</span> [<span class="bold">-s</span>]
-             Load the existing database and check each file to see if its
-             meta-information has been updated, or if the file has been
-             removed.  The database is updated accordingly.
 
 <span class="bold">RUN-TIME</span> <span class="bold">COMMANDS</span>
      Below is a listing of all run-time commands supported by <span class="bold">vitunes</span>.
 
      All commands are entered by typing ':' followed by the command name and
-     any parameters (just like in vi(1)).
+     any parameters (just like in vi(1) ).
 
      Note that abbreviations are also supported.  That is, entering any non-
      ambiguous abbreviation of a command name will also execute the command.
@@ -247,8 +188,8 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
      :<span class="bold">bind</span> <span class="underline">action</span> <span class="underline">keycode</span>
              This will bind the action specified by <span class="underline">action</span> to the keycode
              specified by <span class="underline">keycode</span>.  After this command is issued, entering the
-             inputting the specified <span class="underline">keycode</span> will result in firing the
-             specified <span class="underline">action</span>.
+             inputting the specified <span class="underline">keycode</span> will result in firing the speci-
+             fied <span class="underline">action</span>.
 
              See the section <span class="underline">SPECIFYING</span> <span class="underline">KEYCODES</span> for details on how to specify
              <span class="underline">keycode</span>, and section <span class="underline">KEYBINDING</span> <span class="underline">ACTIONS</span> for a listing of all
@@ -267,8 +208,8 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
                    <span class="bold">library</span>           The library window.
                    <span class="bold">playlist</span>          The playlist window.
                    <span class="bold">errors</span>            Error messages in the status window.
-                   <span class="bold">messages</span>          Informational messages in the status
-                                     window.
+                   <span class="bold">messages</span>          Informational messages in the status win-
+                                     dow.
                    <span class="bold">tildas-library</span>    The tildas in empty rows of the library
                                      window.
                    <span class="bold">tildas-playlist</span>   The tildas in empty rows of the playlist
@@ -277,6 +218,7 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
                                      window.
                    <span class="bold">playing-playlist</span>  Currently playing file in the playlist
                                      window.
+                   <span class="bold">current-active</span>    Current row in the active window.
                    <span class="bold">current-inactive</span>  Current row in the inactive window.
                    <span class="bold">artist</span>            The artist column in the playlist window.
                    <span class="bold">album</span>             The album column in the playlist window.
@@ -284,15 +226,15 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
                    <span class="bold">track</span>             The track column in the playlist window.
                    <span class="bold">year</span>              The year column in the playlist window.
                    <span class="bold">genre</span>             The genre column in the playlist window.
-                   <span class="bold">comment</span>           The comment column in the playlist
-                                     window.
+                   <span class="bold">comment</span>           The comment column in the playlist win-
+                                     dow.
                    <span class="bold">length</span>            The play-length column in the playlist
                                      window.
 
              Available colors for <span class="underline">fg</span> and <span class="underline">bg</span> are: white, black, red, green,
-             yellow, blue, magenta, cyan, and default.  The color default is
-             whatever the terminal uses as the default foreground or
-             background color.
+             yellow, blue, magenta, cyan, default and color[n].  The color
+             default is whatever the terminal uses as the default foreground
+             or background color. N is integer in range -1...255.
 
      :<span class="bold">display</span> (<span class="bold">reset</span> | <span class="bold">show</span> | <span class="underline">display-description</span>)
              The display command is used to change which columns are displayed
@@ -323,11 +265,11 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
              :<span class="bold">display</span> <span class="bold">show</span>
 
      :<span class="bold">filter</span>[!] <span class="underline">token</span> [<span class="underline">token2</span> <span class="underline">...</span>]
-             The filter command is used to filter out all songs from the
-             currently viewed playlist that do not match (or do match) the
-             provided list of tokens.  A song matches the list of tokens if
-             each token appears somewhere in the song's meta-information or
-             filename.
+             The filter command is used to filter out all songs from the cur-
+             rently viewed playlist that do not match (or do match) the pro-
+             vided list of tokens.  A song matches the list of tokens if each
+             token appears somewhere in the song's meta-information or file-
+             name.
 
              If ":<span class="bold">filter</span>" is used, all records not matching the list of tokens
              are removed from the current playlist.  If ":<span class="bold">filter!</span>" is used,
@@ -380,17 +322,17 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
              Load the playlist named by <span class="underline">name</span> in the playlist window.
 
      :<span class="bold">q</span>[!]   Quit <span class="bold">vitunes</span>.  If there are playlists with unsaved changes, then
-             you are notified of this and prevented from quitting.  You can
-             forcefully quit by using :<span class="bold">q</span>!, and any unsaved changes to any
-             playlists will be lost.
+             <span class="bold">vitunes</span> raises a notification and denies any attempts of quit-
+             ting.  To forcefully quit, use :<span class="bold">q</span>!, and any unsaved changes to
+             any playlists will be lost.
 
              Note that playlists with unsaved changes appear bold in the
              library window.
 
      :<span class="bold">reload</span> (<span class="bold">db</span> | <span class="bold">conf</span>)
-             The reload command is used to reload either the database or
-             configuration file while <span class="bold">vitunes</span> is running.  Handy if you update
-             your database using an e-command while also running <span class="bold">vitunes</span>.
+             The reload command is used to reload either the database or con-
+             figuration file while <span class="bold">vitunes</span> is running.  Handy if the database
+             is updated using an e-command while also running <span class="bold">vitunes</span>.
 
      :<span class="bold">set</span> <span class="bold">property</span>=<span class="underline">value</span>
              The set command is used to set various properties within vitunes.
@@ -409,19 +351,18 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
 
              <span class="bold">match-fname</span>=<span class="underline">bool</span>
                          When searching or filtering a playlist, normally the
-                         filenames are also included in the matching
-                         algorithm.  This can sometimes be undesirable,
-                         particularly if, for example, all of your music/media
-                         reside in a directory named "media" and you're trying
-                         to search for a file with the word "media" in the
-                         title.
+                         filenames are also included in the matching algo-
+                         rithm.  This can sometimes be undesirable, particu-
+                         larly if, for example, all of the music/media reside
+                         in a directory named "media" and trying to search for
+                         a file with the word "media" in the title.
 
                          To disable this behavior, set match-fnames to false.
 
              <span class="bold">save-sorts</span>=<span class="underline">bool</span>
                          Most operations that change a playlist (such as
                          paste/cut) set the 'needs-saving' flag on the
-                         playlist, such that you are prompted on exiting
+                         playlist, such that a prompt is shown on exiting
                          vitunes that there is a playlist with unsaved
                          changes.  By default, sorting a playlist does not do
                          this.
@@ -444,22 +385,21 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
 
              <span class="bold">:sort</span> <span class="bold">artist,-album,title</span>
 
-             would sort all records in the current playlist by artist
-             (ascending) first, then album-name (descending), then title
-             (ascending).
+             would sort all records in the current playlist by artist (ascend-
+             ing) first, then album-name (descending), then title (ascending).
 
-             Note that while most operations on playlists set the "needs-
-             saving" flag (so you are prompted when quiting <span class="bold">vitunes</span> that the
+             Note that while most operations on playlists set the "needs-sav-
+             ing" flag (so a prompt is shown when quiting <span class="bold">vitunes</span> that the
              playlist has unsaved changes), sorting a playlist does not do
-             this.  This is intentional.  If you wish this behavior to be
-             changed, see the "save-sorts" option for the <span class="bold">set</span> command.
+             this.  This is intentional.  To invert this behaviour, see the
+             <span class="bold">save-sorts</span> option for the <span class="bold">set</span> command.
 
      :<span class="bold">toggle</span> <span class="underline">register</span> <span class="underline">command-list</span>
              This command will associate a list of commands specified by
-             <span class="underline">command-list</span> to register <span class="underline">register</span>.  Once set, the list of
-             commands can be quickly toggled through using the <span class="bold">toggle_forward</span>
-             and <span class="bold">toggle_backward</span> keybindings (which default to <span class="bold">t</span> and <span class="bold">T</span>,
-             respectively).
+             <span class="underline">command-list</span> to register <span class="underline">register</span>.  Once set, the list of com-
+             mands can be quickly toggled through using the <span class="bold">toggle_forward</span> and
+             <span class="bold">toggle_backward</span> keybindings (which default to <span class="bold">t</span> and <span class="bold">T</span>, respec-
+             tively).
 
              Toggle-lists can be useful to quickly alternate through, for
              example, various sorting or display schemes that the user may
@@ -487,9 +427,9 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
              <span class="bold">unbind</span> <span class="underline">*</span>
 
              which will remove all existing keybindings.  This is handy in a
-             configuration file where you may want to define all custom
-             keybindings.  Issuing this at runtime will leave you with an
-             instance of <span class="bold">vitunes</span> that will not respond to any keybdings!
+             configuration file where defining all custom keybindings is
+             desired.  Issuing this at runtime will leave an instance of
+             <span class="bold">vitunes</span> that will not respond to any keybdings!
 
              The second form is used to unbind actions:
 
@@ -512,9 +452,9 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
      :<span class="bold">w</span>[!] [<span class="underline">name</span>]
              Save the currently viewing playlist.  If a <span class="underline">name</span> is provided, then
              the playlist will be saved with this new name.  If, however, a
-             playlist already exists with that name, then you will be
-             prevented from saving with that name unless '!' is provided, in
-             which case the existing playlist with that name will be deleted.
+             playlist already exists with that name, then saving is denied
+             unless '!' is provided, in which case the existing playlist with
+             that name will be deleted.
 
 <span class="bold">SPECIFYING</span> <span class="bold">KEYCODES</span>
      This section describes how to specify keycodes used in both the :<span class="bold">bind</span> and
@@ -552,11 +492,11 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
 
      Some examples of using keycodes and the :<span class="bold">bind</span> run-time command are:
 
-        bind  paste_after   p
-        bind  paste_before  P
+           bind  paste_after   p
+           bind  paste_before  P
 
-        bind  scroll_up_halfpage    Control u
-        bind  scroll_down_halfpage  Control d
+           bind  scroll_up_halfpage    Control u
+           bind  scroll_down_halfpage  Control d
 
 <span class="bold">KEYBINDING</span> <span class="bold">ACTIONS</span>
      The current list of available actions that keys may be bound to is the
@@ -618,20 +558,20 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
                             DEFAULT BINDINGS: <span class="bold">L</span>
 
      <span class="bold">jumpto_line</span>            Jump to either a specified line (if a global input
-                            number is present) or to the last line in the
-                            current window's buffer.
+                            number is present) or to the last line in the cur-
+                            rent window's buffer.
                             DEFAULT BINDINGS: <span class="bold">G</span>
 
      <span class="bold">jumpto_percent</span>         Using the global input number N, jump to the line
                             N% the way through the current window's buffer.
                             DEFAULT BINDINGS: <span class="bold">%</span>
 
-     <span class="bold">go</span>                     Go to a specific location within the current
-                            window.  This is planned to be similar to vim(1)'s
+     <span class="bold">go</span>                     Go to a specific location within the current win-
+                            dow.  This is planned to be similar to vim(1) 's
                             use of the 'g' keybinding, with multiple suffixes.
-                            For now, only 'gg' is supported, and this takes
-                            you to the first line in the current window's
-                            buffer.
+                            For now, only 'gg' is supported, and this moves
+                            the cursor to the first line in the current win-
+                            dow's buffer.
                             DEFAULT BINDINGS: <span class="bold">g</span>
 
      <span class="bold">search_forward</span>         Begin a search for the entered string searching
@@ -654,12 +594,12 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
                             next matching row.
                             DEFAULT BINDINGS: <span class="bold">N</span>
 
-     <span class="bold">cut</span>                    Remove the following N lines from the current
-                            window, placing them in the copy buffer, where N
-                            is the global input number.  Note that if the
-                            library window is active, only one row (playlist)
-                            can be cut/deleted at a time, and that this action
-                            cannot be undone.
+     <span class="bold">cut</span>                    Remove the following N lines from the current win-
+                            dow, placing them in the copy buffer, where N is
+                            the global input number.  Note that if the library
+                            window is active, only one row (playlist) can be
+                            cut/deleted at a time, and that this action cannot
+                            be undone.
                             DEFAULT BINDINGS: <span class="bold">d</span>
 
      <span class="bold">visual</span>                 Begin visual mode.  This is only available in the
@@ -697,9 +637,9 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
                             DEFAULT BINDINGS: <span class="bold">Control</span> <span class="bold">r</span>
 
      <span class="bold">quit</span>                   Exit <span class="bold">vitunes</span>.  If there are unsaved changes in any
-                            playlists you will be prevented from exiting until
-                            you either save those changes or issue a ":q!"
-                            command.
+                            playlists, <span class="bold">vitunes</span> prevents any attempts of exit-
+                            ing until those changes are saved or ":q!" is
+                            issued.
                             DEFAULT BINDINGS: <span class="bold">Control</span> <span class="bold">c,</span> <span class="bold">Control</span> <span class="bold">/</span>
 
      <span class="bold">redraw</span>                 Clear and re-draw the entire display.
@@ -715,14 +655,14 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
                             display returns to <span class="bold">vitunes</span>.
                             DEFAULT BINDINGS: <span class="bold">!</span>
 
-     <span class="bold">switch_windows</span>         Toggle focus between the library and playlist
-                            windows.
+     <span class="bold">switch_windows</span>         Toggle focus between the library and playlist win-
+                            dows.
                             DEFAULT BINDINGS: <span class="bold">Tab</span>
 
-     <span class="bold">show_file_info</span>         Show the file information (including meta-
-                            information) for the current row/file in the
-                            playlist window.  This action does not work in the
-                            library window.
+     <span class="bold">show_file_info</span>         Show the file information (including meta-informa-
+                            tion) for the current row/file in the playlist
+                            window.  This action does not work in the library
+                            window.
                             DEFAULT BINDINGS: <span class="bold">m</span>
 
      <span class="bold">load_playlist</span>          Load the playlist specified by the current row in
@@ -774,66 +714,72 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
      Some examples of using the above actions and keycodes to define the
      default keybdings are:
 
-        bind  paste_after   p
-        bind  paste_before  P
+           bind  paste_after   p
+           bind  paste_before  P
 
-        bind  scroll_up_halfpage    Control u
-        bind  scroll_down_halfpage  Control d
+           bind  scroll_up_halfpage    Control u
+           bind  scroll_down_halfpage  Control d
 
 <span class="bold">CONFIGURATION</span> <span class="bold">FILE</span>
      The configuration file loaded by <span class="bold">vitunes</span> is relatively straight-forward.
      Each line may be one of the following:
 
-     <span class="bold">o</span>   A comment, which starts with a '#'.
-     <span class="bold">o</span>   An empty line.
-     <span class="bold">o</span>   One of the commands from the <span class="underline">RUN-TIME</span> <span class="underline">COMMANDS</span> section above.
+     <span class="bold">&#8226;</span>   A comment, which starts with a '#'.
+     <span class="bold">&#8226;</span>   An empty line.
+     <span class="bold">&#8226;</span>   One of the commands from the <span class="underline">RUN-TIME</span> <span class="underline">COMMANDS</span> section above.
 
      That's it.  As such, review the list of commands above.
 
-     An example configuration file that would setup some hideous DOS-like
-     colors is:
+     An example configuration file that would setup some hideous DOS-like col-
+     ors is:
 
-        # setup colors
-        color bars=white,blue
-        color player=yellow,blue
-        color library=green,blue
-        color playlist=white,blue
-        color status=red,blue
+           # setup colors
+           color bars=white,blue
+           color player=yellow,blue
+           color library=green,blue
+           color playlist=white,blue
+           color status=red,blue
 
-        # format for playlist window
-        display artist.20,album.20,title.20,track.4,year.4
+           # format for playlist window
+           display artist.20,album.20,title.20,track.4,year.4
 
-        # show most recent work of an artist first in library window
-        sort artist,-year
+           # show most recent work of an artist first in library window
+           sort artist,-year
 
-        # make library window 20 columns wide and hide when not active
-        set lwidth=20
-        set lhide=true
+           # make library window 20 columns wide and hide when not active
+           set lwidth=20
+           set lhide=true
 
 <span class="bold">FILES</span>
-     <span class="underline">~/.vitunes/vitunes.conf</span>
-             Default configuration file.
-     <span class="underline">~/.vitunes/vitunes.db</span>
-             Default database file.
-     <span class="underline">~/.vitunes/playlists/</span>
-             Default playlist directory.
-     <span class="underline">/tmp/.vitunes</span>
+     ~/.vitunes/vitunes.conf
+             Default configuration file.  This can be overridden with the [<span class="bold">-f</span>
+             <span class="underline">config-file</span>] flag.
+     ~/.vitunes/vitunes.db
+             Default database file.  This can be overridden with the [<span class="bold">-d</span>
+             <span class="underline">database-file</span>] flag.
+     ~/.vitunes/playlists/
+             Default playlist directory This can be overridden with the [<span class="bold">-p</span>
+             <span class="underline">playlist-dir</span>] flag.
+     /tmp/.vitunes
              Default location for the socket created on start-up that can be
              used to control <span class="bold">vitunes</span>.
-     <span class="underline">/usr/local/bin/mplayer</span>
+     /usr/local/bin/mplayer
              Default path to the mplayer(1) binary.
 
+<span class="bold">EXAMPLES</span>
+     To have the currently running <span class="bold">vitunes</span> load and play a playlist:
+
+           $ vitunes -c `playlist SomePlaylist' -c media_play
+
 <span class="bold">SEE</span> <span class="bold">ALSO</span>
-     mplayer(1), realpath(3), strftime(3), vi(1).
+     mplayer(1), strftime(3), vi(1), vitunes-add(1), vitunes-addurl(1),
+     vitunes-check(1), vitunes-flush(1), vitunes-init(1), vitunes-rm(1),
+     vitunes-tag(1), vitunes-update(1)
 
-     More information about TagLib can be found on the TagLib website:
-     <span class="underline"><a href="http://developer.kde.org/~wheeler/taglib.html">http://developer.kde.org/~wheeler/taglib.html</a></span>
+     The <span class="bold">vitunes</span> website has additional information, such as a list of fre-
+     quently asked questions, a mailing list, and up-to-date bug information.
 
-     The <span class="bold">vitunes</span> website has additional information, such as a list of
-     frequently asked questions, a mailing list, and up-to-date bug
-     information.
-
-     <span class="underline"><a href="http://www.vitunes.org">http://www.vitunes.org</a></span>
+     <span class="bold"><a href="http://www.vitunes.org">http://www.vitunes.org</a></span>
 
 <span class="bold">AUTHORS</span>
      <span class="bold">vitunes</span> was written by Ryan Flannery &lt;<span class="underline">ryan.flannery@gmail.com</span>&gt;.
@@ -841,10 +787,10 @@ VITUNES(1)                 OpenBSD Reference Manual                 VITUNES(1)
 <span class="bold">BUGS</span>
      None known.
 
-     If you happen to find any, please send a detailed description to me at
-     <span class="underline">ryan.flannery@gmail.com</span>.
+     Send a detailed description to <span class="underline">ryan.flannery@gmail.com</span> if any bug is
+     found.
 
-OpenBSD 4.9                     January 2, 2012                    OpenBSD 4.9
+BSD                            November 7, 2014                            BSD
 </pre>
 </body>
 </html>
