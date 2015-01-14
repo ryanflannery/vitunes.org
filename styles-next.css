@@ -1,3 +1,14 @@
+/* keybinding table styles */
+.error { background-color: #f88; }
+.warning { background-color: #ff8; }
+img.square {
+   vertical-align: middle;
+   margin-bottom: 0.1em;
+   border: 1px solid black;
+   height: 0.5em;
+   width: 0.5em;
+}
+
 /* news styles */
 dl.news dd { margin-bottom: 1.0em; }
 
