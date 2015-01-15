@@ -12,7 +12,7 @@ img.square {
 /* news styles */
 #newsList .date   { display: inline; margin-right: 1em; color: #999999; }
 #newsList .title  { display: inline; font-weight: bold; }
-#newsList .body   { margin-left: 1em; margin-bottom: 1em; }
+#newsList .body   { margin-left: 0.5em; margin-bottom: 1em; }
 
 /* faq styles */
 dl.faq { counter-reset: faq; margin-left: 2em; }
