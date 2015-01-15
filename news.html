@@ -1,222 +1,294 @@
-<dl id="newsList" class="news">
-   <dt>2012 January 2: Version 2.3 Released
-      (<a href="changelogs/version-2.3.html">changelog</a>)
-   </dt>
-   <dd>
-      First release in over a year, consisting entirely of work over 6 months old
-      (much by others) that I never got around to pushing out.
-      Multiple new features, performance improvements,
-      and bugfixes.  Notable new features include toggle-lists, allowing one to
-      quickly toggle through sets of commands, such as various sort or display schemas.
-      One can now also control a running instance of vitunes remoltely, using the new
-      '<tt>-c <i>command</i></tt>' option, allowing vitunes to be controlled remotely.
-      <br />
-      See complete changelog <a href="changelogs/version-2.3.html">here</a>, and the
-      <a href="vitunes.html">man page</a> for usage.
-   </dd>
+<ul id="newsList" class="uk-list">
 
-   <dt>2011 July 11: Back</dt>
-   <dd>
-      New job, new city, and now finally the site is back up!  Once I'm finished
-      moving, I hope to push out some new work.
-   </dd>
+   <li>
+      <div class="date">2012 Jan 2</div>
+      <div class="title">Version 2.3 Released</div>
+      <div class="body">
+         First release in over a year, consisting entirely of work over 6 months
+         old (much by others) that I never got around to pushing out.
+         Multiple new features, performance improvements, and bugfixes. Notable
+         new features include toggle-lists, allowing one to quickly toggle
+         through sets of commands, such as various sort or display schemas.
+         One can now also control a running instance of vitunes remoltely, using
+         the new <code>-c command</code> option, allowing vitunes to be
+         controlled remotely.
+         <br />
+         Complete changelog <a href="changelogs/version-2.3.html">here</a>.
+         See <a href="vitunes.html">man page</a> for usage.
+      </div>
+   </li>
 
-   <dt>2011 March 15: Brief Hiatus</dt>
-   <dd>
-      With end-of-quarter grading, research, job-hunting, and dealing with my
-      University closing my department (Computer Science.... !?!?!?), I'll be
-      rather busy for the next few weeks and unable to contribute to the project.
-      <br /><br />
-      Keep an eye on the
-      &ldquo;<a href="https://github.com/ryanflannery/vitunes/network">Network</a>&rdquo;
-      tab in the GitHub repo for some of the other contributor's work until I return.
-   </dd>
+   <li>
+      <div class="date">2011 Jul 11</div>
+      <div class="title">Site back online</div>
+      <div class="body">
+         New job, new city, and now finally the site is back up!  Once I'm
+         finished moving, I hope to push out some new work.
+      </div>
+   </li>
 
-   <dt>2011 February 16: ArchLinux Port Updated!</dt>
-   <dd>
-      With many thanks, Peter Polacik has updated the ArchLinux port of vitunes!
-   </dd>
+   <li>
+      <div class="date">2011 Mar 15</div>
+      <div class="title">Brief Hiatus</div>
+      <div class="body">
+         With end-of-quarter grading, research, job-hunting, and dealing with my
+         University closing my department (Computer Science.... !?!?!?), I'll be
+         rather busy for the next few weeks and unable to contribute to the
+         project.
+         <br />
+         Keep an eye on the
+         &ldquo;<a href="https://github.com/ryanflannery/vitunes/network">Network</a>&rdquo;
+         tab in the GitHub repo for some of the other contributor's work until I
+         return.
+      </div>
+   </li>
 
-   <dt>2011 February 10: : Linux Support Now Working!</dt>
-   <dd>
-      With much thanks to Daniel Walter and Peter Polacik, vitunes now compiles and
-      runs on Linux!  It requires a newer version of mplayer on Debian, and has some
-      compile warnings (working on that), but it works!
-      <br /><br />
-      Mplayer version 1.0rc3 or later will do.  Alternatively, any version built with
-      a checkout of the source <i>after</i> December 27, 2009 should do.
-   </dd>
+   <li>
+      <div class="date">2011 Feb 16</div>
+      <div class="title">ArchLinux Port Updated!</div>
+      <div class="body">
+         With many thanks, Peter Polacik has updated the ArchLinux port of
+         vitunes.
+      </div>
+   </li>
 
-   <dt>2011 January 9: Version 2.2 Released</dt>
-   <dd>
-      This release adds no new functional features from version 2.1.  It does include
-      a much better man-page and a build that works on Mac OS X.  That's it.
-   </dd>
+   <li>
+      <div class="date">2011 Feb 10</div>
+      <div class="title">Linux Support Now Working out-of-the-box</div>
+      <div class="body">
+         With much thanks to Daniel Walter and Peter Polacik, vitunes now
+         compiles and runs on Linux!  It requires a newer version of mplayer on
+         Debian, and has some compile warnings (working on that), but it works!
+         <br />
+         Mplayer version 1.0rc3 or later will do.  Alternatively, any version
+         built with a checkout of the source <em>after</em> December 27, 2009
+         should do.
+      </div>
+   </li>
 
-   <dt>2011 January 7: Mac OS X Support Added -- Needs Testing</dt>
-   <dd>
-      In the past few days I have added support for a clean build on Mac OS X.  That is,
-      vitunes should build cleanly, as-is, on a Mac.  Only the following needs addressing
-      by any Mac users:
-      <ul>
-         <li>Update the install locations in the Makefile (<tt>PREFIX</tt>)
-            appropriately.</li>
-         <li><span style="text-decoration: line-through;">
-            Edit the <tt>LDFLAGS</tt> variable in the Makefile to include
-            <tt>-lncursesw</tt> rather than <tt>-lncurses</tt>.
-            <br />
-            </span>
-            This is no longer required.
-         </li>
-         <li>Either manually modify the <tt>DEFAULT_PLAYER_PATH</tt> variable in
-            <tt>config.h</tt>, <i>or</i> simply run vitunes with the <tt>-m</tt>
-            flag and a proper path to <tt>mplayer</tt>.</li>
-      </ul>
-      With this, it should be rather trivial for a porter to get this into either
-      <a href="http://www.macports.org">MacPorts</a> or similar.
-      <br /><br />
-      Thanks to Joshua Conner and Andr&eacute; Berger for their help.
-      <br /><br />
-      <b>NOTE:</b> This isn't in any release yet, including the most recent, as it still
-      needs heavy testing.  Use the repositories directly.
-   </dd>
+   <li>
+      <div class="date">2011 Jan 9</div>
+      <div class="title">Version 2.2 Released: native Mac OS X Support</div>
+      <div class="body">
+         This release adds no new functional features from version 2.1.  It does
+         include a much better man-page and a build that works on Mac OS X.
+         That's it.
+      </div>
+   </li>
 
-   <dt>2011 January 5: Version 2.1 Released: Small Bugfix Release</dt>
-   <dd>
-      There were some rather nasty formatting errors with the man page that shipped with
-      the 2.0 release a few days ago.  They didn't show up during testing (e.g. with
-      &ldquo;<tt>mandoc vitunes.1 | less</tt>&rdquo;), but did after installation (with
-      &ldquo;<tt>man vitunes</tt>&rdquo;).
-      <br /><br />
-      This corrects those formatting problems (with a few other small patches as well).
-   </dd>
+   <li>
+      <div class="date">2011 Jan 7</div>
+      <div class="title">Call for testing: Mac OS X Support</div>
+      <div class="body">
+         In the past few days I have added support for a clean build on Mac OS
+         X.  That is, vitunes should build cleanly, as-is, on a Mac. Only the
+         following needs addressing by any Mac users:
+         <ul>
+            <li>
+               Update the install locations in the Makefile
+               (<code>PREFIX</code>) appropriately.
+            </li>
+            <li>
+               <del>Edit the <code>LDFLAGS</code> variable in the Makefile to
+               include <code>-lncursesw</code> rather than
+               <code>-lncurses</code>.</del>
+            </li>
+            <li>
+               Either manually modify the <code>DEFAULT_PLAYER_PATH</code>
+               variable in <code>config.h</code>, <em>or</em> simply run vitunes
+               with the <code>-m</code> flag and a proper path to
+               <code>mplayer</code>.
+            </li>
+         </ul>
+         With this, it should be rather trivial for a porter to get this into
+         either <a href="http://www.macports.org">MacPorts</a> or similar.
+         <br /><br />
+         Thanks to Joshua Conner and Andr&eacute; Berger for their help.
+         <br /><br />
+         <em>NOTE:</em> This isn't in any release yet, including the most
+         recent, as it still needs heavy testing.
+      </div>
+   </li>
 
-   <dt>2011 January 1: Version 2.0 Released</dt>
-   <dd>
-      Version 2.0 is officially released.  Many new features, including support for custom
-      keybindings (via the bind and unbind commands), undo/redo support, vastly improved
-      synchronization between vitunes and mplayer, new display elements that are colorable,
-      and new keybindings.
-      <br /><br />
-      View a repository for a complete changelog.
-      <br /><br />
-      This brings vitunes almost to a completion, at least in terms of what I always wanted
-      it to be.  I'll be maintaining it indefinitely since I use it heavily, but I don't
-      really foresee any major new features.  If you have ideas, let me know.
-      <br /><br />
-      Happy 2011!
-   </dd>
+   <li>
+      <div class="date">2011 Jan 5</div>
+      <div class="title">Version 2.1 Released: Bugfix Release</div>
+      <div class="body">
+         There were some rather nasty formatting errors with the man page that
+         shipped with the 2.0 release a few days ago. They didn't show up during
+         testing (e.g. with &ldquo;<code>mandoc vitunes.1 | less</code>&rdquo;),
+         but did after installation (with
+         &ldquo;<code>man vitunes</code>&rdquo;).
+      </div>
+   </li>
 
-   <dt>2010 December 29: Massive Re-Write Underway</dt>
-   <dd>
-      So my &ldquo;minor clean-up and a few feature additions&rdquo; has turned into a hackathon on my part.
-      It rocks.  Far better synchronization with <tt>mplayer</tt> (less skipping), undo/redo, <tt>:map</tt>,
-      more color-able stuff, support for the comment-field of media files, and cleaner syntax for all commands
-      are all in the works.
-      <br /><br />
-      Unfortunately, these updates will either break compatability with previous versions of vitunes or require
-      super-extra-massive effort on my part to make it backwards compatable by adding loads of goey goey c.
-      Pondering...
-      <br /><br />
-      For the daring sort, you can use one of the repositories listed above to get a copy of the current
-      development version and build yer own.  And hey, if you just feel like contributing something back,
-      that'd be sweet.
-   </dd>
+   <li>
+      <div class="date">2011 Jan 1</div>
+      <div class="title">Version 2.0 Released</div>
+      <div class="body">
+         Version 2.0 is officially released.  Many new features, including
+         support for custom keybindings (via the bind and unbind commands),
+         undo/redo support, vastly improved synchronization between vitunes and
+         mplayer, new display elements that are colorable, and new keybindings.
+         <br /><br />
+         This brings vitunes almost to a completion, at least in terms of what I
+         always wanted it to be.  I'll be maintaining it indefinitely since I
+         use it heavily, but I don't really foresee any major new features.  If
+         you have ideas, let me know.
+         <br /><br />
+         Happy 2011!
+      </div>
+   </li>
 
-   <dt>17 December 2010: Mailing List Up and New Stuff in the Works</dt>
-   <dd>
-      There is now a vitunes mailing list, hosted by <a href="http://www.freelists.org">freelists.org</a>.
-      You can subscribe to the mailing list by visiting 
-      <a href="http://www.freelists.org/list/vitunes">this webpage</a>, and searchable archives are available
-      <a href="http://www.freelists.org/archive/vitunes">here</a>.
-      <br /><br />
-      Now that school is out for the holiday break, I'm on a research binge during the day and a hacking binge
-      during the night.  New features in the works...
-   </dd>
+   <li>
+      <div class="date">2010 Dec 29</div>
+      <div class="title">Massive Re-Write Underway</div>
+      <div class="body">
+         So my &ldquo;minor clean-up and a few feature additions&rdquo; has
+         turned into a hackathon on my part. It rocks. Far better
+         synchronization with <code>mplayer</code> (less skipping), undo/redo
+         support, <code>:map</code> to create custom keybindings, more
+         color-able stuff, support for the comment-field of media files, and
+         cleaner syntax for all commands are all in the works.
+         <br /><br />
+         Unfortunately, these updates will either break compatability with
+         previous versions of vitunes or require super-extra-massive effort on
+         my part to make it backwards compatable by adding loads of goey goey c.
+         Pondering...
+         <br /><br />
+         For the daring sort, you can use one of the repositories listed above
+         to get a copy of the current development version and build yer own.
+         And hey, if you just feel like contributing something back, that'd be
+         sweet.
+      </div>
+   </li>
 
-   <dt>2010 April 27: 1.0.5 Released (Documentation Cleanup)</dt>
-   <dd>
-      New release, 1.0.5 made today.  A simple documentation cleanup.  The man page and
-      output of all &ldquo;<tt>vitunes -e help COMMAND</tt>&rdquo; have been made more
-      complete.  The man page is now the sole source of documentation (although the
-      complete list of keybindings will remain here on the website, maintained).
-   </dd>
+   <li>
+      <div class="date">2010 Dec 17</div>
+      <div class="title">Mailing List Up and New Stuff in the Works</div>
+      <div class="body">
+         There is now a vitunes mailing list, hosted by
+         <a href="http://www.freelists.org">freelists.org</a>.
+         You can subscribe to the mailing list by visiting 
+         <a href="http://www.freelists.org/list/vitunes">this webpage</a>, and
+         searchable archives are available
+         <a href="http://www.freelists.org/archive/vitunes">here</a>.
+         <br /><br />
+         Now that school is out for the holiday break, I'm on a research binge
+         during the day and a hacking binge during the night. New features in
+         the works...
+      </div>
+   </li>
 
-   <dt>2010 February 17: Podcast Support?</dt>
-   <dd>
-      I'm contemplating adding podcast support.  I don't wish to have vitunes automatically
-      download any files within a podcast (a simple shell script, or any number of other
-      existing utilities could be used for that).  Rather, i'd like vitunes to just parse an
-      RSS feed, extract info to view in vitunes, and pass the filenames to mplayer
-      (mplayer handles URL's quite nicely).
-      <br /><br />
-      If anyone actually reads this.. any good ideas on how to integrate this into the vitunes ui?
-      Remember that a podcast is essentially a playlist, with multiple files.  Just an informal
-      &ldquo;RFC.&rdquo;
-   </dd>
+   <li>
+      <div class="date">2010 Apr 27</div>
+      <div class="title">1.0.5 Released (Documentation Cleanup)</div>
+      <div class="body">
+         New release, 1.0.5 made today. A simple documentation cleanup. The man
+         page and output of all <code>vitunes -e help COMMAND</code> have been
+         made more complete. The man page is now the sole source of
+         documentation (although the complete list of keybindings will remain
+         here on the website, maintained, at least for now).
+      </div>
+   </li>
 
-   <dt>2010 January 28: FreeBSD Port!?</dt>
-   <dd>
-      Catching up on <a href="http://www.freshports.org/">freshports</a> yesterday, I
-      noticed that vitunes has been ported (for some time now!) to
-      <a href="http://www.freebsd.org">FreeBSD</a> by Dennis Herrmann.  Many thanks
-      to him!
-   </dd>
+   <li>
+      <div class="date">2010 Feb 17</div>
+      <div class="title">Podcast Support?</div>
+      <div class="body">
+         I'm contemplating adding podcast support.  I don't wish to have vitunes
+         automatically download any files within a podcast (a simple shell
+         script, or any number of other existing utilities could be used for
+         that).  Rather, i'd like vitunes to just parse an RSS feed, extract
+         info to view in vitunes, and pass the filenames to mplayer (mplayer
+         handles URL's quite nicely).
+         <br /><br />
+         vitunes users: any good ideas on how to integrate this into the vitunes
+         ui?  Remember that a podcast is essentially a playlist, with multiple
+         files.  Just an informal &ldquo;RFC.&rdquo;
+      </div>
+   </li>
 
-   <dt>2010 January 20: 1.0.4 Released (Last one for a while)
-      (<a href="changelogs/2010-01-20.html">changelog</a>)
-   </dt>
-   <dd>
-      Last release for a while, baring any bug fixes.  A few bugs fixed, documentation
-      updated, and I finally re-wrote the player code (only stuff untouched from
-      previous rewrite).  Can now search in the library window.  Command abbreviations
-      supported. Can right-align columns in display.
-      See complete changelog <a href="changelogs/2010-01-20.html">here</a>.
-   </dd>
+   <li>
+      <div class="date">2010 Jan 28</div>
+      <div class="title">FreeBSD Port!?</div>
+      <div class="body">
+         Catching up on <a href="http://www.freshports.org/">freshports</a>
+         yesterday, I noticed that vitunes has been ported (for some time now!)
+         to <a href="http://www.freebsd.org">FreeBSD</a> by Dennis Herrmann.
+         Many thanks to him!
+      </div>
+   </li>
 
-   <dt>2010 January 14: 1.0.3 Released
-      (<a href="changelogs/2010-01-13.html">changelog</a>)
-   </dt>
-   <dd>
-      Big news... I removed the dependency on libid3tag, libvorbis, and libmp4v2.  Now
-      <a href="http://developer.kde.org/~wheeler/taglib.html">TagLib</a> is used for
-      all meta-extraction.  Much cleaner.  Some bug fixes also.  This does, however,
-      bump the version &amp; format of the database, thus all vitunes databases will
-      have to be re-built.  It's much faster now though.
-      See the full changelog <a href="changelogs/2010-01-13.html">here</a>.
-   </dd>
+   <li>
+      <div class="date">2010 Jan 20</div>
+      <div class="title">1.0.4 Released (Last one for a while)</div>
+      <div class="body">
+         Last release for a while, baring any bug fixes. A few bugs fixed,
+         documentation updated, and I finally re-wrote the player code (only
+         stuff untouched from previous rewrite). Can now search in the library
+         window.  Command abbreviations supported. Can right-align columns in
+         display. See complete changelog
+         <a href="changelogs/2010-01-20.html">here</a>.
+      </div>
+   </li>
 
-   <dt>2010 January 12: Upcoming Release</dt>
-   <dd>
-      While browsing the intertubes today, I noticed that
-      <a href="http://ktown.kde.org/~wheeler/taglib.html">TagLib</a> was updated recently
-      and now includes MP4/AAC metadata including iTunes-style metadata.  This is awesome,
-      as TagLib is both way cleaner, faster, and overall better than the libraries I'm
-      currently using.  I'm updating vitunes now to use this new library.  When finished,
-      vitunes will also be able to tag files.
-      <br /><tt>:D</tt>
-   </dd>
+   <li>
+      <div class="date">2010 Jan 14</div>
+      <div class="title">1.0.3 Released</div>
+      <div class="body">
+         Big news... I removed the dependency on libid3tag, libvorbis, and
+         libmp4v2. Now
+         <a href="http://developer.kde.org/~wheeler/taglib.html">TagLib</a> is
+         used for all meta-extraction. Much cleaner. Some bug fixes also. This
+         does, however, bump the version &amp; format of the database, thus all
+         vitunes databases will have to be re-built. It's much faster now
+         though.
+         See the full changelog <a href="changelogs/2010-01-13.html">here</a>.
+      </div>
+   </li>
 
-   <dt>2010 January 9: 1.0.2 Released
-      (<a href="changelogs/2010-01-09.html">changelog</a>)
-   </dt>
-   <dd>
-      A small bug-fix release with a few new features.  See the changelog
-      <a href="changelogs/2010-01-09.html">here</a>.
-   </dd>
+   <li>
+      <div class="date">2010 Jan 12</div>
+      <div class="title">Upcoming Release</div>
+      <div class="body">
+         While browsing the intertubes today, I noticed that
+         <a href="http://ktown.kde.org/~wheeler/taglib.html">TagLib</a> was
+         updated recently and now includes MP4/AAC metadata including
+         iTunes-style metadata. This is awesome, as TagLib is both way cleaner,
+         faster, and overall better than the libraries I'm currently using. I'm
+         updating vitunes now to use this new library. When finished, vitunes
+         will also be able to tag files.
+      </div>
+   </li>
 
-   <dt>2010 January 3: 1.0.1 Released</dt>
-   <dd>A simple bug-fix release, fixing an issue where &ldquo;reload db&rdquo;
-      would sometimes segfault due to a use-after-free.
-   </dd>
+   <li>
+      <div class="date">2010 Jan 9</div>
+      <div class="title">1.0.2 Released</div>
+      <div class="body">
+         A small bug-fix release with a few new features.  See the changelog
+         <a href="changelogs/2010-01-09.html">here</a>.
+      </div>
+   </li>
 
-   <dt>2009 December 30: 1.0 Released!
-      (<a href="changelogs/2009-12-30.html">changelog</a>)
-   </dt>
-   <dd>
-      After much work, including a nearly complete re-write of everything, the
-      initial <b>1.0 release</b> has been made!  There are <i>many</i> new
-      features.  See a complete changelog
-      <a href="changelogs/2009-12-30.html">here</a>.
-   </dd>
-</dl>
+   <li>
+      <div class="date">2010 Jan 3</div>
+      <div class="title">1.0.1 Released</div>
+      <div class="body">
+         A simple bug-fix release, fixing an issue where &ldquo;reload db&rdquo;
+         would sometimes segfault due to a use-after-free.
+      </div>
+   </li>
+
+   <li>
+      <div class="date">2009 Dec 30</div>
+      <div class="title">1.0 Released!</div>
+      <div class="body">
+         After much work, including a nearly complete re-write of everything,
+         the initial <em>1.0 release</em> has been made!  There are
+         <em>many</em> new features.  See a complete changelog
+         <a href="changelogs/2009-12-30.html">here</a>.
+      </div>
+   </li>
+
+</ul>

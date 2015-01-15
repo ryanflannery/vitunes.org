@@ -10,11 +10,13 @@ img.square {
 }
 
 /* news styles */
-dl.news dd { margin-bottom: 1.0em; }
+#newsList .date   { display: inline; margin-right: 1em; color: #999999; }
+#newsList .title  { display: inline; font-weight: bold; }
+#newsList .body   { margin-left: 1em; margin-bottom: 1em; }
 
 /* faq styles */
 dl.faq { counter-reset: faq; margin-left: 2em; }
-dl.faq dt { font-style: italic; margin-bottom: 0.5em; font-weight: normal; color: #009; cursor: pointer; }
+dl.faq dt { margin-bottom: 0.5em; font-weight: normal; color: #0077dd; cursor: pointer; }
 dl.faq dt:before { content: counter(faq) ". "; counter-increment: faq; }
 dl.faq dd { border-left: 3px solid #ccc; padding: 1em; }
 dl.faq dt:hover { color: #b00; }

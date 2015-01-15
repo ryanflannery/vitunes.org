@@ -94,27 +94,24 @@
          <div id="newsContent" class="uk-width-1-1">Loading...</div>
          <div class="uk-width-1-1"><a id="newsLoadMore">Load older news</a></div>
          <script>
-            $("#newsContent").load("news.html", function(response, status, xhr) {
+            $("#newsContent").load("news2.html", function(response, status, xhr) {
                   if ("error" == status)
                      return;
 
-                  var totalStories = $('#newsList dt').size();
+                  var totalStories = $('#newsList li').size();
                   var chunkSize = 4;
 
                   // hide all by default
-                  $('#newsList dt').hide();
-                  $('#newsList dd').hide();
+                  $('#newsList li').hide();
 
                   // show first n
-                  $('#newsList dt:lt(' + chunkSize + ')').show();
-                  $('#newsList dd:lt(' + chunkSize + ')').show();
+                  $('#newsList li:lt(' + chunkSize + ')').show();
                   var articlesShown = chunkSize;
 
                   // connect show-more handler
                   $('#newsLoadMore').click(function(){
                      articlesShown += chunkSize;
-                     $('#newsList dt:lt(' + articlesShown + ')').show();
-                     $('#newsList dd:lt(' + articlesShown + ')').show();
+                     $('#newsList li:lt(' + articlesShown + ')').show();
                      if (articlesShown >= totalStories)
                         $(this).hide();
                   });
