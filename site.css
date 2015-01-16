@@ -9,6 +9,17 @@ img.square {
    width: 0.5em;
 }
 
+tbody td:first-child { font-family: monospace; white-space: nowrap; }
+tbody td { font-size: smaller; }
+tbody td i { color: blue; }
+tbody td b.register { color: green; font-weight: normal; font-style: italic; }
+td.headerRow {
+   text-align: center;
+   background-color: #eee;
+   color: #aaa;
+   font-weight: bold;
+}
+
 /* news styles */
 #newsList .date   { display: inline; margin-right: 1em; color: #999999; }
 #newsList .title  { display: inline; font-weight: bold; }

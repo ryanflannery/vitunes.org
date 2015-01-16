@@ -8,11 +8,9 @@
 
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
    <link rel="stylesheet" href="css/uikit.min.css">
-   <link rel="stylesheet" type="text/css" href="js/tablescroll/jquery.tablescroll.css" />
    <link rel="stylesheet" href="site.css">
 
    <script src="http://code.jquery.com/jquery-1.11.2.js"></script>
-   <script src="js/tablescroll/jquery.tablescroll.js"></script>
    <script src="js/uikit.min.js"></script>
  </head>
 
@@ -27,7 +25,8 @@
 <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
 
    <div class="uk-grid" data-uk-grid-margin>
-      <div class="uk-width-1-1 uk-vertical-align uk-text-center" style="height: 90px;">
+      <div class="uk-width-1-1 uk-vertical-align uk-text-center"
+           style="height: 90px;">
          <img style="border:0;margin:0;padding:0;" src="logo.png"
               alt="vitunes" />
       </div>
@@ -92,9 +91,12 @@
       </div>
       <div class="uk-width-1-1">
          <div id="newsContent" class="uk-width-1-1">Loading...</div>
-         <div class="uk-width-1-1"><a id="newsLoadMore">Load older news</a></div>
+         <div class="uk-width-1-1">
+            <a id="newsLoadMore">Load older news</a>
+         </div>
          <script>
-            $("#newsContent").load("news.html", function(response, status, xhr) {
+            $("#newsContent").load("news.html",
+            function(response, status, xhr) {
                   if ("error" == status)
                      return;
 
@@ -128,7 +130,9 @@
       </div>
 
       <div class="uk-width-medium-1-3">
-         <div class="uk-width-1-1"><h3 class="uk-h3"><i class="uk-icon-book"></i> Man Pages</h3></div>
+         <div class="uk-width-1-1">
+            <h3 class="uk-h3"><i class="uk-icon-book"></i> Man Pages</h3>
+         </div>
          <div class="uk-width-1-1">
             <a href="vitunes.html">vitunes(1)</a> - Thorough documentation of
             all features.  Start with the &ldquo;Getting Started&rdquo; section.
@@ -159,19 +163,27 @@
       </div>
 
       <div class="uk-width-medium-1-3">
-         <div class="uk-width-1-1"><h3 class="uk-h3"><i class="uk-icon-users"></i> Mailing List</h3></div>
+         <div class="uk-width-1-1">
+            <h3 class="uk-h3"><i class="uk-icon-users"></i> Mailing List</h3>
+         </div>
          <div class="uk-width-1-1">
             Search the archives for past questions &amp; answers, or subscribe
             to ask new questions.
             <ul class="uk-list">
-               <li><a href="http://www.freelists.org/list/vitunes">Subscribe</a></li>
-               <li><a href="http://www.freelists.org/archive/vitunes">Archives</a></li>
+               <li>
+                  <a href="http://www.freelists.org/list/vitunes">Subscribe</a>
+               </li>
+               <li>
+                  <a href="http://www.freelists.org/archive/vitunes">Archives</a>
+               </li>
             </ul>
          </div>
       </div>
 
       <div class="uk-width-medium-1-3">
-         <div class="uk-width-1-1"><h3 class="uk-h3"><i class="uk-icon-bug"></i> Open Issues</h3></div>
+         <div class="uk-width-1-1">
+            <h3 class="uk-h3"><i class="uk-icon-bug"></i> Open Issues</h3>
+         </div>
          <div class="uk-width-1-1">
             View open issues on
             <a href="https://github.com/ryanflannery/vitunes/issues">GitHub</a>.
@@ -181,21 +193,18 @@
       </div>
 
       <div class="uk-width-1-1">
-         <div class="uk-width-1-1"><h3 class="uk-h3">Complete List of Keybindings</h3></div>
          <div class="uk-width-1-1">
-            <strong>Legend:</strong>
-            <img src="/images/spacer.gif" alt="error-row" class="square error" />
-            Feature is not working yet.
-            &nbsp;&nbsp;&nbsp;
-            <img src="/images/spacer.gif" alt="warning-row" class="square warning" />
-            Feature works, but not as may be expected.
+            <h3 class="uk-h3">Complete List of Keybindings</h3>
          </div>
-         <div id="keybindingContent" class="uk-width-1-1">Loading...</div>
+         <div id="keybindingsContent"
+              class="uk-width-1-1 uk-scrollable-box uk-overflow-container">
+            Loading...
+         </div>
          <script>
-            $("#keybindingContent").load("keybindings.html", function() {
-                  $(document).ready(function($) {
-                     $('#keybindings').tableScroll({height:300});
-                  });
+            $("#keybindingsContent").load("keybindings.html",
+            function(response, status, xhr) {
+                  if ("error" == status)
+                     return;
             });
          </script>
       </div>
@@ -213,12 +222,14 @@
          <figure class="uk-overlay-toggle">
             <div class="uk-overlay">
                <a href="screenshots/ok100-256color.png">
-                  <img src="screenshots/ok100-256color.thumb.png" width="200" height="100" alt="" />
+                  <img src="screenshots/ok100-256color.thumb.png"
+                       width="200" height="100" alt="" />
                   <div class="uk-overlay-area"></div>
                </a>
             </div>
             <figcaption>
-               256 colors, from <a class="ref" href="https://github.com/ok100">@ok100</a>
+               256 colors, from
+               <a class="ref" href="https://github.com/ok100">@ok100</a>
             </figcaption>
          </figure>
       </div>
@@ -226,7 +237,8 @@
          <figure class="uk-overlay-toggle">
             <div class="uk-overlay">
                <a href="screenshots/default.png">
-                  <img src="screenshots/default.thumb.png" width="200" height="100" alt="" />
+                  <img src="screenshots/default.thumb.png"
+                       width="200" height="100" alt="" />
                   <div class="uk-overlay-area"></div>
                </a>
             </div>
@@ -239,7 +251,8 @@
          <figure class="uk-overlay-toggle">
             <div class="uk-overlay">
                <a href="screenshots/default-tiny.png">
-                  <img src="screenshots/default-tiny.thumb.png" width="200" height="100" alt="" />
+                  <img src="screenshots/default-tiny.thumb.png"
+                       width="200" height="100" alt="" />
                   <div class="uk-overlay-area"></div>
                </a>
             </div>
@@ -252,7 +265,8 @@
          <figure class="uk-overlay-toggle">
             <div class="uk-overlay">
                <a href="screenshots/default-tiny-lhide.png">
-                  <img src="screenshots/default-tiny-lhide.thumb.png" width="200" height="100" alt="" />
+                  <img src="screenshots/default-tiny-lhide.thumb.png"
+                       width="200" height="100" alt="" />
                   <div class="uk-overlay-area"></div>
                </a>
             </div>
@@ -265,7 +279,8 @@
          <figure class="uk-overlay-toggle">
             <div class="uk-overlay">
                <a href="screenshots/mac-vitunes2.png">
-                  <img src="screenshots/mac-vitunes2.thumb.png" width="200" height="100" alt="" />
+                  <img src="screenshots/mac-vitunes2.thumb.png"
+                       width="200" height="100" alt="" />
                   <div class="uk-overlay-area"></div>
                </a>
             </div>
@@ -278,7 +293,8 @@
          <figure class="uk-overlay-toggle">
             <div class="uk-overlay">
                <a href="screenshots/old.png">
-                  <img src="screenshots/old.thumb.png" width="200" height="100" alt="" />
+                  <img src="screenshots/old.thumb.png"
+                       width="200" height="100" alt="" />
                   <div class="uk-overlay-area"></div>
                </a>
             </div>
@@ -324,16 +340,22 @@
       </div>
 
       <div class="uk-width-medium-1-3">
-         <div class="uk-width-1-1"><h3 class="uk-h3"><i class="uk-icon-github"></i> Code / Files</h3></div>
          <div class="uk-width-1-1">
-            Repository: <a href="https://github.com/ryanflannery/vitunes">GitHub</a>
+            <h3 class="uk-h3"><i class="uk-icon-github"></i> Code / Files</h3>
+         </div>
+         <div class="uk-width-1-1">
+            Repository:
+            <a href="https://github.com/ryanflannery/vitunes">GitHub</a>
             <br />
-            Latest: <a href="files/vitunes-2.3.tar.gz">vitunes-2.3.tar.gz</a>
+            Latest:
+            <a href="files/vitunes-2.3.tar.gz">vitunes-2.3.tar.gz</a>
          </div>
       </div>
 
       <div class="uk-width-medium-1-3">
-         <div class="uk-width-1-1"><h3 class="uk-h3"><i class="uk-icon-gears"></i> Dependencies</h3></div>
+         <div class="uk-width-1-1">
+            <h3 class="uk-h3"><i class="uk-icon-gears"></i> Dependencies</h3>
+         </div>
          <div class="uk-width-1-1">
             <a href="http://taglib.github.io/">TagLib</a>
             <br />
@@ -346,15 +368,21 @@
       <div class="uk-width-medium-1-3">
          <div class="uk-width-1-1"><h3 class="uk-h3"><i class="uk-icon-flash"></i> Official Ports</h3></div>
             <ul class="uk-list">
-               <li><a href="http://openports.se/multimedia/vitunes">OpenBSD</a></li>
-               <li><a href="http://www.freebsd.org/cgi/cvsweb.cgi/ports/audio/vitunes/">FreeBSD</a></li>
-               <li><a href="https://aur.archlinux.org/packages.php?ID=30313">ArchLinux</a></li>
+               <li>
+                  <a href="http://openports.se/multimedia/vitunes">OpenBSD</a>
+               </li>
+               <li>
+                  <a href="http://www.freebsd.org/cgi/cvsweb.cgi/ports/audio/vitunes/">FreeBSD</a>
+               </li>
+               <li>
+                  <a href="https://aur.archlinux.org/packages.php?ID=30313">ArchLinux</a>
+               </li>
             </ul>
-         <div class="uk-width-1-1">
-         </div>
       </div>
 
-      <div class="uk-width-1-1"><h3 class="uk-h3">Building/Installation</h3></div>
+      <div class="uk-width-1-1">
+         <h3 class="uk-h3">Building/Installation</h3>
+      </div>
       <div class="uk-width-1-1">
          First: <code>$ ./configure.sh</code>
          <br />
@@ -469,5 +497,5 @@
    </div>
 </div>
 
- </body>
+</body>
 </html>
