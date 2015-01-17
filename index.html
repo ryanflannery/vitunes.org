@@ -403,38 +403,44 @@
          <div class="uk-width-1-1"><h3 class="uk-h3"><i class="uk-icon-flash"></i> Official Ports</h3></div>
             <ul class="uk-list">
                <li>
-                  <a href="http://openports.se/multimedia/vitunes">OpenBSD</a>
+                  <a href="https://aur.archlinux.org/packages.php?ID=30313">ArchLinux</a>
                </li>
                <li>
                   <a href="http://www.freebsd.org/cgi/cvsweb.cgi/ports/audio/vitunes/">FreeBSD</a>
                </li>
                <li>
-                  <a href="https://packages.gentoo.org/package/media-sound/vitunes">gentoo</a>
+                  <a href="https://packages.gentoo.org/package/media-sound/vitunes">Gentoo Linux</a>
                </li>
                <li>
-                  <a href="https://aur.archlinux.org/packages.php?ID=30313">ArchLinux</a>
+                  <a href="http://openports.se/multimedia/vitunes">OpenBSD</a>
                </li>
             </ul>
       </div>
 
-      <div class="uk-width-1-1">
+      <div class="uk-width-medium-1-2">
          <h3 class="uk-h3">Building/Installation</h3>
+         <p>Configure: <code>$ ./configure.sh</code><br />
+         Build &amp; install: <code>$ make install</code><br />
+         Uninstall: <code>$ make uninstall </code>
+         </p>
+         <p>Default install locations for binary and man pages are
+         <code>/usr/local/{bin,man}</code>. To tweak, edit relevant variables in
+         <code>Makefile</code>.
+         </p>
       </div>
-      <div class="uk-width-1-1">
-         First: <code>$ ./configure.sh</code>
-         <br />
-         Then this should suffice: <code>$ make install</code>
-         <br />
-         Default install locations for binary and man page are
-         <code>/usr/local/{bin,man}</code>.
-         To change, edit the relevant variables in the <code>Makefile</code>.
-         <br/>
-         To uninstall, either <code>make uninstall</code>, or manually remove
-         these two files:
-         <ul class="uk-list">
-            <li><code>/usr/local/bin/vitunes</code></li>
-            <li><code>/usr/local/man/man1/vitunes.1</code></li>
-         </ul>
+
+      <div class="uk-width-medium-1-2">
+         <h3 class="uk-h3">Notes for Porters</h3>
+         <p>vitunes is developed on OpenBSD, and makes use of a few
+         OpenBSD-specific things such as 
+         <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=err&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"><code>err(3)/warn(3)</code></a>,
+         <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fparseln&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"><code>fparseln(3)</code></a>,
+         <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=strlcpy&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"><code>strlcat(3)/strlcpy(3)</code></a>,
+      and
+         <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=strtonum&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"><code>strtonum(3)</code></a>.
+         </p>
+         <p>Most of these are picked-up during the build on Linux &amp; Mac OS X
+         and will be added if needed. See the file <code>config.h</code>.</p>
       </div>
    </div>
 
