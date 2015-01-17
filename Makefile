@@ -13,5 +13,8 @@ MANS=vitunes \
 # regenerate all html for man pages
 all: $(MANS)
 
+wserve:
+	python -m SimpleHTTPServer
+
 $(MANS):
 	man2web $@ > $@.html
