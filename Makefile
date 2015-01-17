@@ -10,7 +10,8 @@ MANS=vitunes \
 	  vitunes-tag \
 	  vitunes-update
 
-SRCS=src/news.html
+SRCS=src/news.html \
+	  src/faq.html
 
 index.html: template.index.html ${SRCS}
 	cpp -E -CC -P -w template.index.html $@

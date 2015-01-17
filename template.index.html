@@ -317,33 +317,18 @@
          <h2 class="uk-h2" id="faq">Frequently Answered Questions</h2>
       </div>
       <div class="uk-width-1-1">
-         <div id="faqContent"></div>
-         <div id="faqLoadFail" class="uk-alert uk-alert-danger"
-              style="display: none;" data-uk-alert>
-              <a href="" class="uk-alert-close uk-close"></a>
-              <p>Failed to load FAQ data!  Refresh to try again.</p>
+         <div id="faqContent">
+#include "src/faq.html"
          </div>
          <script>
-            $("#faqContent").load("faq.html",
-            function(response, status, xhr) {
-                  if ("error" == status)
-                  {
-                     $('#faqContent').hide();
-                     $('#faqLoadFail').show();
-                     return;
-                  }
+            $(document).ready(function(){
+               $("dl.faq > dd").hide();
+            });
 
-                  $('#faqLoadFail').hide();
-
-                  $(document).ready(function(){
-                     $("dl.faq > dd").hide();
-                  });
-
-                  $("dl.faq > dt").click(function(){
-                     $(this).next().slideToggle(500)
-                     return false;
-                  });
-              });
+            $("dl.faq > dt").click(function(){
+               $(this).next().slideToggle(500)
+               return false;
+            });
          </script>
       </div>
    </div>

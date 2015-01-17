@@ -633,33 +633,151 @@
          <h2 class="uk-h2" id="faq">Frequently Answered Questions</h2>
       </div>
       <div class="uk-width-1-1">
-         <div id="faqContent"></div>
-         <div id="faqLoadFail" class="uk-alert uk-alert-danger"
-              style="display: none;" data-uk-alert>
-              <a href="" class="uk-alert-close uk-close"></a>
-              <p>Failed to load FAQ data!  Refresh to try again.</p>
+         <div id="faqContent">
+
+<h3 class="uk-h3">General Usage Questions</h3>
+
+<dl class="faq">
+
+   <dt>How do I change the meta-information of a file within vitunes?</dt>
+   <dd>
+      Use the <a href="man/vitunes-tag.html">tag</a> e-command (or another application)
+      followed by an <a href="man/vitunes-update.html">update</a>.
+      <br /><br />
+      The next time you launch <tt>vitunes</tt> you will see the changes (or
+      you can issue a <b><tt>:reload db</tt></b> command within vitunes).
+   </dd>
+
+   <dt>I moved a bunch of my music around.  How do I update vitunes?</dt>
+   <dd>
+      Use the <a href="man/vitunes-update.html">update</a> e-command to remove any moved
+      files and then simply <a href="man/vitunes-add.html">add</a> your moved files again.
+   </dd>
+
+   <dt>For some songs, the percent-complete in the player window is always negative?</dt>
+   <dd>
+      When vitunes extracts the meta-information from songs, including playlength, it uses
+      <a href="http://taglib.github.io/">TagLib</a>.  If TagLib isn't
+      able to determine the play length of the file, vitunes will attempt to
+      determine the length when loading the file, but this isn't always possible either.
+      In these cases, the percent will be negative.
+   </dd>
+
+   <dt>How do I backup the vitunes database?</dt>
+   <dd>
+      Just copy the <b><tt>~/.vitunes/</tt></b> directory.  If you have your
+      database/playlists stored elsewhere, just backup those.
+   </dd>
+
+   <dt>Can I have my database/playlists/config-file stored elsewhere?</dt>
+   <dd>Yes.  Use the <tt>-d</tt>, <tt>-p</tt>, and <tt>-f</tt> flags as described
+      in the
+      <a href="man/vitunes.html">man page</a>.
+   </dd>
+
+   <dt>I have an old version of vitunes with an existing database.  When I run the new
+      version, it tells me to rebuild my database.  How do I do this?</dt>
+   <dd>
+      I had to slightly change the format of the database for this new version.  Also,
+      I never included any &ldquo;version&rdquo; information in the previous format.
+      This has now been changed.  To upgrade an existing setup, download the most recent
+      version below and 1) remove the existing database, 2) re-init the database, then
+      3) re-add all of your files. e.g.
+      <pre class="code">
+         $ rm ~/.vitunes/vitunes.db
+         $ vitunes -e init
+         $ vitunes -e add <i>/path/to/music/</i> <i>...</i></pre>
+   </dd>
+
+   <dt>Adding regular files to the database is easy, but adding URL's is somewhat painful.
+      Is there an easy way to automate this?</dt>
+   <dd>
+      Of course!  You're using *nix, so use a shell script to add all of your URL's,
+      like this one: <a href="add_urls.sh"><tt>add_urls.sh</tt></a>.
+   </dd>
+
+   <dt>When exiting vitunes, it seems to hang for one half-second.  Why?</dt>
+   <dd>
+      This is intentional.  The <tt>fork()'d</tt> mplayer child will <tt>fork()</tt>
+      an instance of itself whenever it plays an internet radio stream (or similar)
+      to handle the buffering.  As such, vitunes needs to wait for this
+      &lsquo;grandchild&rsquo; instance of mplayer to exit before quitting.
+   </dd>
+</dl>
+
+<h3 class="uk-h3">Bugs &amp; Other Questions</h3>
+
+<dl class="faq">
+
+   <dt>I think I found a bug... what should I do?</dt>
+   <dd>
+      First, do the following, in this order:
+      <ol>
+         <li>Read the <a href="man/vitunes.html">man page</a> (humor me)</li>
+         <li>Read the <a href="#faq">FAQ</a></li>
+         <li>Search the mailing list archives to see if your &ldquo;bug&rdquo;
+            has popped-up before.</li>
+         <li>Search the
+            <a href="https://github.com/ryanflannery/vitunes/issues">Bug/Issue
+            database</a> to see if your bug is already known, and if so, add a
+            comment that you too are experiencing it.  Provide as many details
+            as possible.
+         </li>
+      </ol>
+      <br />
+      If you've done the above and haven't found your bug/issue mentioned and
+      resolved elsewhere, then email either the mailing list or
+      <a href="mailto:ryan.flannery@gmail.com">me</a>, and include
+      an extremely detailed description of your bug and how to reproduce it.
+   </dd>
+
+   <dt>After a song finishes playing, the next song isn't automatically started.</dt>
+   <dd>
+      Most likely you're on a Linux distro with an older version of mplayer.  You need
+      mplayer version 1.0rc3 or greater.  Alternatively, any version of mplayer built
+      from a checkout of the source <i>after</i> December 29, 2009 will work.
+   </dd>
+
+   <dt>The cursor is always visible, even when I'm not in command mode... what gives?</dt>
+   <dd>
+      This is most likely a mis-configured <tt>$TERM</tt> environment variable.  Specifically,
+      it's set to something that does not support this particular feature.  See the
+      documentation for your OS &amp; terminal emulator (e.g. xterm/rxvt/etc.) for what this
+      should be set to.  Note that &ldquo;<tt>xterm-color</tt>&rdquo; almost always has
+      limitations (see
+      <a href="http://invisible-island.net/ncurses/ncurses.faq.html#xterm_color">here</a>
+      for more information).
+      <br /><br />
+      On OpenBSD pre <b>4.7</b>, your <tt>$TERM</tt> variable, when using <tt>xterm</tt>, should
+      always be set to <tt>xterm-xfree86</tt>.  After <b>4.7</b>, just leave your <tt>$TERM</tt>
+      variable alone.
+   </dd>
+
+   <dt>Scrolling, redrawing, and resizing are all very slow.  Is this normal?</dt>
+   <dd>
+      If you're using an <i>actual</i>
+      <a href="http://en.wikipedia.org/wiki/VT100"><tt>VT100</tt></a> (or similar)
+      <i>or</i> if you have 1,000,000,000,000+ songs in your library, then yes.
+      Otherwise, no.  This is mostly likely a misconfigured <tt>$TERM</tt> environment
+      variable.  See the previous F.A.Q.  entry.
+   </dd>
+
+   <dt>What license is vitunes distributed under?</dt>
+   <dd>
+      <a href="LICENSE.txt">ISC</a>.
+   </dd>
+</dl>
+
          </div>
          <script>
-            $("#faqContent").load("faq.html",
-            function(response, status, xhr) {
-                  if ("error" == status)
-                  {
-                     $('#faqContent').hide();
-                     $('#faqLoadFail').show();
-                     return;
-                  }
+            $(document).ready(function(){
+               $("dl.faq > dd").hide();
+            });
 
-                  $('#faqLoadFail').hide();
-
-                  $(document).ready(function(){
-                     $("dl.faq > dd").hide();
-                  });
-
-                  $("dl.faq > dt").click(function(){
-                     $(this).next().slideToggle(500)
-                     return false;
-                  });
-              });
+            $("dl.faq > dt").click(function(){
+               $(this).next().slideToggle(500)
+               return false;
+            });
          </script>
       </div>
    </div>
