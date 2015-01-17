@@ -10,8 +10,15 @@ MANS=vitunes \
 	  vitunes-tag \
 	  vitunes-update
 
-# regenerate all html for man pages
-all: $(MANS)
+SRCS=src/news.html
+
+index.html: template.index.html ${SRCS}
+	cpp -E -CC -P -w template.index.html $@
+
+mans: $(MANS)
+
+deploy:
+	git push
 
 wserve:
 	python -m SimpleHTTPServer
