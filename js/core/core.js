@@ -1,4 +1,4 @@
-/*! UIkit 2.16.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.16.2 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 (function(core) {
 
     if (typeof define == "function" && define.amd) { // AMD
@@ -43,7 +43,7 @@
 
     var UI = {}, _UI = window.UIkit;
 
-    UI.version = '2.16.0';
+    UI.version = '2.16.2';
     UI._prefix = 'uk';
 
     UI.noConflict = function(prefix) {
