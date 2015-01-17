@@ -508,25 +508,384 @@
          </div>
          <div id="keybindingsContent"
               class="uk-width-1-1 uk-scrollable-box uk-overflow-container">
-         </div>
-         <div id="keybindingsLoadFail" class="uk-alert uk-alert-danger"
-              style="display: none;" data-uk-alert>
-              <a href="" class="uk-alert-close uk-close"></a>
-              <p>Failed to load keybindings table!  Refresh to try again.</p>
-         </div>
-         <script>
-            $("#keybindingsContent").load("keybindings.html",
-            function(response, status, xhr) {
-                  if ("error" == status)
-                  {
-                     $('#keybindingsContent').hide();
-                     $('#keybindingsLoadFail').show();
-                     return;
-                  }
 
-                  $('#keybindingsLoadFail').hide();
-            });
-         </script>
+<table class="uk-table uk-table-hover uk-table-condensed">
+<thead>
+   <tr>
+      <th>Key</th>
+      <th>Scope</th>
+      <th>Action</th>
+   </tr>
+</thead>
+<tbody>
+
+   <tr>
+      <td>&lt;ENTER&gt;</td>
+      <td>Library</td>
+      <td>Load currently selected playlist for viewing &amp; switch focus to playlist window</td>
+   </tr>
+   <tr>
+      <td>&lt;ENTER&gt;</td>
+      <td>Playlist</td>
+      <td>Begin playback of currently selected song</td>
+   </tr>
+   <tr>
+      <td>&lt;TAB&gt;</td>
+      <td>Library</td>
+      <td>Switch focus to playlist window</td>
+   </tr>
+   <tr>
+      <td>&lt;TAB&gt;</td>
+      <td>Playlist</td>
+      <td>Switch focus to library window</td>
+   </tr>
+   <tr>
+      <td>s</td>
+      <td>Global</td>
+      <td>stop playback</td>
+   </tr>
+   <tr>
+      <td>z</td>
+      <td>Global</td>
+      <td>pause/unpause playback</td>
+   </tr>
+   <tr>
+      <td>^p</td>
+      <td>Global</td>
+      <td><em>same as above</em></td>
+   </tr>
+   <tr>
+      <td><i>n</i>b / <i>n</i>f</td>
+      <td>Global</td>
+      <td>Seek backwards/forwards <i>n</i> * 10 seconds in currently playing song</td>
+   </tr>
+   <tr>
+      <td><i>n</i>[ / <i>n</i>]</td>
+      <td>Global</td>
+      <td><em>same as above</em></td>
+   </tr>
+   <tr>
+      <td><i>n</i>B / <i>n</i>F</td>
+      <td>Global</td>
+      <td>Seek backwards/forwards <i>n</i> * 1 minute(s) in currently playing song</td>
+   </tr>
+   <tr>
+      <td><i>n</i>{ / <i>n</i>}</td>
+      <td>Global</td>
+      <td><em>same as above</em></td>
+   </tr>
+   <tr>
+      <td>m</td>
+      <td>Playlist</td>
+      <td>Show/hide the filename &amp; meta-info for the currently
+         selected file.</td>
+   </tr>
+   <tr>
+      <td><i>n</i>t<strong class="register">register</strong></td>
+      <td>Global</td>
+      <td>Execute the <i>n</i><sup>th</sup> next command in the toggle list associated with
+      register <strong class="register">register</strong>.<br />
+      See the man page documentation for the <strong>:toggle</strong> command.</td>
+   </tr>
+   <tr>
+      <td><i>n</i>T<strong class="register">register</strong></td>
+      <td>Global</td>
+      <td>Execute the <i>n</i><sup>th</sup> previous command in the toggle list associated with
+      register <strong class="register">register</strong>.<br />
+      See the man page documentation for the <strong>:toggle</strong> command.</td>
+   </tr>
+
+
+
+
+   <tr>
+      <td>/</td>
+      <td>Global</td>
+      <td>Get query from user and search <strong>forwards</strong> in current window
+         for first playlist/file that matches the query.  The structure of the query
+         specified is identical to that of the <code>:filter</code> command
+         below.  See that for more info.
+         <br />
+         <strong>Note:</strong> In the Library window, only the playlist name is matched against.
+      </td>
+   </tr>
+   <tr>
+      <td>?</td>
+      <td>Global</td>
+      <td>Get query from user and search <strong>backwards</strong> in current window
+         for first playlist/file that matches the query.  The structure of the query
+         specified is identical to that of the <code>:filter</code> command
+         below.  See that for more info.
+         <br />
+         <strong>Note:</strong> In the Library window, only the playlist name is matched against.
+      </td>
+   </tr>
+   <tr>
+      <td>n</td>
+      <td>Global</td>
+      <td>Jump to the next row in the current window matching the
+         last provided query.  If the last query made was done using
+         '<code>/</code>', then this search is <strong>forwards</strong>, otherwise
+         it is <strong>backwards</strong>.
+      </td>
+   </tr>
+   <tr>
+      <td>N</td>
+      <td>Global</td>
+      <td>Jump to the next row in the current window matching the
+         last provided query.  If the last query made was done using
+         '<code>/</code>', then this search is <strong>backwards</strong>,
+         otherwise it is <strong>forwards</strong>.
+      </td>
+   </tr>
+
+
+
+   <tr>
+      <td><i>n</i>yy</td>
+      <td>Playlist</td>
+      <td>Yank the next <i>n</i> rows into the copy buffer</td>
+   </tr>
+   <tr>
+      <td>yG</td>
+      <td>Playlist</td>
+      <td>Yank the rest of the current playlist into the copy buffer</td>
+   </tr>
+   <tr class="error">
+      <td>*y*</td>
+      <td>Library</td>
+      <td>
+         Currently can't yank at all in library window.
+         <br />
+         <strong>Note:</strong>
+         I don't really see a way of doing this in an intuitive way, so it will
+         probably never be added.
+      </td>
+   </tr>
+   <tr>
+      <td><i>n</i>dd</td>
+      <td>Playlist</td>
+      <td>Delete the next <i>n</i> rows and copy them into the copy buffer</td>
+   </tr>
+   <tr>
+      <td>dG</td>
+      <td>Playlist</td>
+      <td>Delete the rest of the files in the current playlist
+         after copying them into the copy buffer
+       </td>
+   </tr>
+   <tr class="warning">
+      <td>dd</td>
+      <td>Library</td>
+      <td>Delete the currently selected playlist
+         <br />
+         <strong>Note:</strong>
+         Currently, no <i>n</i> can be applied to this in the library window.  I simply
+         do not want to be able to delete all of my playlists accidentally.
+      </td>
+   </tr>
+   <tr>
+      <td>p</td>
+      <td>Playlist</td>
+      <td>Paste the contents of the copy buffer <strong>after</strong> the currently selected row.</td>
+   </tr>
+   <tr>
+      <td>P</td>
+      <td>Playlist</td>
+      <td>Paste the contents of the copy buffer <strong>before</strong> the currently selected row.</td>
+   </tr>
+   <tr>
+      <td>p</td>
+      <td>Library</td>
+      <td>Paste the contents of the copy buffer at the <strong>end</strong> the currently selected
+         playlist.</td>
+   </tr>
+   <tr>
+      <td>P</td>
+      <td>Library</td>
+      <td>Paste the contents of the copy buffer at the <strong>beginning</strong> the currently selected
+         playlist.</td>
+   </tr>
+   <tr class="warning">
+      <td>u</td>
+      <td>Playlist</td>
+      <td>
+         Un-do the previous cut/paste to the currently viewed playlist.
+      </td>
+   </tr>
+   <tr class="warning">
+      <td>^r</td>
+      <td>Playlist</td>
+      <td>
+         Re-do the previously undone cut/paste to the currently viewed playlist.
+      </td>
+   </tr>
+
+
+
+   <tr>
+      <td>:</td>
+      <td>Global</td>
+      <td>Enter command mode.  See <a href="man/vitunes.html#commands">vitunes(1)</a> for list of all commands.</td>
+   </tr>
+   <tr>
+      <td>!<i>cmd</i></td>
+      <td>Global</td>
+      <td>Exit curses-mode and execute external command <i>cmd</i></td>
+   </tr>
+   <tr>
+      <td>^l</td>
+      <td>Global</td>
+      <td>Erase and redraw display</td>
+   </tr>
+   <tr>
+      <td><i>n</i>j</td>
+      <td>Global</td>
+      <td>Move current row down <i>n</i> * 1 lines</td>
+   </tr>
+   <tr>
+      <td><i>n</i>&lt;KEY_DOWN&gt;</td>
+      <td>Global</td>
+      <td>Move current row down <i>n</i> * 1 lines</td>
+   </tr>
+   <tr>
+      <td><i>n</i>k</td>
+      <td>Global</td>
+      <td>Move current row up <i>n</i> * 1 lines</td>
+   </tr>
+   <tr>
+      <td><i>n</i>&lt;KEY_UP&gt;</td>
+      <td>Global</td>
+      <td>Move current row up <i>n</i> * 1 lines</td>
+   </tr>
+   <tr>
+      <td><i>n</i>-</td>
+      <td>Global</td>
+      <td>Move current row up <i>n</i> * 1 lines</td>
+   </tr>
+   <tr>
+      <td><i>n</i>h</td>
+      <td>Global</td>
+      <td>Horizontally scroll left <i>n</i> * 1 columns</td>
+   </tr>
+   <tr>
+      <td><i>n</i>&lt;KEY_LEFT&gt;</td>
+      <td>Global</td>
+      <td>Horizontally scroll left <i>n</i> * 1 columns</td>
+   </tr>
+   <tr>
+      <td><i>n</i>&lt;BACKSPACE&gt;</td>
+      <td>Global</td>
+      <td>Horizontally scroll left <i>n</i> * 1 columns</td>
+   </tr>
+   <tr>
+      <td><i>n</i>l</td>
+      <td>Global</td>
+      <td>Horizontally scroll right <i>n</i> * 1 columns</td>
+   </tr>
+   <tr>
+      <td><i>n</i>&lt;KEY_RIGHT&gt;</td>
+      <td>Global</td>
+      <td>Horizontally scroll right <i>n</i> * 1 columns</td>
+   </tr>
+   <tr>
+      <td><i>n</i>' '</td>
+      <td>Global</td>
+      <td>Horizontally scroll right <i>n</i> * 1 columns
+         <br /><strong>Note:</strong> that's a space.
+      </td>
+   </tr>
+   <tr>
+      <td>$</td>
+      <td>Global</td>
+      <td>Scroll all the way to the right</td>
+   </tr>
+   <tr>
+      <td>'^'</td>
+      <td>Global</td>
+      <td>Scroll all the way to the left
+         <br /><strong>Note:</strong> that's a carrot, not a "CONTROL+"
+      </td>
+   </tr>
+   <tr>
+      <td>0</td>
+      <td>Global</td>
+      <td>Scroll all the way to the left</td>
+   </tr>
+   <tr>
+      <td><i>n</i>^e</td>
+      <td>Global</td>
+      <td>Scroll screen down <i>n</i> * 1 line(s)</td>
+   </tr>
+   <tr>
+      <td><i>n</i>^y</td>
+      <td>Global</td>
+      <td>Scroll screen up <i>n</i> * 1 line(s)</td>
+   </tr>
+   <tr>
+      <td><i>n</i>^u</td>
+      <td>Global</td>
+      <td>Scroll screen up <i>n</i> * 1 half page(s)</td>
+   </tr>
+   <tr>
+      <td><i>n</i>^d</td>
+      <td>Global</td>
+      <td>Scroll screen down <i>n</i> * 1 half page(s)</td>
+   </tr>
+   <tr>
+      <td><i>n</i>^b</td>
+      <td>Global</td>
+      <td>Scroll screen up <i>n</i> * 1 full page(s)</td>
+   </tr>
+   <tr>
+      <td><i>n</i>&lt;PAGE_UP&gt;</td>
+      <td>Global</td>
+      <td>Scroll screen up <i>n</i> * 1 full page(s)</td>
+   </tr>
+   <tr>
+      <td><i>n</i>^f</td>
+      <td>Global</td>
+      <td>Scroll screen down <i>n</i> * 1 full page(s)</td>
+   </tr>
+   <tr>
+      <td><i>n</i>&lt;PAGE_DOWN&gt;</td>
+      <td>Global</td>
+      <td>Scroll screen down <i>n</i> * 1 full page(s)</td>
+   </tr>
+   <tr>
+      <td>G</td>
+      <td>Global</td>
+      <td>Goto last row</td>
+   </tr>
+   <tr>
+      <td><i>n</i>G</td>
+      <td>Global</td>
+      <td>Goto row <i>n</i></td>
+   </tr>
+   <tr>
+      <td><i>n</i>%</td>
+      <td>Global</td>
+      <td>Goto the row <i>n%</i> through the total number of rows</td>
+   </tr>
+   <tr>
+      <td><i>n</i>H</td>
+      <td>Global</td>
+      <td>Goto the <i>n</i><sup>th</sup> row from the top of current page</td>
+   </tr>
+   <tr>
+      <td>M</td>
+      <td>Global</td>
+      <td>Goto the middle row of the current page</td>
+   </tr>
+   <tr>
+      <td><i>n</i>L</td>
+      <td>Global</td>
+      <td>Goto the <i>n</i><sup>th</sup> row from the bottom of current page</td>
+   </tr>
+</tbody>
+</table>
+
+         </div>
       </div>
 
    </div>

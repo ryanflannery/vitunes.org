@@ -11,6 +11,7 @@ MANS=vitunes \
 	  vitunes-update
 
 SRCS=src/news.html \
+	  src/keybindings.html \
 	  src/faq.html
 
 index.html: template.index.html ${SRCS}

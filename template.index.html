@@ -192,25 +192,8 @@
          </div>
          <div id="keybindingsContent"
               class="uk-width-1-1 uk-scrollable-box uk-overflow-container">
+#include "src/keybindings.html"
          </div>
-         <div id="keybindingsLoadFail" class="uk-alert uk-alert-danger"
-              style="display: none;" data-uk-alert>
-              <a href="" class="uk-alert-close uk-close"></a>
-              <p>Failed to load keybindings table!  Refresh to try again.</p>
-         </div>
-         <script>
-            $("#keybindingsContent").load("keybindings.html",
-            function(response, status, xhr) {
-                  if ("error" == status)
-                  {
-                     $('#keybindingsContent').hide();
-                     $('#keybindingsLoadFail').show();
-                     return;
-                  }
-
-                  $('#keybindingsLoadFail').hide();
-            });
-         </script>
       </div>
 
    </div>
