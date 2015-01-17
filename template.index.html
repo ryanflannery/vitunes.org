@@ -35,11 +35,11 @@
    <nav class="uk-navbar uk-margin-bottom uk-border-rounded">
       <ul class="uk-navbar-nav uk-hidden-small">
          <li><a href="#features">Features</a></li>
-         <li><a href="#news">News</a></li>
+         <li><a href="#download">Getting Started</a></li>
          <li><a href="#documentation">Documentation</a></li>
          <li><a href="#screenshots">Screenshots</a></li>
+         <li><a href="#news">News</a></li>
          <li><a href="#faq">FAQ</a></li>
-         <li><a href="#download">Download</a></li>
          <li><a href="#roadmap">Roadmap</a></li>
       </ul>
       <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
@@ -87,32 +87,87 @@
 
    <div class="uk-grid" data-uk-grid-margin>
       <div class="uk-width-1-1">
-         <h2 class="uk-h2" id="news">News</h2>
+         <h2 class="uk-h2" id="download">Getting Started</h2>
       </div>
-      <div class="uk-width-1-1">
-         <div id="newsContent"  class="uk-width-1-1">
-#include "src/news.html"
+
+      <div class="uk-width-medium-1-3">
+         <div class="uk-width-1-1">
+            <h3 class="uk-h3"><i class="uk-icon-github"></i> Code / Files</h3>
          </div>
-         <div id="newsLoadMore" class="uk-width-1-1"><a>Load older news</a></div>
-         <script>
-            var totalStories = $('#newsList li').size();
-            var chunkSize = 4;
+         <div class="uk-width-1-1">
+            Repository:
+            <a href="https://github.com/ryanflannery/vitunes">GitHub</a>
+            <br />
+            Latest:
+            <a href="files/vitunes-2.3.tar.gz">vitunes-2.3.tar.gz</a>
+         </div>
+      </div>
 
-            // hide all by default
-            $('#newsList li').hide();
+      <div class="uk-width-medium-1-3">
+         <div class="uk-width-1-1">
+            <h3 class="uk-h3"><i class="uk-icon-gears"></i> Dependencies</h3>
+         </div>
+         <div class="uk-width-1-1">
+            <a href="http://taglib.github.io/">TagLib</a>
+            <br />
+            <a href="http://www.mplayerhq.hu/">mplayer</a> &ge; 1.0rc3
+            <br />
+            <a href="http://gstreamer.freedesktop.org/">gstreamer</a> (optional)
+         </div>
+      </div>
 
-            // show first n
-            $('#newsList li:lt(' + chunkSize + ')').show();
-            var articlesShown = chunkSize;
+      <div class="uk-width-medium-1-3">
+         <div class="uk-width-1-1">
+            <h3 class="uk-h3"><i class="uk-icon-flash"></i> Official Ports</h3>
+         </div>
+         <div class="uk-grid">
+            <div class="uk-width-medium-1-2">
+               <ul class="uk-list">
+                  <li>
+                     <a href="http://openports.se/multimedia/vitunes">OpenBSD</a>
+                  </li>
+                  <li>
+                     <a href="http://www.freebsd.org/cgi/cvsweb.cgi/ports/audio/vitunes/">FreeBSD</a>
+                  </li>
+               </ul>
+            </div>
+            <div class="uk-width-medium-1-2">
+               <ul class="uk-list">
+                  <li>
+                     <a href="https://aur.archlinux.org/packages.php?ID=30313">ArchLinux</a>
+                  </li>
+                  <li>
+                     <a href="https://packages.gentoo.org/package/media-sound/vitunes">Gentoo Linux</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
 
-            // connect show-more handler
-            $('#newsLoadMore').click(function(){
-               articlesShown += chunkSize;
-               $('#newsList li:lt(' + articlesShown + ')').show();
-               if (articlesShown >= totalStories)
-                  $(this).hide();
-            });
-         </script>
+      <div class="uk-width-medium-1-2">
+         <h3 class="uk-h3"><i class="uk-icon-wrench"></i> Building/Installation</h3>
+         <p>Configure: <code>$ ./configure.sh</code><br />
+         Build &amp; install: <code>$ make install</code><br />
+         Uninstall: <code>$ make uninstall </code>
+         </p>
+         <p>Default install locations for binary and man pages are
+         <code>/usr/local/{bin,man}</code>. To tweak, edit relevant variables in
+         <code>Makefile</code>.
+         </p>
+      </div>
+
+      <div class="uk-width-medium-1-2">
+         <h3 class="uk-h3"><i class="uk-icon-exclamation"></i> Notes for Porters</h3>
+         <p>vitunes is developed on OpenBSD, and makes use of a few
+         OpenBSD-specific things such as 
+         <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=err&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"><code>err(3)/warn(3)</code></a>,
+         <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fparseln&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"><code>fparseln(3)</code></a>,
+         <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=strlcpy&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"><code>strlcat(3)/strlcpy(3)</code></a>,
+      and
+         <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=strtonum&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"><code>strtonum(3)</code></a>.
+         </p>
+         <p>Most of these are picked-up during the build on Linux &amp; Mac OS X
+         and will be added if needed. See the file <code>config.h</code>.</p>
       </div>
    </div>
 
@@ -297,6 +352,39 @@
 
    <div class="uk-grid" data-uk-grid-margin>
       <div class="uk-width-1-1">
+         <h2 class="uk-h2" id="news">News</h2>
+      </div>
+      <div class="uk-width-1-1">
+         <div id="newsContent"  class="uk-width-1-1">
+#include "src/news.html"
+         </div>
+         <div id="newsLoadMore" class="uk-width-1-1"><a>Load older news</a></div>
+         <script>
+            var totalStories = $('#newsList li').size();
+            var chunkSize = 4;
+
+            // hide all by default
+            $('#newsList li').hide();
+
+            // show first n
+            $('#newsList li:lt(' + chunkSize + ')').show();
+            var articlesShown = chunkSize;
+
+            // connect show-more handler
+            $('#newsLoadMore').click(function(){
+               articlesShown += chunkSize;
+               $('#newsList li:lt(' + articlesShown + ')').show();
+               if (articlesShown >= totalStories)
+                  $(this).hide();
+            });
+         </script>
+      </div>
+   </div>
+
+   <div class="uk-grid-divider"></div>
+
+   <div class="uk-grid" data-uk-grid-margin>
+      <div class="uk-width-1-1">
          <h2 class="uk-h2" id="faq">Frequently Answered Questions</h2>
       </div>
       <div class="uk-width-1-1">
@@ -313,84 +401,6 @@
                return false;
             });
          </script>
-      </div>
-   </div>
-
-   <div class="uk-grid-divider"></div>
-
-   <div class="uk-grid" data-uk-grid-margin>
-      <div class="uk-width-1-1">
-         <h2 class="uk-h2" id="download">Download &amp; Installation</h2>
-      </div>
-
-      <div class="uk-width-medium-1-3">
-         <div class="uk-width-1-1">
-            <h3 class="uk-h3"><i class="uk-icon-github"></i> Code / Files</h3>
-         </div>
-         <div class="uk-width-1-1">
-            Repository:
-            <a href="https://github.com/ryanflannery/vitunes">GitHub</a>
-            <br />
-            Latest:
-            <a href="files/vitunes-2.3.tar.gz">vitunes-2.3.tar.gz</a>
-         </div>
-      </div>
-
-      <div class="uk-width-medium-1-3">
-         <div class="uk-width-1-1">
-            <h3 class="uk-h3"><i class="uk-icon-gears"></i> Dependencies</h3>
-         </div>
-         <div class="uk-width-1-1">
-            <a href="http://taglib.github.io/">TagLib</a>
-            <br />
-            <a href="http://www.mplayerhq.hu/">mplayer</a> &ge; 1.0rc3
-            <br />
-            <a href="http://gstreamer.freedesktop.org/">gstreamer</a> (optional)
-         </div>
-      </div>
-
-      <div class="uk-width-medium-1-3">
-         <div class="uk-width-1-1"><h3 class="uk-h3"><i class="uk-icon-flash"></i> Official Ports</h3></div>
-            <ul class="uk-list">
-               <li>
-                  <a href="https://aur.archlinux.org/packages.php?ID=30313">ArchLinux</a>
-               </li>
-               <li>
-                  <a href="http://www.freebsd.org/cgi/cvsweb.cgi/ports/audio/vitunes/">FreeBSD</a>
-               </li>
-               <li>
-                  <a href="https://packages.gentoo.org/package/media-sound/vitunes">Gentoo Linux</a>
-               </li>
-               <li>
-                  <a href="http://openports.se/multimedia/vitunes">OpenBSD</a>
-               </li>
-            </ul>
-      </div>
-
-      <div class="uk-width-medium-1-2">
-         <h3 class="uk-h3"><i class="uk-icon-wrench"></i> Building/Installation</h3>
-         <p>Configure: <code>$ ./configure.sh</code><br />
-         Build &amp; install: <code>$ make install</code><br />
-         Uninstall: <code>$ make uninstall </code>
-         </p>
-         <p>Default install locations for binary and man pages are
-         <code>/usr/local/{bin,man}</code>. To tweak, edit relevant variables in
-         <code>Makefile</code>.
-         </p>
-      </div>
-
-      <div class="uk-width-medium-1-2">
-         <h3 class="uk-h3"><i class="uk-icon-exclamation"></i> Notes for Porters</h3>
-         <p>vitunes is developed on OpenBSD, and makes use of a few
-         OpenBSD-specific things such as 
-         <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=err&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"><code>err(3)/warn(3)</code></a>,
-         <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fparseln&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"><code>fparseln(3)</code></a>,
-         <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=strlcpy&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"><code>strlcat(3)/strlcpy(3)</code></a>,
-      and
-         <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=strtonum&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"><code>strtonum(3)</code></a>.
-         </p>
-         <p>Most of these are picked-up during the build on Linux &amp; Mac OS X
-         and will be added if needed. See the file <code>config.h</code>.</p>
       </div>
    </div>
 
@@ -480,11 +490,11 @@
    <div class="uk-offcanvas-bar">
       <ul class="uk-nav uk-nav-offcanvas">
          <li><a href="#features">Features</a></li>
-         <li><a href="#news">News</a></li>
+         <li><a href="#download">Getting Started</a></li>
          <li><a href="#documentation">Documentation</a></li>
          <li><a href="#screenshots">Screenshots</a></li>
+         <li><a href="#news">News</a></li>
          <li><a href="#faq">FAQ</a></li>
-         <li><a href="#download">Download</a></li>
          <li><a href="#roadmap">Roadmap</a></li>
       </ul>
    </div>
