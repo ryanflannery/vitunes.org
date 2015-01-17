@@ -19,7 +19,7 @@ index.html: template.index.html ${SRCS}
 
 mans: $(MANS)
 
-deploy:
+deploy: index.html
 	git push
 
 wserve:

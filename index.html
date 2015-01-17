@@ -1053,15 +1053,16 @@
       Is there an easy way to automate this?</dt>
    <dd>
       Of course!  You're using *nix, so use a shell script to add all of your URL's,
-      like this one: <a href="add_urls.sh"><tt>add_urls.sh</tt></a>.
+      like this one: <a href="add_urls.sh"><code>add_urls.sh</code></a>.
    </dd>
 
    <dt>When exiting vitunes, it seems to hang for one half-second.  Why?</dt>
    <dd>
-      This is intentional.  The <tt>fork()'d</tt> mplayer child will <tt>fork()</tt>
-      an instance of itself whenever it plays an internet radio stream (or similar)
-      to handle the buffering.  As such, vitunes needs to wait for this
-      &lsquo;grandchild&rsquo; instance of mplayer to exit before quitting.
+      This is intentional.  The <code>fork()'d</code> mplayer child will
+      <code>fork()</code> an instance of itself whenever it plays an internet
+      radio stream (or similar) to handle the buffering.  As such, vitunes needs
+      to wait for this &lsquo;grandchild&rsquo; instance of mplayer to exit
+      before quitting.
    </dd>
 </dl>
 
@@ -1107,7 +1108,7 @@
    Specifically, it's set to something that does not support this particular
    feature.  See the documentation for your OS &amp; terminal emulator (e.g.
    xterm/rxvt/etc.) for what this should be set to.  Note that
-   &ldquo;<tt>xterm-color</tt>&rdquo; almost always has limitations (see
+   &ldquo;<code>xterm-color</code>&rdquo; almost always has limitations (see
    <a href="http://invisible-island.net/ncurses/ncurses.faq.html#xterm_color">here</a>
    for more information).
    <br /><br />
@@ -1120,7 +1121,7 @@
    normal?</dt>
    <dd>
       If you're using an <i>actual</i>
-      <a href="http://en.wikipedia.org/wiki/VT100"><tt>VT100</tt></a> (or
+      <a href="http://en.wikipedia.org/wiki/VT100"><code>VT100</code></a> (or
       similar) <i>or</i> if you have 1,000,000,000,000+ songs in your library,
       then yes. Otherwise, no. This is mostly likely a misconfigured
       <code>$TERM</code> environment variable. See the previous FAQ entry.
