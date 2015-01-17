@@ -20,6 +20,7 @@ index.html: template.index.html ${SRCS}
 mans: $(MANS)
 
 deploy: index.html
+	git diff-index --quiet HEAD
 	git push
 
 wserve:
