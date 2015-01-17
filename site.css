@@ -12,7 +12,7 @@ img.square {
 tbody td:first-child { font-family: monospace; white-space: nowrap; }
 tbody td { font-size: smaller; }
 tbody td i { color: blue; }
-tbody td b.register { color: green; font-weight: normal; font-style: italic; }
+tbody td .register { color: green; font-weight: normal; font-style: italic; }
 td.headerRow {
    text-align: center;
    background-color: #eee;
