@@ -44,6 +44,8 @@ deploy: index.html man tidy
 	git push
 
 # launch local webserver for testing
+# requires npm install [-g] local-web-server
 wserve:
-	python -m SimpleHTTPServer
+	ws
+	#python -m SimpleHTTPServer
 
